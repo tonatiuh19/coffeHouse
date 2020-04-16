@@ -1,8 +1,9 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 27/09/2018 06:27
+  	Creation date: 06/10/2018 08:32
   	*/
-  	
+
+
 @font-face {
   font-family: "Flaticon";
   src: url("../fonts/flaticon/font/Flaticon.eot");
@@ -35,7 +36,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.flaticon-coffee-cup:before { content: "\f100"; }
-.flaticon-choices:before { content: "\f101"; }
-.flaticon-coffee-bean:before { content: "\f102"; }
-.flaticon-delivery-truck:before { content: "\f103"; }
+
+.flaticon-meeting:before { content: "\f100"; }
+.flaticon-tray:before { content: "\f101"; }
+.flaticon-cake:before { content: "\f102"; }

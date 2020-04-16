@@ -1,7 +1,13 @@
 <?php
-$servername = "mx50.hostgator.mx";
+/*$servername = "mx50.hostgator.mx";
 $username = "alanchat_admin";
 $password = "tonatiuh19";
+$dbname = "alanchat_coffe";*/
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
 $dbname = "alanchat_coffe";
 
 // Create connection
