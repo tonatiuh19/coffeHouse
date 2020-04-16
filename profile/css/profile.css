@@ -1,0 +1,13 @@
+html,
+body {
+  height: 100%;
+}
+
+
+
+.sectionando {
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  margin: 0 auto;
+}
