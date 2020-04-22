@@ -64,7 +64,7 @@
             <li class="nav-item"><a href="about.html" class="nav-link">Para tu Negocio</a></li>
             <li class="nav-item"><a href="menu.html" class="nav-link">El <i class="fas fa-globe-americas"></i> en tu casa</a></li>
             <li class="nav-item"><a href="menu.html" class="nav-link">Suscribete</a></li>
-            <li class="nav-item"><a href="#" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i> 1 </a></li>
+            <li class="nav-item"><a data-toggle="modal" href="#myCart" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i><span id="countCart"></span></a></li>
              <?php
               if (isset($_SESSION['email'])){
 

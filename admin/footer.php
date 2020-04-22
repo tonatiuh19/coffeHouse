@@ -63,7 +63,45 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+  <div class="modal fade" id="myCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="cart">
+              <h1>Mi Bolsa</h1>
+              <table class="table" id="cartItems">
+              </table>
+              <table class="table"> 
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>Precio total:</td>
+                  <td><strong id="totalPrice">0 $</strong></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td><button class="tiny secondary btn btn-secondary" id="clear">Limpiar mi bolsa</button></td>
+                  <td id="checkoutBtn"></td>
+                </tr>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+
+
+  <script type="text/template" id="cartT">
+    <% _.each(items, function (item) { %> 
+       <tr class = "panel">
+        <td><%= item.name %></td>
+        <td class="label"> <%= item.count %> </td>
+        <td>  $<%= item.total %></td>
+      </tr>
+    <% }); %>
+  </script>
+
+  <script  src="../js/cart_headers.js"></script>
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery-migrate-3.0.1.min.js"></script>
   <script src="../js/popper.min.js"></script>
@@ -78,8 +116,7 @@
   <script src="../js/bootstrap-datepicker.js"></script>
   <script src="../js/jquery.timepicker.min.js"></script>
   <script src="../js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../js/google-map.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'></script>
   <script src="../js/main.js"></script>
     
   </body>

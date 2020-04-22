@@ -64,7 +64,7 @@ session_start();
       <li class="nav-item"><a href="about.html" class="nav-link">Para tu Negocio</a></li>
       <li class="nav-item"><a href="menu.html" class="nav-link">El <i class="fas fa-globe-americas"></i> en tu casa</a></li>
       <li class="nav-item"><a href="menu.html" class="nav-link">Suscribete</a></li>
-      <li class="nav-item"><a href="#" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i> 1 </a></li>
+      <li class="nav-item"><a data-toggle="modal" href="#myCart" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i><span id="countCart"></span></a></li>
       <?php
       if (isset($_SESSION['email'])){
 
@@ -210,20 +210,14 @@ session_start();
    if ($result->num_rows > 0) {
                 // output data of each row
     while($row = $result->fetch_assoc()) {
-      echo '<div class="menus d-flex ftco-animate">
-      <div class="menu-img img" style="background-image: url(images/breakfast-1.jpg);"></div>
-      <div class="text">
-      <div class="d-flex">
-      <div class="one-half">
-      <h3>'.$row["name"].'</h3>
-      </div>
-      <div class="one-forth">
-      <span class="price">$29</span>
-      </div>
-      </div>
-      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-      </div>
-      </div>';;
+     echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
+                <img src="images/breakfast-1.jpg" alt="" width="90" />
+                    <h3>'.$row["name"].'</h3>
+                    <span class="price">$29</span>                
+                <p></p>
+                <input type="number" class="count form-control" value="1" /><br>
+                <button class="tiny btn btn-success">Add to cart</button>
+            </div>';
     }
   } else {
     echo "0 results";
@@ -231,7 +225,7 @@ session_start();
   ?>
 </div>
 
-<div class="col-md-6 col-lg-4 menu-wrap">
+<div class="col-md-6 col-lg-4 menu-wrap products">
   <div class="heading-menu text-center ftco-animate">
    <h3>Colombia</h3>
  </div>
@@ -243,20 +237,14 @@ session_start();
  if ($result->num_rows > 0) {
                 // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo '<div class="menus d-flex ftco-animate">
-    <div class="menu-img img" style="background-image: url(images/breakfast-1.jpg);"></div>
-    <div class="text">
-    <div class="d-flex">
-    <div class="one-half">
-    <h3>'.$row["name"].'</h3>
-    </div>
-    <div class="one-forth">
-    <span class="price">$29</span>
-    </div>
-    </div>
-    <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-    </div>
-    </div>';;
+    echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
+                <img src="images/breakfast-1.jpg" alt="" width="90" />
+                    <h3>'.$row["name"].'</h3>
+                    <span class="price">$29</span>                
+                <p></p>
+                <input type="number" class="count form-control" value="1" /><br>
+                <button class="tiny btn btn-success">Add to cart</button>
+            </div>';
   }
 } else {
   echo "0 results";
@@ -275,20 +263,14 @@ session_start();
  if ($result->num_rows > 0) {
                 // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo '<div class="menus d-flex ftco-animate">
-    <div class="menu-img img" style="background-image: url(images/breakfast-1.jpg);"></div>
-    <div class="text">
-    <div class="d-flex">
-    <div class="one-half">
-    <h3>'.$row["name"].'</h3>
-    </div>
-    <div class="one-forth">
-    <span class="price">$29</span>
-    </div>
-    </div>
-    <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-    </div>
-    </div>';;
+   echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
+                <img src="images/breakfast-1.jpg" alt="" width="90" />
+                    <h3>'.$row["name"].'</h3>
+                    <span class="price">$29</span>                
+                <p></p>
+                <input type="number" class="count form-control" value="1" /><br>
+                <button class="tiny btn btn-success">Add to cart</button>
+            </div>';
   }
 } else {
   echo "0 results";
@@ -439,7 +421,45 @@ session_start();
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+<div class="modal fade" id="myCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="cart">
+            <h1>Mi Bolsa</h1>
+            <table class="table" id="cartItems">
+            </table>
+            <table class="table"> 
+              <tr>
+                <td>&nbsp;</td>
+                <td>Precio total:</td>
+                <td><strong id="totalPrice">0 $</strong></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><button class="tiny secondary btn btn-secondary" id="clear">Limpiar mi bolsa</button></td>
+                <td id="checkoutBtn"></td>
+              </tr>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+
+<script type="text/template" id="cartT">
+  <% _.each(items, function (item) { %> 
+     <tr class = "panel">
+      <td><%= item.name %></td>
+      <td class="label"> <%= item.count %> </td>
+      <td>  $<%= item.total %></td>
+    </tr>
+  <% }); %>
+</script>
+
+<script  src="js/cart.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -454,9 +474,9 @@ session_start();
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/jquery.timepicker.min.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="js/google-map.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'></script>
 <script src="js/main.js"></script>
+
 
 </body>
 </html>
