@@ -5,6 +5,7 @@ if (!(isset($_SESSION['email']))){
 		window.location.href='../sign-in/';
 		</SCRIPT>");
 }
+$precioTotal = 0;
 ?>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_4.jpg');" data-stellar-background-ratio="0.5">
 	<div class="overlay"></div>
@@ -29,8 +30,26 @@ if (!(isset($_SESSION['email']))){
 				
 			</h4>
 			<ul class="list-group mb-3">
-				<table class="table" id="cartItems">
-				</table>
+				<?php
+				$sql = "SELECT id, firstname, lastname FROM MyGuests";
+				$result = $conn->query($sql);
+
+				if ($result->num_rows > 0) {
+				    // output data of each row
+				    while($row = $result->fetch_assoc()) {
+				        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+				    }
+				} else {
+				    echo "0 results";
+				}
+				?>
+				<li class="list-group-item d-flex justify-content-between lh-condensed">
+		          <div>
+		            <h6 class="my-0">Third item</h6>
+		            <small class="text-muted">Brief description</small>
+		          </div>
+		          <span class="text-muted">$5</span>
+		        </li>
 				
 				<li class="list-group-item d-flex justify-content-between">
 					<span>Precio Total (MXN)</span>
@@ -122,18 +141,7 @@ if (!(isset($_SESSION['email']))){
 		
 	</footer>
 </div>
-<script type="text/template" id="cartT">
-	<% _.each(items, function (x) { %> 
-	<li class="list-group-item d-flex justify-content-between lh-condensed">
-		<div>
-			<h6 class="my-0"><%= x.name %></h6>
-			<small class="text-muted">Cantidad: <%= x.count %></small>
-		</div>
-		<span class="text-muted">$<%= x.total %></span>
-	</li>
-	<% }); %>
-</script>
-<script  src="js/cart_checkout.js"></script>
+
 <?php
 require_once('../admin/footer.php');
 ?>

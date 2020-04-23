@@ -229,7 +229,23 @@ document.addEventListener('DOMContentLoaded', function () {
         cart.clearItems();
 
     });
-    const sum = storage.getCart().reduce((a, {parseInt(price)}) => a + parseInt(price), 0);
-    console.log(sum);
 
 });
+
+var valueCarrito = JSON.parse(window.localStorage.getItem('cart'));
+//console.log(valueCarrito);
+
+
+var options = {
+  url: "post_cart_info.php",
+  dataType: "text",
+  type: "POST",
+  data: { price: JSON.stringify( valueCarrito ) }, // Our valid JSON string
+  success: function( data, status, xhr ) {
+     console.log(data);
+  },
+  error: function( xhr, status, error ) {
+      //...
+  }
+};
+$.ajax( options );

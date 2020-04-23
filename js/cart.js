@@ -88,7 +88,7 @@ var helpers = {
         this.setHtml('cartItems', compiled);
         this.updateTotal();
         this.setHtml('countCart', ' <i class="fas fa-exclamation-circle text-danger"></i>');
-        this.setHtml('checkoutBtn', '<a class="btn btn-primary" href="check-out/" role="button">Ir a pagar</a>');
+        this.setHtml('checkoutBtn', '<button type="submit" class="btn btn-primary">Ir a pagar</button>');
 
     },
     emptyView: function () {

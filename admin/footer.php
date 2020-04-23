@@ -69,20 +69,22 @@
         <div class="modal-body">
           <div class="cart">
               <h1>Mi Bolsa</h1>
-              <table class="table" id="cartItems">
-              </table>
-              <table class="table"> 
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>Precio total:</td>
-                  <td><strong id="totalPrice">0 $</strong></td>
-                </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td><button class="tiny secondary btn btn-secondary" id="clear">Limpiar mi bolsa</button></td>
-                  <td id="checkoutBtn"></td>
-                </tr>
-              </table>
+              <form action="../check-out-save/" method="post">
+                <table class="table" id="cartItems">
+                </table>
+                <table class="table"> 
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>Precio total:</td>
+                    <td><strong id="totalPrice">0 $</strong></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><button class="tiny secondary btn btn-secondary" id="clear">Limpiar mi bolsa</button></td>
+                    <td id="checkoutBtn"></td>
+                  </tr>
+                </table>
+              </form>
           </div>
         </div>
       </div>
