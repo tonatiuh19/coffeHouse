@@ -19,12 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($result->num_rows > 0) {
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
-		    	$idOrder = $row["id_orders"];
+		    	echo $idOrder = $row["id_orders"];
 		    	foreach(array_keys($product_arr) as $key) {
 			    // do something with $array_one[$key] and $array_two[$key]
 		    		$idProduct = $product_arr[$key];
 		    		$quantity = $qty_arr[$key];
-		    		$sql = "INSERT INTO carts (id_products, quantity, id_order)
+		    		$sql = "INSERT INTO carts (id_products, quantity, id_orders)
 					VALUES ('$idProduct', '$quantity', '$idOrder')";
 
 					if ($conn->query($sql) === TRUE) {

@@ -53,7 +53,7 @@ session_start();
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
  <div class="container">
-   <a class="navbar-brand" href="index.html">Appetizer</a>
+   <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Cinque Terre"></a>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
      <span class="oi oi-menu"></span> Menu
    </button>
@@ -204,7 +204,7 @@ session_start();
      <h3>Mexico</h3>
    </div>
    <?php
-   $sql = "SELECT id_products, name, description, id_product_type, id_product_type, id_country, date FROM products wHERE id_country=1 and id_product_type=1";
+   $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=1";
    $result = $conn->query($sql);
 
    if ($result->num_rows > 0) {
@@ -213,7 +213,7 @@ session_start();
      echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
                 <img src="images/breakfast-1.jpg" alt="" width="90" />
                     <h3>'.$row["name"].'</h3>
-                    <span class="price">$29</span>                
+                    <span class="price">$'.$row["price"].'</span>                
                 <p></p>
                 <input type="number" class="count form-control" value="1" /><br>
                 <button class="tiny btn btn-success">Add to cart</button>
@@ -231,7 +231,7 @@ session_start();
  </div>
 
  <?php
- $sql = "SELECT id_products, name, description, id_product_type, id_product_type, id_country, date FROM products wHERE id_country=2 and id_product_type=1";
+ $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=2";
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {
@@ -240,7 +240,7 @@ session_start();
     echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
                 <img src="images/breakfast-1.jpg" alt="" width="90" />
                     <h3>'.$row["name"].'</h3>
-                    <span class="price">$29</span>                
+                    <span class="price">$'.$row["price"].'</span>                
                 <p></p>
                 <input type="number" class="count form-control" value="1" /><br>
                 <button class="tiny btn btn-success">Add to cart</button>
@@ -257,7 +257,7 @@ session_start();
    <h3>Accesorios</h3>
  </div>
  <?php
- $sql = "SELECT id_products, name, description, id_product_type, id_country, date FROM products wHERE id_product_type=2";
+ $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=2";
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {
@@ -266,7 +266,7 @@ session_start();
    echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
                 <img src="images/breakfast-1.jpg" alt="" width="90" />
                     <h3>'.$row["name"].'</h3>
-                    <span class="price">$29</span>                
+                    <span class="price">$'.$row["price"].'</span>                
                 <p></p>
                 <input type="number" class="count form-control" value="1" /><br>
                 <button class="tiny btn btn-success">Add to cart</button>

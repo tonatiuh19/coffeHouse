@@ -31,29 +31,51 @@ $precioTotal = 0;
 			</h4>
 			<ul class="list-group mb-3">
 				<?php
-				$sql = "SELECT id, firstname, lastname FROM MyGuests";
+				$correo= $_SESSION["email"];
+				$sql = "SELECT b.id_carts, b.id_products, b.quantity, b.id_orders, e.price, d.name FROM carts as b INNER JOIN (SELECT max(a.id_orders) as 'id_orders' FROM orders as a where email_user='".$correo."' ) as c on c.id_orders=b.id_orders INNER JOIN products as d on d.id_products=b.id_products INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products";
 				$result = $conn->query($sql);
 
 				if ($result->num_rows > 0) {
 				    // output data of each row
 				    while($row = $result->fetch_assoc()) {
-				        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+				        echo '<li class="list-group-item d-flex justify-content-between lh-condensed">
+						          <div>
+						            <h6 class="my-0">'.$row["name"].'</h6>
+						            <small class="text-muted">Cantidad '.$row["quantity"].'</small>
+						          </div>
+						          <span class="text-muted">$'.$row["price"].'</span>
+						        </li>';
+						        $precioTotal += $row["price"];
 				    }
+					if ($precioTotal >= 600) {
+						echo '<li class="list-group-item d-flex justify-content-between lh-condensed">
+							          <div>
+							            <h6 class="my-0">Envio gratis</h6>
+							            <small class="text-muted"></small>
+							          </div>
+							          <span class="text-muted">$0</span>
+							        </li>';
+					}else{
+						$precioAlcanzar = 600-$precioTotal;
+						echo '<li class="list-group-item d-flex justify-content-between lh-condensed">
+							          <div>
+							            <h6 class="my-0">Envio</h6>
+							            <small class="text-muted"><b>$'.$precioAlcanzar.' y tu envio es gratis </b></small>
+							          </div>
+							          <span class="text-muted">$99</span>
+							        </li>';
+						$precioTotal += 99;					
+					}
+				    
 				} else {
-				    echo "0 results";
+				    echo "No hay productos";
 				}
 				?>
-				<li class="list-group-item d-flex justify-content-between lh-condensed">
-		          <div>
-		            <h6 class="my-0">Third item</h6>
-		            <small class="text-muted">Brief description</small>
-		          </div>
-		          <span class="text-muted">$5</span>
-		        </li>
+				
 				
 				<li class="list-group-item d-flex justify-content-between">
 					<span>Precio Total (MXN)</span>
-					<strong id="totalPrice">0 $</strong>
+					<strong>$<?php echo $precioTotal;?></strong>
 				</li>
 			</ul>
 
