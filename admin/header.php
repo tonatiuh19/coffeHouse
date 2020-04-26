@@ -60,7 +60,7 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item <!--active-->"><a href="index.html" class="nav-link">CoffePacks</a></li>
+            <li class="nav-item <!--active-->"><a href="../coffePack/" class="nav-link">CoffePacks</a></li>
             <li class="nav-item"><a href="../yourBusiness/" class="nav-link">Para tu Negocio</a></li>
             <li class="nav-item"><a href="../coffeWorld/" class="nav-link">El <i class="fas fa-mug-hot"></i> en tu casa</a></li>
             <li class="nav-item"><a href="../suscribete/" class="nav-link">Suscribete</a></li>
