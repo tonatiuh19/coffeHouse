@@ -3,7 +3,7 @@
 session_start();
 require_once('../admin/cn.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" &&(isset($$qty_arr) && isset($product_arr))) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 	$qty_arr = $_POST["qty"];
 	$product_arr = $_POST['productId'];
 	$todayVisit = date("Y-m-d H:i:s");
@@ -27,10 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" &&(isset($$qty_arr) && isset($product_a
 		    		$sql = "INSERT INTO carts (id_products, quantity, id_orders)
 					VALUES ('$idProduct', '$quantity', '$idOrder')";
 
+
 					if ($conn->query($sql) === TRUE) {
 					    //echo "New record created successfully";
 					} else {
-					    //echo "Error: " . $sql . "<br>" . $conn->error;
+					    //echo "Error: " . $sql . "<br>" . $conn->error; 
 					}
 				}
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
@@ -48,10 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" &&(isset($$qty_arr) && isset($product_a
 
 
 }else{
-	echo ("<SCRIPT LANGUAGE='JavaScript'>
-
+	/*echo ("<SCRIPT LANGUAGE='JavaScript'>
 		window.location.href='../';
-		</SCRIPT>");
+		</SCRIPT>");*/
 }
 
 function test_input($data) {

@@ -61,9 +61,9 @@ session_start();
    <div class="collapse navbar-collapse" id="ftco-nav">
      <ul class="navbar-nav ml-auto">
       <li class="nav-item <!--active-->"><a href="index.html" class="nav-link">CoffePacks</a></li>
-      <li class="nav-item"><a href="about.html" class="nav-link">Para tu Negocio</a></li>
-      <li class="nav-item"><a href="menu.html" class="nav-link">El <i class="fas fa-globe-americas"></i> en tu casa</a></li>
-      <li class="nav-item"><a href="menu.html" class="nav-link">Suscribete</a></li>
+      <li class="nav-item"><a href="yourBusiness/" class="nav-link">Para tu Negocio</a></li>
+      <li class="nav-item"><a href="coffeWorld/" class="nav-link">El <i class="fas fa-mug-hot"></i> en tu casa</a></li>
+      <li class="nav-item"><a href="suscribete/" class="nav-link">Suscribete</a></li>
       <li class="nav-item"><a data-toggle="modal" href="#myCart" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i><span id="countCart"></span></a></li>
       <?php
       if (isset($_SESSION['email'])){
@@ -210,14 +210,45 @@ session_start();
    if ($result->num_rows > 0) {
                 // output data of each row
     while($row = $result->fetch_assoc()) {
-     echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
-                <img src="images/breakfast-1.jpg" alt="" width="90" />
+     echo '<!--<a data-toggle="modal" href="#my'.$row["id_products"].'">--><div class="menus d-flex ftco-animate">
+              <div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
+              <div class="text">
+                <div class="d-flex">
+                  <div class="one-half">
                     <h3>'.$row["name"].'</h3>
-                    <span class="price">$'.$row["price"].'</span>                
-                <p></p>
-                <input type="number" class="count form-control" value="1" /><br>
-                <button class="tiny btn btn-success">Add to cart</button>
-            </div>';
+                  </div>
+                  <div class="one-forth">
+                    <span class="price">$'.$row["price"].'</span>
+
+                  </div>
+                </div>
+                <p>
+                  <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
+                  <input type="number" class="count" value="1" min="1" />
+                  <button class="tiny btn btn-success">Soltar en mi bolsa</button>
+                  </div>
+                </p>
+              </div>
+            </div><!--</a>-->';
+      echo '<div class="modal fade" id="my'.$row["id_products"].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">'.$row["name"].'</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>';
     }
   } else {
     echo "0 results";
@@ -237,13 +268,24 @@ session_start();
  if ($result->num_rows > 0) {
                 // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
-                <img src="images/breakfast-1.jpg" alt="" width="90" />
+    echo '<div class="menus d-flex ftco-animate">
+              <div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
+              <div class="text">
+                <div class="d-flex">
+                  <div class="one-half">
                     <h3>'.$row["name"].'</h3>
-                    <span class="price">$'.$row["price"].'</span>                
-                <p></p>
-                <input type="number" class="count form-control" value="1" /><br>
-                <button class="tiny btn btn-success">Add to cart</button>
+                  </div>
+                  <div class="one-forth">
+                    <span class="price">$'.$row["price"].'</span>
+                  </div>
+                </div>
+                <p>
+                  <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
+                  <input type="number" class="count" value="1" min="1" />
+                  <button class="tiny btn btn-success">Soltar en mi bolsa</button>
+                  </div>
+                </p>
+              </div>
             </div>';
   }
 } else {
@@ -263,13 +305,33 @@ session_start();
  if ($result->num_rows > 0) {
                 // output data of each row
   while($row = $result->fetch_assoc()) {
-   echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
+   /*echo '<div class="product medium-4 columns menus ftco-animate text-center" data-name="'.$row["name"].'" data-price="50000" data-id="'.$row["id_products"].'">
                 <img src="images/breakfast-1.jpg" alt="" width="90" />
                     <h3>'.$row["name"].'</h3>
                     <span class="price">$'.$row["price"].'</span>                
                 <p></p>
                 <input type="number" class="count form-control" value="1" /><br>
                 <button class="tiny btn btn-success">Add to cart</button>
+            </div>';*/
+    echo '<div class="menus d-flex ftco-animate">
+              <div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
+              <div class="text">
+                <div class="d-flex">
+                  <div class="one-half">
+                    <h3>'.$row["name"].'</h3>
+                  </div>
+                  <div class="one-forth">
+                    <span class="price">$'.$row["price"].'</span>
+                  </div>
+                </div>
+                <p>
+                  <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
+                  <input type="number" class="count" value="1" min="1" />
+                  <button class="tiny btn btn-success">Soltar en mi bolsa</button>
+                  </div>
+
+                </p>
+              </div>
             </div>';
   }
 } else {
@@ -406,14 +468,7 @@ session_start();
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
 
-      <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> CoffeHouse All rights reserved </a>
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-      </div>
-    </div>
   </div>
 </footer>
 
@@ -438,7 +493,7 @@ session_start();
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
-                  <td><button class="tiny secondary btn btn-secondary" id="clear">Limpiar mi bolsa</button></td>
+                  <td><button class="tiny secondary btn btn-secondary" id="clear" type="button">Limpiar mi bolsa</button></td>
                   <td id="checkoutBtn"></td>
                 </tr>
               </table>

@@ -61,9 +61,9 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item <!--active-->"><a href="index.html" class="nav-link">CoffePacks</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">Para tu Negocio</a></li>
-            <li class="nav-item"><a href="menu.html" class="nav-link">El <i class="fas fa-globe-americas"></i> en tu casa</a></li>
-            <li class="nav-item"><a href="menu.html" class="nav-link">Suscribete</a></li>
+            <li class="nav-item"><a href="../yourBusiness/" class="nav-link">Para tu Negocio</a></li>
+            <li class="nav-item"><a href="../coffeWorld/" class="nav-link">El <i class="fas fa-mug-hot"></i> en tu casa</a></li>
+            <li class="nav-item"><a href="../suscribete/" class="nav-link">Suscribete</a></li>
             <li class="nav-item"><a data-toggle="modal" href="#myCart" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i><span id="countCart"></span></a></li>
              <?php
               if (isset($_SESSION['email'])){

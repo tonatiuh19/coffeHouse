@@ -43,14 +43,14 @@ $precioTotal = 0;
 						            <h6 class="my-0">'.$row["name"].'</h6>
 						            <small class="text-muted">Cantidad '.$row["quantity"].'</small>
 						          </div>
-						          <span class="text-muted">$'.$row["price"].'</span>
+						          <span class="text-muted">$'.($row["price"])*$row["quantity"].'</span>
 						        </li>';
-						        $precioTotal += $row["price"];
+						        $precioTotal += ($row["price"])*$row["quantity"];
 				    }
 					if ($precioTotal >= 600) {
 						echo '<li class="list-group-item d-flex justify-content-between lh-condensed">
 							          <div>
-							            <h6 class="my-0">Envio gratis</h6>
+							            <h6 class="my-0"><i class="fas fa-truck"></i> Envio gratis</h6>
 							            <small class="text-muted"></small>
 							          </div>
 							          <span class="text-muted">$0</span>
@@ -59,7 +59,7 @@ $precioTotal = 0;
 						$precioAlcanzar = 600-$precioTotal;
 						echo '<li class="list-group-item d-flex justify-content-between lh-condensed">
 							          <div>
-							            <h6 class="my-0">Envio</h6>
+							            <h6 class="my-0"><i class="fas fa-truck"></i> Envio</h6>
 							            <small class="text-muted"><b>$'.$precioAlcanzar.' y tu envio es gratis </b></small>
 							          </div>
 							          <span class="text-muted">$99</span>
