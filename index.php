@@ -72,7 +72,18 @@ session_start();
       if (isset($_SESSION['email'])){
 
         /*echo '<li class="nav-item"><a href="profile/" class="nav-link btn btn-success btn-sm" data-toggle="tooltip" title="Inicia Sesion"><i class="fas fa-user-astronaut fa-1x"></i></a></li>';*/
-        echo '<li class="nav-item"><button data-toggle="collapse" data-target="#demo" class="nav-link btn btn-success btn-sm"><i class="fas fa-user-astronaut fa-1x"></i></button></li>
+        if ($_SESSION["type_user"] == 3) {
+          echo '<li class="nav-item"><button data-toggle="collapse" data-target="#demo" class="nav-link btn btn-success btn-sm"><i class="fas fa-user-astronaut fa-1x"></i></button></li>
+
+              <div id="demo" class="collapse">
+                <div class="btn-group-vertical">
+                  <a href="sign-in/fin.php" class="btn btn-success btn-sm"><i class="fas fa-times-circle"></i> sesion</a>
+                  <a href="profile/" class="btn btn-success btn-sm">Mi Perfil</a>
+                  <a href="dashboard/" class="btn btn-success btn-sm">Admin</a>
+                </div>
+              </div>';
+        }else{
+          echo '<li class="nav-item"><button data-toggle="collapse" data-target="#demo" class="nav-link btn btn-success btn-sm"><i class="fas fa-user-astronaut fa-1x"></i></button></li>
 
               <div id="demo" class="collapse">
                 <div class="btn-group-vertical">
@@ -80,6 +91,8 @@ session_start();
                   <a href="profile/" class="btn btn-success btn-sm">Mi Perfil</a>
                 </div>
               </div>';
+        }
+        
         
       }else{
         echo '<li class="nav-item"><a href="sign-in/" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Inicia Sesion"><i class="fas fa-user-astronaut fa-1x"></i></a></li>';
