@@ -6,7 +6,14 @@ if (!(isset($_SESSION['email']))){
 		</SCRIPT>");
 }
 $precioTotal = 0;
+$carrito = 0;
 ?>
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://js.openpay.mx/openpay.v1.min.js"></script>
+<script type='text/javascript'
+  src="https://js.openpay.mx/openpay-data.v1.min.js"></script>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_4.jpg');" data-stellar-background-ratio="0.5">
 	<div class="overlay"></div>
 	<div class="container">
@@ -38,6 +45,7 @@ $precioTotal = 0;
 				if ($result->num_rows > 0) {
 				    // output data of each row
 				    while($row = $result->fetch_assoc()) {
+				    	$carrito = $row["id_carts"];
 				        echo '<li class="list-group-item d-flex justify-content-between lh-condensed">
 						          <div>
 						            <h6 class="my-0">'.$row["name"].'</h6>
@@ -90,9 +98,12 @@ $precioTotal = 0;
 		</div>
 		<div class="col-md-8 order-md-1">
 			<h4 class="mb-3">Añadir Domicilio</h4>
-			<form class="needs-validation" novalidate>
-				
-				
+			<form action="pay/" method="POST" id="payment-form">
+				<input type="hidden" name="token_id" id="token_id">
+				<?php
+					echo '<input type="hidden" name="amount" id="amount" value="'.$precioTotal.'">';
+					echo '<input type="hidden" name="description" id="description" value="cart'.$carrito.'">';
+				?>
 				<div class="row">
 					<div class="col-md-5 mb-3">
 						<label for="country">Country</label>
@@ -122,15 +133,14 @@ $precioTotal = 0;
 				<div class="row">
 					<div class="col-md-6 mb-3">
 						<label for="cc-name">Nombre en tarjeta</label>
-						<input type="text" class="form-control" id="cc-name" placeholder="" required>
-						<small class="text-muted">Como aparece en tu tarjeta</small>
+						<input class="form-control" type="text" autocomplete="off" data-openpay-card="holder_name" placeholder="Como aparece en tu tarjeta" required>
 						<div class="invalid-feedback">
 							Name on card is required
 						</div>
 					</div>
 					<div class="col-md-6 mb-3">
 						<label for="cc-number">Numero de Tarjeta</label>
-						<input type="text" class="form-control" id="cc-number" placeholder="" required>
+						<input class="form-control" type="text" autocomplete="off" data-openpay-card="card_number" required>
 						<div class="invalid-feedback">
 							Credit card number is required
 						</div>
@@ -139,21 +149,29 @@ $precioTotal = 0;
 				<div class="row">
 					<div class="col-md-3 mb-3">
 						<label for="cc-expiration">Expiracion</label>
-						<input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                        <input type="text" class="form-control" placeholder="Mes" data-openpay-card="expiration_month">
+						<div class="invalid-feedback">
+							Expiration date required
+						</div>
+					</div>
+					<div class="col-md-3 mb-3">
+						<label for="cc-expiration">&nbsp;</label>
+                        <input type="text" class="form-control" placeholder="Año" data-openpay-card="expiration_year">
 						<div class="invalid-feedback">
 							Expiration date required
 						</div>
 					</div>
 					<div class="col-md-3 mb-3">
 						<label for="cc-expiration">CVV</label>
-						<input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+						<input class="form-control" type="text" placeholder="3 dígitos" autocomplete="off" data-openpay-card="cvv2" required>
 						<div class="invalid-feedback">
 							Security code required
 						</div>
 					</div>
 				</div>
+				<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
 				<hr class="mb-4">
-				<button class="btn btn-primary btn-lg btn-block" type="submit"><i class="fas fa-lock"></i> Pagar</button>
+				<a class="btn btn-primary btn-lg btn-block" id="pay-button"><i class="fas fa-lock"></i> Pagar</a>
 			</form>
 		</div>
 	</div>
@@ -164,6 +182,40 @@ $precioTotal = 0;
 	</footer>
 </div>
 
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		OpenPay.setId('mrnlrokkehg1vqbwx9x3');
+		OpenPay.setApiKey('pk_54e714c777c54724a21e789d3e3faf2b');
+		var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
+	});
+
+	$(document).ready(function() {
+		OpenPay.setId('mrnlrokkehg1vqbwx9x3');
+		OpenPay.setApiKey('pk_54e714c777c54724a21e789d3e3faf2b');
+		OpenPay.setSandboxMode(true);
+	});
+
+	$('#pay-button').on('click', function(event) {
+		event.preventDefault();
+		$("#pay-button").prop( "disabled", true);
+		OpenPay.token.extractFormAndCreate('payment-form', success_callbak, error_callbak);              
+
+	});
+
+	var success_callbak = function(response) {
+		var token_id = response.data.id;
+		$('#token_id').val(token_id);
+		$('#payment-form').submit();
+	};
+
+	var error_callbak = function(response) {
+		var desc = response.data.description != undefined ?
+		response.data.description : response.message;
+		alert("ERROR [" + response.status + "] " + desc);
+		$("#pay-button").prop("disabled", false);
+	};
+</script>
 <?php
 require_once('../admin/footer.php');
 ?>

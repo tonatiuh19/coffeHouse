@@ -106,13 +106,17 @@ session_start();
 
 <section class="home-slider owl-carousel js-fullheight">
   <?php
-  $sql = "SELECT id_campaigns, name, description, start_date, end_date, start_date FROM campaigns";
+  $sql = "SELECT d.id_products, e.price, d.name, d.description, d.long_description FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=3";
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
           // output data of each row
     while($row = $result->fetch_assoc()) {
-      echo '      <div class="slider-item js-fullheight" style="background-image: url(images/bg_1.jpg);">
+      echo '      <div class="slider-item js-fullheight" style="background-image: url('; 
+      foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+        echo $file;
+      }
+      echo');">
       <div class="overlay"></div>
       <div class="container">
       <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
@@ -227,7 +231,11 @@ session_start();
                 // output data of each row
     while($row = $result->fetch_assoc()) {
      echo '<!--<a data-toggle="modal" href="#my'.$row["id_products"].'">--><div class="menus d-flex ftco-animate">
-              <div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
+              <div class="menu-img img" style="background-image: url(';
+              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+                echo $file;
+              }
+              echo ');"></div>
               <div class="text">
                 <div class="d-flex">
                   <div class="one-half">
@@ -285,7 +293,11 @@ session_start();
                 // output data of each row
   while($row = $result->fetch_assoc()) {
     echo '<div class="menus d-flex ftco-animate">
-              <div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
+              <div class="menu-img img" style="background-image: url(';
+              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+                echo $file;
+              }
+              echo ');"></div>
               <div class="text">
                 <div class="d-flex">
                   <div class="one-half">
@@ -330,7 +342,11 @@ session_start();
                 <button class="tiny btn btn-success">Add to cart</button>
             </div>';*/
     echo '<div class="menus d-flex ftco-animate">
-              <div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
+              <div class="menu-img img" style="background-image: url(';
+              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+                echo $file;
+              }
+              echo ');"></div>
               <div class="text">
                 <div class="d-flex">
                   <div class="one-half">
@@ -365,11 +381,11 @@ session_start();
     <div class="row d-md-flex align-items-center justify-content-center">
      <div class="col-lg-10">
       <div class="row d-md-flex align-items-center">
-        <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+        <!--<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
           <div class="block-18">
             <div class="text">
-              <strong class="number" data-number="18">0</strong>
-              <span>Years of Experienced</span>
+              <strong class="number" data-number="3">0</strong>
+              <span>Año cumpliendo sueños</span>
             </div>
           </div>
         </div>
@@ -377,7 +393,7 @@ session_start();
           <div class="block-18">
             <div class="text">
               <strong class="number" data-number="15000">0</strong>
-              <span>Happy Customers</span>
+              <span>Clientes felices</span>
             </div>
           </div>
         </div>
@@ -385,15 +401,15 @@ session_start();
           <div class="block-18">
             <div class="text">
               <strong class="number" data-number="100">0</strong>
-              <span>Menus</span>
+              <span>Nuevos paquetes</span>
             </div>
           </div>
-        </div>
+        </div>-->
         <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
           <div class="block-18">
             <div class="text">
               <strong class="number" data-number="20">0</strong>
-              <span>Staffs</span>
+              <span>Crew members a tu dispocision</span>
             </div>
           </div>
         </div>

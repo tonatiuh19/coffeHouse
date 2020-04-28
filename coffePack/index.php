@@ -12,34 +12,78 @@ require_once('../admin/header.php');
 	</div>
 </section>
 
+<style type="text/css">
+	.card-product .img-wrap {
+	    border-radius: 3px 3px 0 0;
+	    overflow: hidden;
+	    position: relative;
+	    height: 220px;
+    	text-align: center;
+	}
+	.card-product .img-wrap img {
+	    max-height: 100%;
+	    max-width: 100%;
+	    object-fit: cover;
+	}
+	.card-product .info-wrap {
+	    overflow: hidden;
+	    padding: 15px;
+	    border-top: 1px solid #eee;
+	}
+	.card-product .bottom-wrap {
+	    padding: 15px;
+	    border-top: 1px solid #eee;
+	}
 
+	.label-rating { margin-right:10px;
+	    color: #333;
+	    display: inline-block;
+	    vertical-align: middle;
+	}
+
+	.card-product .price-old {
+	    color: #999;
+	}
+</style>
 <section class="ftco-section">
 	<div class="container">
 		<div class="row">
 			<?php
-			$sql = "SELECT id_campaigns, name, description, start_date, end_date, start_date FROM campaigns";
+			$sql = "SELECT d.id_products, e.price, d.name, d.description FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=3 and d.active=1";
 			$result = $conn->query($sql);
 
 			if ($result->num_rows > 0) {
 			    // output data of each row
 			    while($row = $result->fetch_assoc()) {
-			        echo '<div class="col-md-4 ftco-animate">
-				<div class="blog-entry">
-					<a href="blog-single.html" class="block-20" style="background-image: url(../images/image_2.jpg);">
-					</a>
-					<div class="text pt-3 pb-4">
-						<div class="meta">
-							<div><a href="#">A partir de: '.$row["start_date"].'9</a></div>
-							
-						</div>
-						<h3 class="heading"><a href="#">'.$row["name"].'</a></h3>
-						<p class="clearfix">
-							<a href="#" class="float-left btn btn-success">Soltar en mi bolsa</a>
-							
-						</p>
-					</div>
-				</div>
-			</div>';
+									echo '<div class="col-md-4">
+											<figure class="card card-product">
+												<div class="img-wrap"><img src="';
+												foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+									                echo $file;
+									              }
+												echo '"></div>
+												<figcaption class="info-wrap">
+														<h4 class="title">'.$row["name"].'</h4>
+														<p class="desc">'.$row["description"].'</p>
+														<!--<div class="rating-wrap">
+															<div class="label-rating">132 reviews</div>
+															<div class="label-rating">154 orders </div>
+														</div>  rating-wrap.// -->
+												</figcaption>
+												<div class="bottom-wrap">
+													  <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
+									                  <input type="number" class="count float-right form-control" value="1" min="1" />
+									                  <button class="tiny btn btn-sm btn-primary float-right">Soltar en mi bolsa</button>
+									                  </div>	
+													<div class="price-wrap h5">
+													';
+													$percentage = $row["price"]+20;
+													echo '<span class="price-new"><b>$'.$row["price"].'</b></span> 
+													<!--<del class="price-old">$'.$percentage.'</del>-->
+													</div> <!-- price-wrap.// -->
+												</div> <!-- bottom-wrap.// -->
+											</figure>
+										</div>';
 			    }
 			} else {
 			    echo "0 results";

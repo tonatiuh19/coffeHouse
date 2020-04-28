@@ -82,7 +82,7 @@
                       </div>';
                 
               }else{
-                echo '<li class="nav-item"><a href="sign-in/" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Inicia Sesion"><i class="fas fa-user-astronaut fa-1x"></i></a></li>';
+                echo '<li class="nav-item"><a href="../sign-in/" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Inicia Sesion"><i class="fas fa-user-astronaut fa-1x"></i></a></li>';
               }
               ?>
           </ul>
