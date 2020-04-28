@@ -6,7 +6,8 @@ require_once('../admin/header.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$id = test_input($_POST["id"]);
 
-	$sql = "SELECT a.id_products, a.name, a.description, a.long_description, a.id_country, a.id_product_type, b.country, c.product_type FROM products as a INNER JOIN countries as b on b.id_country=a.id_country INNER JOIN product_types as c on c.id_product_types=a.id_product_type WHERE a.id_products=".$id."";
+	/*$sql = "SELECT a.id_products, a.name, a.description, a.long_description, a.id_country, a.id_product_type, b.country, c.product_type FROM products as a INNER JOIN countries as b on b.id_country=a.id_country INNER JOIN product_types as c on c.id_product_types=a.id_product_type WHERE a.id_products=".$id."";*/
+	$sql = "SELECT d.id_products, e.price, d.name, d.description, d.id_product_type, d.id_country, d.active, d.long_description, m.country, n.product_type FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN countries as m on m.id_country=d.id_country INNER JOIN product_types as n on n.id_product_types=d.id_product_type WHERE d.id_products=".$id."";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -58,7 +59,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						<div class="container">
 						    <div class="row">
 						        <div class="col-sm-6">
-						        	<h5>Foto principal de producto</h5>
+						        	<?php
+						        	if ($row["id_product_type"]==3) {
+						        		echo '<h5>Foto principal de la campaña</h5>';
+						        	}else{
+						        		echo '<h5>Foto principal de producto</h5>';
+						        	}
+						        	?>
 													<form action="file_image.php" method="post" enctype="multipart/form-data">
 														<div class="form-group">
 															<input type="hidden" name="folderId" value="<?php echo $row["id_products"]; ?>" id="exampleFormControlFile1">
@@ -125,61 +132,84 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						    </div>
 						</div><p></p>
 						<?php echo '<form method="post" action="../update/">
-							<div class="form-group">
-								<label for="exampleInputEmail1">Nombre del Producto:</label>
-								<input type="hidden" name="id" value="'.$row["id_products"].'" >
+							<div class="form-group">';
+								if ($row["id_product_type"]==3) {
+									echo '<label for="exampleInputEmail1">Nombre de la Campaña:</label>';
+								}else{
+									echo '<label for="exampleInputEmail1">Nombre del Producto:</label>';
+								}
+								echo '<input type="hidden" name="id" value="'.$row["id_products"].'" >
 								<input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" value="'.$row["name"].'" required>
 							</div>
 							<div class="form-group">
-								<label for="sel1">¿Que tipo de producto es?</label>
-								<select class="form-control" id="sel1" name="product_type">';
-								$sql2 = "SELECT id_product_types, product_type FROM product_types WHERE id_product_types NOT IN ( SELECT id_product_types FROM product_types WHERE id_product_types = 3 )";
-								$result2 = $conn->query($sql2);
+								<label for="exampleInputEmail1">Precio:</label>
+								<input type="text" class="form-control" id="exampleInputEmail1" name="price" aria-describedby="emailHelp" value="'.$row["price"].'" required>
+							</div>';
+							if ($row["id_product_type"]!=3) {
+								echo '<div class="form-group">
+									<label for="sel1">¿Que tipo de producto es?</label>
+									<select class="form-control" id="sel1" name="product_type">';
+									$sql2 = "SELECT id_product_types, product_type FROM product_types WHERE id_product_types NOT IN ( SELECT id_product_types FROM product_types WHERE id_product_types = 3 )";
+									$result2 = $conn->query($sql2);
 
-								if ($result2->num_rows > 0) {
-				    // output data of each row
-									while($row2 = $result2->fetch_assoc()) {
-										if ($row2["id_product_types"]==$row["id_product_types"]) {
-											echo '<option value="'.$row2["id_product_types"].'" selected>'.$row2["product_type"].'</option>';
-										}else{
-											echo '<option value="'.$row2["id_product_types"].'">'.$row2["product_type"].'</option>';
+									if ($result2->num_rows > 0) {
+					    // output data of each row
+										while($row2 = $result2->fetch_assoc()) {
+											if ($row2["id_product_types"]==$row["id_product_types"]) {
+												echo '<option value="'.$row2["id_product_types"].'" selected>'.$row2["product_type"].'</option>';
+											}else{
+												echo '<option value="'.$row2["id_product_types"].'">'.$row2["product_type"].'</option>';
+											}
 										}
+									} else {
+										echo "0 results";
 									}
-								} else {
-									echo "0 results";
+									echo '</select>
+								</div>';
+							}else{
+								echo '<input type="hidden" name="product_type" value="3">';
+							}
+							echo '<div class="form-group">';
+								if ($row["id_product_type"]!=3) {
+									echo '<label for="exampleFormControlTextarea1">Descripcion corta del producto:</label>';
+								}else{
+									echo '<label for="exampleFormControlTextarea1">Descripcion corta de la campaña:</label>';
 								}
-								echo '</select>
+								echo '<textarea class="form-control" id="exampleFormControlTextarea1" name="s_desc" rows="2"  required>'.$row["description"].'</textarea>
 							</div>
-							<div class="form-group">
-								<label for="exampleFormControlTextarea1">Descripcion corta del producto:</label>
-								<textarea class="form-control" id="exampleFormControlTextarea1" name="s_desc" rows="2"  required>'.$row["description"].'</textarea>
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlTextarea1">Descripcion extensa del producto:</label>
-								<textarea class="form-control" id="exampleFormControlTextarea1" name="l_desc" rows="5"  required>'.$row["long_description"].'</textarea>
-							</div>
-							<div class="form-group">
-								<label for="sel1">¿De que lugar es?</label>
-								<select class="form-control" id="sel1" name="country">';
-								$sql2 = "SELECT id_country, country FROM countries";
-								$result2 = $conn->query($sql2);
+							<div class="form-group">';
+								if ($row["id_product_type"]!=3) {
+									echo '<label for="exampleFormControlTextarea1">Descripcion extensa del producto:</label>';
+								}else{
+									echo '<label for="exampleFormControlTextarea1">Descripcion extensa de la campaña:</label>';
+								}
+								echo '<textarea class="form-control" id="exampleFormControlTextarea1" name="l_desc" rows="5"  required>'.$row["long_description"].'</textarea>
+							</div>';
+							if ($row["id_product_type"]!=3) {
+								echo '<div class="form-group">
+									<label for="sel1">¿De que lugar es?</label>
+									<select class="form-control" id="sel1" name="country">';
+									$sql2 = "SELECT id_country, country FROM countries";
+									$result2 = $conn->query($sql2);
 
-								if ($result2->num_rows > 0) {
-				    // output data of each row
-									while($row2 = $result2->fetch_assoc()) {
-										if ($row2["id_country"]==$row["id_country"]) {
-											echo '<option value="'.$row["id_country"].'" selected>'.$row["country"].'</option>';
-										}else{
-											echo '<option value="'.$row2["id_country"].'">'.$row2["country"].'</option>';
+									if ($result2->num_rows > 0) {
+					    // output data of each row
+										while($row2 = $result2->fetch_assoc()) {
+											if ($row2["id_country"]==$row["id_country"]) {
+												echo '<option value="'.$row["id_country"].'" selected>'.$row["country"].'</option>';
+											}else{
+												echo '<option value="'.$row2["id_country"].'">'.$row2["country"].'</option>';
+											}
 										}
+									} else {
+										echo "0 results";
 									}
-								} else {
-									echo "0 results";
-								}
-								echo '</select>
-							</div>
-							
-							<button type="submit" class="btn btn-primary">Actualizar</button>
+									echo '</select>
+								</div>';
+							}else{
+								echo '<input type="hidden" name="country" value="10">';
+							}
+							echo '<button type="submit" class="btn btn-primary">Actualizar</button>
 						</form>
 
 					</main>

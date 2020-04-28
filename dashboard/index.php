@@ -28,23 +28,23 @@ if ($_SESSION["type_user"] != 3){
 			<div class="sidebar-sticky">
 				<ul class="nav flex-column">
 					<li class="nav-item">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="../dashboard/">
 							<span data-feather="home"></span>
 							Productos <span class="sr-only"></span>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="campaigns/">
 							<span data-feather="file"></span>
 							Campañas
 						</a>
 					</li>
-					<li class="nav-item">
+					<!--<li class="nav-item">
 						<a class="nav-link" href="#">
 							<span data-feather="shopping-cart"></span>
 							Usuarios
 						</a>
-					</li>
+					</li>-->
 				</ul>
 			</div>
 		</nav>
@@ -60,15 +60,17 @@ if ($_SESSION["type_user"] != 3){
 	</div>
 
 	<?php
-	$sql = "SELECT id_products, name, description, id_product_type, id_country, active, long_description FROM products";
+	$sql = "SELECT d.id_products, e.price, d.name, d.description, d.id_product_type, d.id_country, d.active, d.long_description, m.country FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN countries as m on m.id_country=d.id_country";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
-    echo '<table class="table">
+    echo '<table class="table text-center">
 			  <thead class="thead-dark">
 			    <tr>
 			      <th scope="col">ID</th>
 			      <th scope="col">Nombre</th>
+			      <th scope="col">Precio</th>
+			      <th scope="col">Region</th>
 			      <th scope="col">Descripcion</th>
 			      <th scope="col">Descripcion extensa</th>
 			      <th scope="col">Status</th>
@@ -78,9 +80,12 @@ if ($_SESSION["type_user"] != 3){
 			  </thead>
 			  <tbody>';
 		while($row = $result->fetch_assoc()) {
-			echo '<tr>
+			if($row["id_product_type"] !=3){
+				echo '<tr>
 			      <th scope="row">'.$row["id_products"].'</th>
 			      <td>'.$row["name"].'</td>
+			      <td>$'.$row["price"].'</td>
+			      <td>'.$row["country"].'</td>
 			      <td>'.substr($row["description"],0,12)."...".'</td>
 			      <td>'.substr($row["long_description"],0,12)."...".'</td>';
 			      if ($row["active"]==1) {
@@ -88,6 +93,7 @@ if ($_SESSION["type_user"] != 3){
 			      	echo '<td><form action="activate/" method="post">
 								<input type="hidden" name="act" value="'.$row["active"].'">
 								<input type="hidden" name="id" value="'.$row["id_products"].'">
+								<input type="hidden" name="type" value="1">
 								<button type="submit" class="btn btn-danger"><i class="fas fa-times-circle"></i></button>
 							</form></td>';
 			      }else{
@@ -95,6 +101,7 @@ if ($_SESSION["type_user"] != 3){
 			      	echo '<td><form action="activate/" method="post">
 								<input type="hidden" name="act" value="'.$row["active"].'">
 								<input type="hidden" name="id" value="'.$row["id_products"].'">
+								<input type="hidden" name="type" value="1">
 								<button class="btn btn-success" type="submit"><i class="fas fa-check-circle"></i></button>
 							</form></td>';
 			      }
@@ -103,6 +110,8 @@ if ($_SESSION["type_user"] != 3){
 								<button class="btn btn-primary"><i class="fas fa-edit"></i></button>
 							</form></td>';
 			    echo '</tr>';
+			}
+
 		}
 	echo '</tbody>
 		</table>';

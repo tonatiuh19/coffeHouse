@@ -17,6 +17,10 @@ require_once('../admin/header.php');
 			<input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="Cafe de los Alpes" required>
 		</div>
 		<div class="form-group">
+			<label for="exampleInputEmail1">Precio:</label>
+			<input type="text" class="form-control" id="exampleInputEmail1" name="price" aria-describedby="emailHelp" placeholder="$850" required>
+		</div>
+		<div class="form-group">
 			<label for="sel1">¿Que tipo de producto es?</label>
 			<select class="form-control" id="sel1" name="product_type">
 				<?php

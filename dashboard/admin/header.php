@@ -34,17 +34,17 @@ if ($_SESSION["type_user"] != 3){
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="../campaigns/">
 							<span data-feather="file"></span>
 							Campañas
 						</a>
 					</li>
-					<li class="nav-item">
+					<!--<li class="nav-item">
 						<a class="nav-link" href="#">
 							<span data-feather="shopping-cart"></span>
 							Usuarios
 						</a>
-					</li>
+					</li>-->
 				</ul>
 			</div>
 		</nav>

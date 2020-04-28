@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 				if ($conn->query($sql) === TRUE) {
 					echo ("<SCRIPT LANGUAGE='JavaScript'>
-							window.location.href='../../';
+							window.location.href='../../campaigns/';
 							</SCRIPT>");
 				} else {
 					echo "Error: " . $sql . "<br>" . $conn->error;
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }else{
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
 
-		window.location.href='../../';
+		window.location.href='../../campaigns/';
 		</SCRIPT>");
 }
 
