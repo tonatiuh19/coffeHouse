@@ -103,6 +103,10 @@ $carrito = 0;
 				<?php
 					echo '<input type="hidden" name="amount" id="amount" value="'.$precioTotal.'">';
 					echo '<input type="hidden" name="description" id="description" value="cart'.$carrito.'">';
+					echo '<input type="hidden" name="email" value="'.$_SESSION['email'].'">';
+					echo '<input type="hidden" name="name" value="Pero">';
+					echo '<input type="hidden" name="last" value="Gato">';
+					echo '<input type="hidden" name="number" value="1234567890">';
 				?>
 				<div class="row">
 					<div class="col-md-5 mb-3">
