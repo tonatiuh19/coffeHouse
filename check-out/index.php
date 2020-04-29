@@ -14,6 +14,11 @@ if (!(isset($_SESSION['email']))){
 $precioTotal = 0;
 $carrito = 0;
 ?>
+<style>
+	.box{
+		display: none;
+	}
+</style>
 <script type="text/javascript"
         src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript"
@@ -104,16 +109,7 @@ $carrito = 0;
 		</div>
 		<div class="col-md-8 order-md-1">
 			<h4 class="mb-3">Añadir Domicilio</h4>
-			<form action="pay/" method="POST" id="payment-form">
-				<input type="hidden" name="token_id" id="token_id">
-				<?php
-					echo '<input type="hidden" name="amount" id="amount" value="'.$precioTotal.'">';
-					echo '<input type="hidden" name="description" id="description" value="'.$carrito.'">';
-					echo '<input type="hidden" name="email" value="'.$_SESSION['email'].'">';
-					echo '<input type="hidden" name="name" value="Pero">';
-					echo '<input type="hidden" name="last" value="Gato">';
-					echo '<input type="hidden" name="number" value="1234567890">';
-				?>
+			
 				<div class="row">
 					<div class="col-md-5 mb-3">
 						<label for="country">Country</label>
@@ -131,58 +127,100 @@ $carrito = 0;
 				<h4 class="mb-3">Pago</h4>
 
 				<div class="d-block my-3">
-					<div class="custom-control custom-radio">
-						<input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-						<label class="custom-control-label" for="credit">Credito / Debito</label>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="colorRadio" value="red">
+					  <label class="form-check-label" for="exampleRadios1">
+					    Credito/Debito
+					  </label>
 					</div>
-					<div class="custom-control custom-radio">
-						<input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-						<label class="custom-control-label" for="paypal">Paypal</label>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="colorRadio" value="green">
+					  <label class="form-check-label" for="exampleRadios2">
+					    Tienda
+					  </label>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 mb-3">
-						<label for="cc-name">Nombre en tarjeta</label>
-						<input class="form-control" type="text" autocomplete="off" data-openpay-card="holder_name" placeholder="Como aparece en tu tarjeta" required>
-						<div class="invalid-feedback">
-							Name on card is required
-						</div>
-					</div>
-					<div class="col-md-6 mb-3">
-						<label for="cc-number">Numero de Tarjeta</label>
-						<input class="form-control" type="text" autocomplete="off" data-openpay-card="card_number" required>
-						<div class="invalid-feedback">
-							Credit card number is required
-						</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="colorRadio" value="blue">
+					  <label class="form-check-label" for="exampleRadios3">
+					    Paypal
+					  </label>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-3 mb-3">
-						<label for="cc-expiration">Expiracion</label>
-                        <input type="text" class="form-control" placeholder="Mes" data-openpay-card="expiration_month">
-						<div class="invalid-feedback">
-							Expiration date required
+				<div class="red box">
+					<form action="pay/" method="POST" id="payment-form">
+					<input type="hidden" name="token_id" id="token_id">
+					<?php
+						echo '<input type="hidden" name="payType" value="1">';
+						echo '<input type="hidden" name="amount" id="amount" value="'.$precioTotal.'">';
+						echo '<input type="hidden" name="description" id="description" value="'.$carrito.'">';
+						echo '<input type="hidden" name="email" value="'.$_SESSION['email'].'">';
+						echo '<input type="hidden" name="name" value="Pero">';
+						echo '<input type="hidden" name="last" value="Gato">';
+						echo '<input type="hidden" name="number" value="1234567890">';
+					?>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="cc-name">Nombre en tarjeta</label>
+							<input class="form-control" type="text" autocomplete="off" data-openpay-card="holder_name" placeholder="Como aparece en tu tarjeta" required>
+							<div class="invalid-feedback">
+								Name on card is required
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="cc-number">Numero de Tarjeta</label>
+							<input class="form-control" type="text" autocomplete="off" data-openpay-card="card_number" required>
+							<div class="invalid-feedback">
+								Credit card number is required
+							</div>
 						</div>
 					</div>
-					<div class="col-md-3 mb-3">
-						<label for="cc-expiration">&nbsp;</label>
-                        <input type="text" class="form-control" placeholder="Año" data-openpay-card="expiration_year">
-						<div class="invalid-feedback">
-							Expiration date required
+					<div class="row">
+						<div class="col-md-3 mb-3">
+							<label for="cc-expiration">Expiracion</label>
+	                        <input type="text" class="form-control" placeholder="Mes" data-openpay-card="expiration_month">
+							<div class="invalid-feedback">
+								Expiration date required
+							</div>
+						</div>
+						<div class="col-md-3 mb-3">
+							<label for="cc-expiration">&nbsp;</label>
+	                        <input type="text" class="form-control" placeholder="Año" data-openpay-card="expiration_year">
+							<div class="invalid-feedback">
+								Expiration date required
+							</div>
+						</div>
+						<div class="col-md-3 mb-3">
+							<label for="cc-expiration">CVV</label>
+							<input class="form-control" type="text" placeholder="3 dígitos" autocomplete="off" data-openpay-card="cvv2" required>
+							<div class="invalid-feedback">
+								Security code required
+							</div>
 						</div>
 					</div>
-					<div class="col-md-3 mb-3">
-						<label for="cc-expiration">CVV</label>
-						<input class="form-control" type="text" placeholder="3 dígitos" autocomplete="off" data-openpay-card="cvv2" required>
-						<div class="invalid-feedback">
-							Security code required
-						</div>
-					</div>
-				</div>
-				<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
-				<hr class="mb-4">
-				<a class="btn btn-primary btn-lg btn-block" id="pay-button"><i class="fas fa-lock"></i> Pagar</a>
-			</form>
+					<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
+					<hr class="mb-4">
+					<a class="btn btn-primary btn-lg btn-block" id="pay-button"><i class="fas fa-lock"></i> Pagar</a>
+				</form>
+			</div>
+			<div class="green box">
+				<img src="../images/openpay_tiendas.jpg" alt="Cinque Terre">
+				<form action="pay/" method="POST" >
+					<?php
+					echo '<input type="hidden" name="payType" value="2">';
+					echo '<input type="hidden" name="amount" id="amount" value="'.$precioTotal.'">';
+					echo '<input type="hidden" name="description" id="description" value="'.$carrito.'">';
+					echo '<input type="hidden" name="email" value="'.$_SESSION['email'].'">';
+					echo '<input type="hidden" name="name" value="Pero">';
+					echo '<input type="hidden" name="last" value="Gato">';
+					echo '<input type="hidden" name="number" value="1234567890">';
+					?>
+					<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
+					<hr class="mb-4">
+					<!--<a class="btn btn-primary btn-lg btn-block" id="pay-button" target="_blank"><i class="fas fa-lock"></i> Generar ticket de Pago</a>-->
+					<button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fas fa-lock"></i> Generar ticket de Pago</button>
+				</form>
+			</div>
+    		<div class="blue box">Paypal</div>
 		</div>
 	</div>
 
@@ -229,3 +267,13 @@ $carrito = 0;
 <?php
 require_once('../admin/footer.php');
 ?>
+<script>
+	$(document).ready(function(){
+		$('input[type="radio"]').click(function(){
+			var inputValue = $(this).attr("value");
+			var targetBox = $("." + inputValue);
+			$(".box").not(targetBox).hide();
+			$(targetBox).show();
+		});
+	});
+</script>
