@@ -85,17 +85,19 @@
 
 
 
-  <script type="text/template" id="cartT">
-    <% _.each(items, function (item) { %> 
-       <tr class = "panel">
-        <td><%= item.name %></td>
-        <td class="label"> <%= item.count %> </td>
-        <td>  $<%= item.total %></td>
-      </tr>
-    <% }); %>
-  </script>
+<script type="text/template" id="cartT">
+  <% _.each(items, function (item) { %> 
+     <tr class = "panel">
+      <td><%= item.name %></td>
+      <td class="label"> <%= item.count %> </td>
+      <td>  $<%= item.total %></td>
+      <input type="hidden" id="custId" name="productId[]" value="<%= item.id %>">
+      <input type="hidden" id="custId" name="qty[]" value="<%= item.count %>">
+    </tr>
+  <% }); %>
+</script>
 
-  <script  src="../js/cart_headers.js"></script>
+  <script  src="../js/cart.js"></script>
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery-migrate-3.0.1.min.js"></script>
   <script src="../js/popper.min.js"></script>
@@ -112,6 +114,23 @@
   <script src="../js/scrollax.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'></script>
   <script src="../js/main.js"></script>
+  <script type="text/javascript">
+      $(function() {
+        var alert = $('div.alert[auto-close]');
+        alert.each(function() {
+          var that = $(this);
+          var time_period = that.attr('auto-close');
+          setTimeout(function() {
+            that.alert('close');
+          }, time_period);
+        });
+      });
+
+      $("#modalButton").click(function(){
+            $("#moo").addClass('show') //Shows Bootstrap alert
+            //alert("hola");
+      })
+    </script>
     
   </body>
 </html>

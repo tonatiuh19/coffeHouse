@@ -35,6 +35,14 @@
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
     <link href="../css/fontawesome/css/all.css" rel="stylesheet">
+    <style type="text/css">
+      .alerti {
+          position: fixed;
+          bottom: 0;
+          width: 40%;
+          z-index: 1000;
+      }
+    </style>
   </head>
   <body>
     <div class="py-1 bg-black top">
@@ -89,6 +97,13 @@
         </div>
       </div>
     </nav>
+
+    <div id="moo" class="alert alert-success alert-dismissible fade alerti" role="alert" auto-close="3000">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+      </button>
+      Añadido
+    </div>
+
     <!-- END nav -->
     
     

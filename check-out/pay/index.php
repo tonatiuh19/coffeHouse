@@ -1,8 +1,8 @@
 <?php
 require_once("Openpay.php");
 
-Openpay::setId('mrnlrokkehg1vqbwx9x3');
-Openpay::setApiKey('sk_1c29e17ce09b46f99dcb0c82bdf99b11');
+Openpay::setId('my5osdjarjverf8pvgd7');
+Openpay::setApiKey('sk_9252628a92d04854b9602f975da5da78');
 $customer = array(
 	'name' => $_POST["name"],
 	'last_name' => $_POST["last"],
@@ -19,36 +19,65 @@ $chargeData = array(
 	    'device_session_id' => $_POST["deviceIdHiddenFieldName"],
 	    'customer' => $customer
 	);
+$status=0;
 try {
 	//Openpay::setProductionMode(false);
-	$openpay = Openpay::getInstance('mrnlrokkehg1vqbwx9x3', 'sk_1c29e17ce09b46f99dcb0c82bdf99b11');
+	$openpay = Openpay::getInstance('my5osdjarjverf8pvgd7', 'sk_9252628a92d04854b9602f975da5da78');
 	$charge = $openpay->charges->create($chargeData);
 	echo $charge->id;
 	echo "<br>";
 	echo $charge->status;
 	echo "<br>";
 
-
+	$status=1;
 } catch (OpenpayApiTransactionError $e) {
-	echo error_log('ERROR on the transaction: ' . $e->getMessage() .
-		' [error code: ' . $e->getErrorCode() .
+	/*echo 'ERROR on the transaction: ' . $e->getMessage() .
+		' error code: ' . $e->getErrorCode() .
 		', error category: ' . $e->getCategory() .
 		', HTTP code: '. $e->getHttpCode() .
-		', request ID: ' . $e->getRequestId() . ']', 0);
-
+		', request ID: ' . $e->getRequestId();*/
+	$status=2;
 } catch (OpenpayApiRequestError $e) {
-	echo error_log('ERROR on the request: ' . $e->getMessage(), 0);
-
+	//echo 'ERROR on the request: ' . $e->getMessage();
+	$status=3;
 } catch (OpenpayApiConnectionError $e) {
-	echo error_log('ERROR while connecting to the API: ' . $e->getMessage(), 0);
-
+	//echo 'ERROR while connecting to the API: ' . $e->getMessage();
+	$status=4;
 } catch (OpenpayApiAuthError $e) {
-	echo error_log('ERROR on the authentication: ' . $e->getMessage(), 0);
-
+	//echo 'ERROR on the authentication: ' . $e->getMessage();
+	$status=5;
 } catch (OpenpayApiError $e) {
-	echo error_log('ERROR on the API: ' . $e->getMessage(), 0);
-
+	//echo 'ERROR on the API: ' . $e->getMessage();
+	$status=6;
 } catch (Exception $e) {
-	echo error_log('Error on the script: ' . $e->getMessage(), 0);
+	//echo 'Error on the script: ' . $e->getMessage();
 }
+
+echo '<form action="../../status/" id="finish" method="post">';
+if ($status==1) {
+	echo '<input type="hidden" name="stat" value="1">';
+	echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+}elseif ($status==2) {
+	echo '<input type="hidden" name="stat" value="2">';
+	echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+}elseif ($status==3) {
+	echo '<input type="hidden" name="stat" value="3">';
+	echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+}elseif ($status==4) {
+	echo '<input type="hidden" name="stat" value="4">';
+	echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+}elseif ($status==5) {
+	echo '<input type="hidden" name="stat" value="5">';
+	echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+}elseif ($status==6) {
+	echo '<input type="hidden" name="stat" value="6">';
+	echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+}else{
+	echo '<input type="hidden" name="stat" value="0">';
+	echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+}
+echo '</form>';
+echo '<script type="text/javascript">
+  document.getElementById("finish").submit();
+</script>';
 ?>

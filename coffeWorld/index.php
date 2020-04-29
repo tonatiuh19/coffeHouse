@@ -83,7 +83,7 @@ require_once('../admin/header.php');
 												<div class="bottom-wrap">
 													  <div class="product" data-name="'.$row2["name"].'" data-price="'.$row2["price"].'" data-id="'.$row2["id_products"].'">
 									                  <input type="number" class="count float-right form-control" value="1" min="1" />
-									                  <button class="tiny btn btn-sm btn-primary float-right">Soltar en mi bolsa</button>
+									                  <button class="tiny btn btn-sm btn-primary float-right" id="modalButton">Soltar en mi bolsa</button>
 									                  </div>	
 													<div class="price-wrap h5">
 													';

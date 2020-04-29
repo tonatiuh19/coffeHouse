@@ -1,4 +1,10 @@
 <?php
+echo ("<SCRIPT LANGUAGE='JavaScript'>
+		if (localStorage.getItem('cart') === null) {
+		  window.location.href='../';
+		}
+		</SCRIPT>");
+
 require_once('../admin/header.php');
 if (!(isset($_SESSION['email']))){
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
@@ -45,7 +51,7 @@ $carrito = 0;
 				if ($result->num_rows > 0) {
 				    // output data of each row
 				    while($row = $result->fetch_assoc()) {
-				    	$carrito = $row["id_carts"];
+				    	$carrito = $row["id_orders"];
 				        echo '<li class="list-group-item d-flex justify-content-between lh-condensed">
 						          <div>
 						            <h6 class="my-0">'.$row["name"].'</h6>
@@ -102,7 +108,7 @@ $carrito = 0;
 				<input type="hidden" name="token_id" id="token_id">
 				<?php
 					echo '<input type="hidden" name="amount" id="amount" value="'.$precioTotal.'">';
-					echo '<input type="hidden" name="description" id="description" value="cart'.$carrito.'">';
+					echo '<input type="hidden" name="description" id="description" value="'.$carrito.'">';
 					echo '<input type="hidden" name="email" value="'.$_SESSION['email'].'">';
 					echo '<input type="hidden" name="name" value="Pero">';
 					echo '<input type="hidden" name="last" value="Gato">';
@@ -189,14 +195,14 @@ $carrito = 0;
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		OpenPay.setId('mrnlrokkehg1vqbwx9x3');
-		OpenPay.setApiKey('pk_54e714c777c54724a21e789d3e3faf2b');
+		OpenPay.setId('my5osdjarjverf8pvgd7');
+		OpenPay.setApiKey('pk_adbd72980cc14a83a9b6ede8ebe6dc5a');
 		var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
 	});
 
 	$(document).ready(function() {
-		OpenPay.setId('mrnlrokkehg1vqbwx9x3');
-		OpenPay.setApiKey('pk_54e714c777c54724a21e789d3e3faf2b');
+		OpenPay.setId('my5osdjarjverf8pvgd7');
+		OpenPay.setApiKey('pk_adbd72980cc14a83a9b6ede8ebe6dc5a');
 		OpenPay.setSandboxMode(true);
 	});
 
