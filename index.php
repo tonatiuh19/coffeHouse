@@ -123,7 +123,11 @@ session_start();
 
       <div class="col-md-12 col-sm-12 text-center ftco-animate">
       <h1 class="mb-4 mt-5">'.$row["name"].'</h1>
-      <p>'.$row["description"].'<br><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Añadir a bolsa</a></p>
+      <p>'.$row["description"].'<br>
+      <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
+                                    <input type="hidden" class="count float-right form-control" value="1" min="1" />
+                                    <button class="tiny btn btn-primary p-3 px-xl-4 py-xl-3" id="modalButton">Soltar en mi bolsa</button>
+                                    </div></p>
       </div>
 
       </div>

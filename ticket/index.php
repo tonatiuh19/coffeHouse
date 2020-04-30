@@ -1,3 +1,45 @@
+
+<?php
+// define variables and set to empty values
+session_start();
+require_once('../admin/cn.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $barcode_url = test_input($_POST["barcode_url"]);
+    $barcode_paybin_url = test_input($_POST["barcode_paybin_url"]);
+    $reference = test_input($_POST["reference"]);
+    $paybin_reference = test_input($_POST["paybin_reference"]);
+    $amount = test_input($_POST["amount"]);
+    $cart = test_input($_POST["description"]);
+    $adres = test_input($_POST["adress"]);
+    $todayVisit = date("Y-m-d H:i:s");
+
+    $sql = "UPDATE orders SET complete='2', id_adress='".$adres."' WHERE id_orders=".$cart."";
+
+    if ($conn->query($sql) === TRUE) {
+        //echo "Record updated successfully";
+    } else {
+        //echo "Error updating record: " . $conn->error;
+    }
+
+}else{
+    echo ("<SCRIPT LANGUAGE='JavaScript'>
+
+        window.location.href='../sign-in/';
+        </SCRIPT>");
+}
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+
+?>
+
+
 <!doctype html>
 <html>
 <head>
@@ -9,12 +51,9 @@
 <div class="whitepaper">
 	<div class="Header">
 	<div class="Logo_empresa">
-    	<img src="images/logo.png" alt="Logo">
+    	<img src="../images/logo.png" alt="Logo">
     </div>
-    <div class="Logo_paynet">
-    	<div>Servicio a pagar</div>
-    	<img src="../images/logo.png" alt="Logo Paynet">
-    </div>
+    
     </div>
     <div class="Data">
     	<div class="Big_Bullet">
@@ -22,15 +61,23 @@
         </div>
     	<div class="col1">
         	<h3>Fecha límite de pago</h3>
-            <h4>30 de Noviembre 2018, a las 2:30 AM</h4>
-            <img width="300" src="https://api.openpay.mx/barcode/0129384756234859?height=30" alt="Código de Barras">
-        	<center><span>0129384756234859</span></center>
+            <h4><?php
+            $Date = "2010-09-17";
+            echo date('d-m-Y H:i:s', strtotime($todayVisit. ' + 8 days'));
+            ?></h4>
+            <?php
+                echo '<img width="300" src="'.$barcode_url.'" alt="Código de Barras">
+                    <center><span>'.$reference.'</span></center>';
+            ?>
             <small>En caso de que el escáner no sea capaz de leer el código de barras, escribir la referencia tal como se muestra.</small>
 
         </div>
         <div class="col2">
         	<h2>Total a pagar</h2>
-            <h1>$9,000<span>.00</span><small> MXN</small></h1>
+            <?php
+            $number = number_format($amount,2,",",".");
+            echo ' <h1>$'.$number.'<small> MXN</small></h1>';
+            ?>
             <span class="note">La comisión por recepción del pago varía de acuerdo a los términos y condiciones que cada cadena comercial establece.</span>
         </div>
     </div>
@@ -46,15 +93,21 @@
     <div class="Table-Data">
     	<div class="table-row color1">
         	<div>Descripción</div>
-            <span>Descripción de la compra realizada</span>
+            <span>Pedido CoffeHouse</span>
         </div>
     	<div class="table-row color2">
         	<div>Fecha y hora</div>
-            <span>30 de Noviembre de 2018 a las 4:00 A.M.</span>
+            <?php
+            echo '<span>'.$todayVisit.'</span>';
+            ?>
+            
         </div>
     	<div class="table-row color1">
-        	<div>Correo del cliente</div>
-            <span>nombre@dominio.com</span>
+        	<div>Correo de un soñador CoffeHouse</div>
+            <?php
+            echo '<span>'.$_SESSION["email"].'</span>';
+            ?>
+            
         </div>
     	<div class="table-row color2"  style="display:none">
         	<div>&nbsp;</div>
@@ -64,6 +117,20 @@
         	<div>&nbsp;</div>
             <span>&nbsp;</span>
         </div>
+    </div>
+    <div class="logos-tiendas">
+
+        <ul>
+            <li><img src="images/01.png" width="100" height="50"></li>
+            <li><img src="images/02.png" width="100" height="50"></li>
+            <li><img src="images/03.png" width="100" height="50"></li>
+            <li><img src="images/04.png" width="100" height="50"></li>
+            <li><img src="images/05.png" width="100" height="50"></li>
+            <li><img src="images/06.png" width="100" height="50"></li>
+            <li><img src="images/07.png" width="100" height="50"></li>
+            <li><img src="images/08.png" width="100" height="50"></li>
+        </ul>
+
     </div>
     <div class="DT-margin"></div>
     <div>
@@ -94,30 +161,20 @@
         </div>
     </div>
 
-    <div class="logos-tiendas">
-
-	    <ul>
-		    <li><img src="images/01.png" width="100" height="50"></li>
-		    <li><img src="images/02.png" width="100" height="50"></li>
-		    <li><img src="images/03.png" width="100" height="50"></li>
-		    <li><img src="images/04.png" width="100" height="50"></li>
-		    <li><img src="images/05.png" width="100" height="50"></li>
-		    <li><img src="images/06.png" width="100" height="50"></li>
-		    <li><img src="images/07.png" width="100" height="50"></li>
-		    <li><img src="images/08.png" width="100" height="50"></li>
-	    </ul>
-        <div style="height: 90px; width: 190px; float: right; margin-top: 30px;">
-	        ¿Quieres pagar en otras tiendas? visítanos en: www.openpay.mx/tiendas
-        </div>
-
-    </div>
+    
     <div class="Powered">
-    	<img src="images/powered_openpay.png" alt="Powered by Openpay" width="150">
-    	<a href="#">Imprimir</a>
-    	<a href="#">Seguir comprando</a>
+        <a id="myLink" href="#" onclick="printing();return false;">Imprimir</a>
+        <a href="../">Seguir comprando</a>
     </div>
 </div>
 <div style="height: 40px; width: 100%; float left;"></div>
-
+<script type="text/javascript">
+    function printing(){
+        window.print();
+    }
+</script>
+<script type="text/javascript">
+    window.localStorage.clear();
+</script>
 </body>
 </html>

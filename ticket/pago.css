@@ -6,11 +6,11 @@ body {
 	font-family:Helvetica, Arial, sans-serf;
 }
 h3 {
-	font-size:25px;
+	font-size:20px;
 	margin:15px 0 0 0;
 }
 h4 {
-	font-size:17px;
+	font-size:14px;
 	margin:8px 0;
 }
 .whitepaper {
@@ -35,7 +35,7 @@ h4 {
 	margin-top:3px;
 }
 .Logo_paynet div {
-	font-size:20px;
+	font-size:14px;
 	font-weight:lighter;
 	display:block;
 	float:left;
@@ -75,13 +75,13 @@ h4 {
 	float:left;
 }
 .col1 span {
-	font-size:14px;
+	font-size:11px;
 	clear:both;
 	display:block;
 	margin:5px 0;
 }
 .col1 small {
-	font-size:12px;
+	font-size:9px;
 	width:320px;
 	display:block;
 }
@@ -100,11 +100,11 @@ h4 {
 	font-size:45px;
 }
 .col2 h1 small {
-	font-size:20px;
+	font-size:17px;
 }
 .col2 h2 {
 	margin:0;
-	font-size:22px;
+	font-size:19px;
 	font-weight:lighter;
 }
 .S-margin {
@@ -141,7 +141,7 @@ h4 {
 }
 
 .col1 ol, .Col2 ol {
-	font-size:12px;
+	font-size:9px;
 	width:290px;
 	padding-left:20px;
 }

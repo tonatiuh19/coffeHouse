@@ -108,15 +108,106 @@ $carrito = 0;
 			</form>-->
 		</div>
 		<div class="col-md-8 order-md-1">
-			<h4 class="mb-3">Añadir Domicilio</h4>
+			<h4 class="mb-3">Domicilio</h4>
 			
 				<div class="row">
-					<div class="col-md-5 mb-3">
-						<label for="country">Country</label>
-						<select class="custom-select d-block w-100" id="country" required>
-							<option value="">Choose...</option>
-							<option>United States</option>
-						</select>
+					<div class="col-md-9 mb-3">
+						<label for="country"><b>¿Que domicilio quieres recibir tu paquete?</b></label>
+						
+							<?php
+							$sql = "SELECT id_adresses, street, number, cp, state, city FROM adresses WHERE email_user='".$_SESSION['email']."'";
+							$result = $conn->query($sql);
+
+							if ($result->num_rows > 0) {
+							    echo '<select class="custom-select d-block w-100" id="country" onchange="adre(event)" required>';
+							    echo '<option disabled selected>Escoge el domicilio</option>';
+							    while($row = $result->fetch_assoc()) {
+							       echo '<option value="'.$row["id_adresses"].'">'.$row["street"].','.$row["number"].','.$row["cp"].','.$row["state"].','.$row["city"].'</option>';
+							    }
+							    echo '</select><br>';
+							    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Añadir domicilio</button>';
+							} else {
+								echo '<div class="form-check">';
+							    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Añadir domicilio</button>';
+							    echo '</div>';
+							}
+							?>
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel">Nuevo Domicilio</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							        <form action="../new-address/" method="post">
+							        	<input type="hidden" value="2" name="type">
+									  <div class="form-row ">
+									    <div class="col-7">
+									    	<label class="form-check-label" for="exampleRadios1">
+											    Calle:
+											</label>
+									      <input type="text" class="form-control" name="street" required>
+									    </div>
+									    <div class="col">
+									    	<label class="form-check-label" for="exampleRadios1">
+											    No ext:
+											</label>
+									      <input type="text" class="form-control" name="number" required>
+									    </div>
+									  </div>	
+									
+									  <div class="form-row">
+									    <div class="col-6">
+									    	<label class="form-check-label" for="exampleRadios1">
+											    Colonia:
+											</label>
+									      <input type="text" class="form-control" name="colony" required>
+									    </div>
+									    <div class="col-6">
+									    	<label class="form-check-label" for="exampleRadios1">
+											    Estado:
+											</label>
+									      <input type="text" class="form-control" name="state" required>
+									    </div>
+									  </div>
+									
+									  <div class="form-row">
+									  	
+									    <div class="col-8">
+									    	<label class="form-check-label" for="exampleRadios1">
+											    Ciudad:
+											</label>
+									      <input type="text" class="form-control" name="city"  required>
+									    </div>
+									    <div class="col-4">
+									    	<label class="form-check-label" for="exampleRadios1">
+											    CP:
+											</label>
+									      <input type="text" class="form-control" name="cp"  required>
+									    </div>
+									  </div>
+									  
+									  <div class="form-row">
+									    <div class="col-12">
+									    	<label class="form-check-label" for="exampleRadios1">
+											    Descripcion adicional:
+											</label>
+									      <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3" placeholder="Descripcion opcional: Numero interior, entre calles, color fachada, etc."></textarea>
+									    </div>
+									   
+									  </div>								
+							      </div>
+							      <div class="modal-footer">
+							        <button type="submit" class="btn btn-primary">Guardar</button>
+							        </form>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+						
 						<div class="invalid-feedback">
 							Please select a valid country.
 						</div>
@@ -125,7 +216,7 @@ $carrito = 0;
 				<h4 class="mb-4"></h4>
 
 				<h4 class="mb-3">Pago</h4>
-
+				<label for="country"><b>¿Cual es tu medio de pago favorito?</b></label>
 				<div class="d-block my-3">
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="radio" name="colorRadio" value="red">
@@ -147,7 +238,7 @@ $carrito = 0;
 					</div>
 				</div>
 				<div class="red box">
-					<form action="pay/" method="POST" id="payment-form">
+					<form action="pay/" method="POST" name="Form" id="payment-form" onsubmit="return validateFormA()">
 					<input type="hidden" name="token_id" id="token_id">
 					<?php
 						echo '<input type="hidden" name="payType" value="1">';
@@ -158,6 +249,7 @@ $carrito = 0;
 						echo '<input type="hidden" name="last" value="Gato">';
 						echo '<input type="hidden" name="number" value="1234567890">';
 					?>
+					<input id="myAdress1" type="hidden" name="adres" value="">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="cc-name">Nombre en tarjeta</label>
@@ -190,12 +282,13 @@ $carrito = 0;
 							</div>
 						</div>
 						<div class="col-md-3 mb-3">
-							<label for="cc-expiration">CVV</label>
-							<input class="form-control" type="text" placeholder="3 dígitos" autocomplete="off" data-openpay-card="cvv2" required>
+							<label for="cc-expiration">CVV <button class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" data-html="true" title="3 digitos atras de tu tarjeta"><i class="fas fa-question-circle"></i></button></label>
+							<input class="form-control" type="text" autocomplete="off" data-openpay-card="cvv2" required>
 							<div class="invalid-feedback">
 								Security code required
 							</div>
 						</div>
+
 					</div>
 					<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
 					<hr class="mb-4">
@@ -204,7 +297,7 @@ $carrito = 0;
 			</div>
 			<div class="green box">
 				<img src="../images/openpay_tiendas.jpg" alt="Cinque Terre">
-				<form action="pay/" method="POST" >
+				<form action="pay/" method="POST" name="Form2" onsubmit="return validateFormB()">
 					<?php
 					echo '<input type="hidden" name="payType" value="2">';
 					echo '<input type="hidden" name="amount" id="amount" value="'.$precioTotal.'">';
@@ -214,6 +307,7 @@ $carrito = 0;
 					echo '<input type="hidden" name="last" value="Gato">';
 					echo '<input type="hidden" name="number" value="1234567890">';
 					?>
+					<input id="myAdress2" type="hidden" name="adres" value="">
 					<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
 					<hr class="mb-4">
 					<!--<a class="btn btn-primary btn-lg btn-block" id="pay-button" target="_blank"><i class="fas fa-lock"></i> Generar ticket de Pago</a>-->
@@ -276,4 +370,27 @@ require_once('../admin/footer.php');
 			$(targetBox).show();
 		});
 	});
+
+	function adre(e) {
+		document.getElementById("myAdress1").value = e.target.value
+		document.getElementById("myAdress2").value = e.target.value
+	}
+
+	function validateFormA() {
+		var a = document.forms["Form"]["adres"].value;
+
+		if (a == null || a == "") {
+			alert("Necesitas escoger un domicilio");
+			return false;
+		}
+	}
+
+	function validateFormB() {
+		var a = document.forms["Form2"]["adres"].value;
+
+		if (a == null || a == "") {
+			alert("Necesitas escoger un domicilio");
+			return false;
+		}
+	}
 </script>

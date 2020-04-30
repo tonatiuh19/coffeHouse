@@ -37,22 +37,22 @@ if ($_SESSION["type_user"] != 3){
 				<ul class="nav flex-column">
 					<li class="nav-item">
 						<a class="nav-link" href="../">
-							<span data-feather="home"></span>
+							<i class="fas fa-shopping-bag"></i>
 							Productos <span class="sr-only"></span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="../campaigns/">
-							<span data-feather="file"></span>
+							<i class="fas fa-gift"></i>
 							Campañas
 						</a>
 					</li>
-					<!--<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="shopping-cart"></span>
-							Usuarios
+					<li class="nav-item">
+						<a class="nav-link" href="../orders/">
+							<i class="fas fa-box-open"></i>
+							Ordenes
 						</a>
-					</li>-->
+					</li>
 				</ul>
 			</div>
 		</nav>

@@ -5,8 +5,9 @@ require_once('../admin/header.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$status = test_input($_POST["stat"]);
 	$cart = test_input($_POST["cart"]);
+	$adress = test_input($_POST["adress"]);
 
-	$sql = "UPDATE orders SET complete='1' WHERE id_orders=".$cart."";
+	$sql = "UPDATE orders SET complete='1', id_adress='".$adress."' WHERE id_orders=".$cart."";
 
 	if ($conn->query($sql) === TRUE) {
 	    //echo "Record updated successfully";
