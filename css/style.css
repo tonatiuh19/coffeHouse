@@ -5,6 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Comic+Neue:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 :root {
   --blue: #007bff;
@@ -8324,16 +8325,16 @@ h1, h2, h3, h4, h5,
           text-transform: uppercase;
           letter-spacing: 3px; }
         .owl-carousel.home-slider .slider-item .slider-text h1 {
-          text-transform: uppercase;
+          /*text-transform: uppercase;*/
           font-size: 5vw;
           color: #fff;
           line-height: 1.5;
           font-weight: normal;
-          font-family: "Monoton", cursive;
+          font-family: 'Pacifico', cursive;
           letter-spacing: 1px; }
           .owl-carousel.home-slider .slider-item .slider-text h1 strong {
             color: #fff;
-            font-family: "Monoton", cursive;
+            font-family: 'Pacifico', cursive;
             font-size: 50px; }
           @media (max-width: 991.98px) {
             .owl-carousel.home-slider .slider-item .slider-text h1 {
@@ -9523,3 +9524,15 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+
+
+    .nuevaFont{
+      font-family: 'Pacifico', cursive;
+      font-size: 156%;
+    }
+
+    .box{
+      display: none;
+    }
