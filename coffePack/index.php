@@ -55,21 +55,21 @@ require_once('../admin/header.php');
 			if ($result->num_rows > 0) {
 			    // output data of each row
 			    while($row = $result->fetch_assoc()) {
-									echo '<div class="col-md-4"><a href="../product/?product_sku='.$row["id_products"].'">
+									echo '<div class="col-md-4">
 											<figure class="card card-product">
-												<div class="img-wrap"><img src="';
+												<a href="../product/?product_sku='.$row["id_products"].'"><div class="img-wrap"><img src="';
 												foreach(glob('../dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
 									                echo $file;
 									              }
-												echo '"></div>
-												<figcaption class="info-wrap">
+												echo '"></div></a>
+												<a href="../product/?product_sku='.$row["id_products"].'"><figcaption class="info-wrap">
 														<h4 class="title">'.$row["name"].'</h4>
 														<p class="desc">'.$row["description"].'</p>
 														<!--<div class="rating-wrap">
 															<div class="label-rating">132 reviews</div>
 															<div class="label-rating">154 orders </div>
 														</div>  rating-wrap.// -->
-												</figcaption>
+												</figcaption></a>
 												<div class="bottom-wrap">
 													  <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
 									                  <input type="number" class="count float-right form-control" value="1" min="1" />
@@ -82,7 +82,7 @@ require_once('../admin/header.php');
 													<!--<del class="price-old">$'.$percentage.'</del>-->
 													</div> <!-- price-wrap.// -->
 												</div> <!-- bottom-wrap.// -->
-											</figure></a>
+											</figure>
 										</div>';
 			    }
 			} else {

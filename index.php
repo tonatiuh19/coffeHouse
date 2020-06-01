@@ -112,7 +112,7 @@ session_start();
   if ($result->num_rows > 0) {
           // output data of each row
     while($row = $result->fetch_assoc()) {
-      echo '<a href="../product/?product_sku='.$row["id_products"].'"><div class="slider-item js-fullheight" style="background-image: url('; 
+      echo '<div class="slider-item js-fullheight" style="background-image: url('; 
       foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
         echo $file;
       }
@@ -122,8 +122,8 @@ session_start();
       <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
 
       <div class="col-md-12 col-sm-12 text-center ftco-animate">
-      <h1 class="mb-4 mt-5">'.$row["name"].'</h1>
-      <p>'.$row["description"].'<br>
+      <a href="../product/?product_sku='.$row["id_products"].'"><h1 class="mb-4 mt-5">'.$row["name"].'</h1>
+      <p>'.$row["description"].'<br></a>
       <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
                                     <input type="hidden" class="count float-right form-control" value="1" min="1" />
                                     <button class="tiny btn btn-primary p-3 px-xl-4 py-xl-3" id="modalButton">Soltar en mi bolsa</button>
@@ -132,7 +132,7 @@ session_start();
 
       </div>
       </div>
-      </div></a>';
+      </div>';
     }
   } else {
     echo "0 results";
@@ -234,7 +234,7 @@ session_start();
    if ($result->num_rows > 0) {
                 // output data of each row
     while($row = $result->fetch_assoc()) {
-     echo '<a href="../product/?product_sku='.$row["id_products"].'"><div class="menus d-flex ftco-animate">
+     echo '<div class="menus d-flex ftco-animate">
               <div class="menu-img img" style="background-image: url(';
               foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
                 echo $file;
@@ -243,10 +243,10 @@ session_start();
               <div class="text">
                 <div class="d-flex">
                   <div class="one-half">
-                    <h3>'.$row["name"].'</h3>
+                    <a href="../product/?product_sku='.$row["id_products"].'"><h3>'.$row["name"].'</h3></a>
                   </div>
                   <div class="one-forth">
-                    <span class="price">$'.$row["price"].'</span>
+                    <a href="../product/?product_sku='.$row["id_products"].'"><span class="price">$'.$row["price"].'</span></a>
 
                   </div>
                 </div>
@@ -257,7 +257,7 @@ session_start();
                   </div>
                 </p>
               </div>
-            </div></a>';
+            </div>';
       echo '<div class="modal fade" id="my'.$row["id_products"].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -305,10 +305,10 @@ session_start();
               <div class="text">
                 <div class="d-flex">
                   <div class="one-half">
-                    <h3>'.$row["name"].'</h3>
+                    <a href="../product/?product_sku='.$row["id_products"].'"><h3>'.$row["name"].'</h3></a>
                   </div>
                   <div class="one-forth">
-                    <span class="price">$'.$row["price"].'</span>
+                    <a href="../product/?product_sku='.$row["id_products"].'"><span class="price">$'.$row["price"].'</span></a>
                   </div>
                 </div>
                 <p>
@@ -353,13 +353,13 @@ session_start();
               echo ');"></div>
               <div class="text">
                 <div class="d-flex">
-                  <div class="one-half">
-                    <h3>'.$row["name"].'</h3>
+                  <a href="../product/?product_sku='.$row["id_products"].'"><div class="one-half">
+                    <a href="../product/?product_sku='.$row["id_products"].'"><h3>'.$row["name"].'</h3></a>
                   </div>
                   <div class="one-forth">
-                    <span class="price">$'.$row["price"].'</span>
+                    <a href="../product/?product_sku='.$row["id_products"].'"><span class="price">$'.$row["price"].'</span></a>
                   </div>
-                </div>
+                </div></a>
                 <p>
                   <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
                   <input type="number" class="count" value="1" min="1" />

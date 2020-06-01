@@ -66,8 +66,8 @@ require_once('../admin/header.php');
 							    // output data of each row
 							    while($row2 = $result2->fetch_assoc()) {
 									echo '<div class="col-md-4">
-											<figure class="card card-product"><a href="../product/?product_sku='.$row2["id_products"].'">
-												<div class="img-wrap"><img src="';
+											<figure class="card card-product">
+												<a href="../product/?product_sku='.$row2["id_products"].'"><div class="img-wrap"><img src="';
 												foreach(glob('../dashboard/user/'.$row2["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
 									                echo $file;
 									              }
@@ -79,7 +79,7 @@ require_once('../admin/header.php');
 															<div class="label-rating">132 reviews</div>
 															<div class="label-rating">154 orders </div>
 														</div>  rating-wrap.// -->
-												</figcaption>
+												</figcaption></a>
 												<div class="bottom-wrap">
 													  <div class="product" data-name="'.$row2["name"].'" data-price="'.$row2["price"].'" data-id="'.$row2["id_products"].'">
 									                  <input type="number" class="count float-right form-control" value="1" min="1" />
@@ -91,7 +91,7 @@ require_once('../admin/header.php');
 													echo '<span class="price-new"><b>$'.$row2["price"].'</b></span> <del class="price-old">$'.$percentage.'</del>
 													</div> <!-- price-wrap.// -->
 												</div> <!-- bottom-wrap.// -->
-											</figure></a>
+											</figure>
 										</div>';
 							    }
 							} else {
