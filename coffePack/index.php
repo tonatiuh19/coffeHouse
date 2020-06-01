@@ -55,10 +55,10 @@ require_once('../admin/header.php');
 			if ($result->num_rows > 0) {
 			    // output data of each row
 			    while($row = $result->fetch_assoc()) {
-									echo '<div class="col-md-4">
+									echo '<div class="col-md-4"><a href="../product/?product_sku='.$row["id_products"].'">
 											<figure class="card card-product">
 												<div class="img-wrap"><img src="';
-												foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+												foreach(glob('../dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
 									                echo $file;
 									              }
 												echo '"></div>
@@ -82,7 +82,7 @@ require_once('../admin/header.php');
 													<!--<del class="price-old">$'.$percentage.'</del>-->
 													</div> <!-- price-wrap.// -->
 												</div> <!-- bottom-wrap.// -->
-											</figure>
+											</figure></a>
 										</div>';
 			    }
 			} else {
