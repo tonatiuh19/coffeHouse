@@ -112,7 +112,7 @@ session_start();
   if ($result->num_rows > 0) {
           // output data of each row
     while($row = $result->fetch_assoc()) {
-      echo '      <div class="slider-item js-fullheight" style="background-image: url('; 
+      echo '<a href="../product/?product_sku='.$row["id_products"].'"><div class="slider-item js-fullheight" style="background-image: url('; 
       foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
         echo $file;
       }
@@ -132,7 +132,7 @@ session_start();
 
       </div>
       </div>
-      </div>';
+      </div></a>';
     }
   } else {
     echo "0 results";
