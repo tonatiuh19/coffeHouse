@@ -106,7 +106,7 @@ session_start();
 
 <section class="home-slider owl-carousel js-fullheight">
   <?php
-  $sql = "SELECT d.id_products, e.price, d.name, d.description, d.long_description FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=3";
+  $sql = "SELECT d.id_products, e.price, d.name, d.description, d.long_description FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=3 LIMIT 3";
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
@@ -228,13 +228,13 @@ session_start();
      <h3>Mexico</h3>
    </div>
    <?php
-   $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=1";
+   $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=1 LIMIT 3";
    $result = $conn->query($sql);
 
    if ($result->num_rows > 0) {
                 // output data of each row
     while($row = $result->fetch_assoc()) {
-     echo '<!--<a data-toggle="modal" href="#my'.$row["id_products"].'">--><div class="menus d-flex ftco-animate">
+     echo '<a href="../product/?product_sku='.$row["id_products"].'"><div class="menus d-flex ftco-animate">
               <div class="menu-img img" style="background-image: url(';
               foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
                 echo $file;
@@ -257,7 +257,7 @@ session_start();
                   </div>
                 </p>
               </div>
-            </div><!--</a>-->';
+            </div></a>';
       echo '<div class="modal fade" id="my'.$row["id_products"].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -290,13 +290,13 @@ session_start();
  </div>
 
  <?php
- $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=2";
+ $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=2 LIMIT 3";
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {
                 // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo '<div class="menus d-flex ftco-animate">
+    echo '<a href="../product/?product_sku='.$row["id_products"].'"><div class="menus d-flex ftco-animate">
               <div class="menu-img img" style="background-image: url(';
               foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
                 echo $file;
@@ -318,7 +318,7 @@ session_start();
                   </div>
                 </p>
               </div>
-            </div>';
+            </div></a>';
   }
 } else {
   echo "0 results";
@@ -345,7 +345,7 @@ session_start();
                 <input type="number" class="count form-control" value="1" /><br>
                 <button class="tiny btn btn-success">Add to cart</button>
             </div>';*/
-    echo '<div class="menus d-flex ftco-animate">
+    echo '<a href="../product/?product_sku='.$row["id_products"].'"><div class="menus d-flex ftco-animate">
               <div class="menu-img img" style="background-image: url(';
               foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
                 echo $file;
@@ -368,7 +368,7 @@ session_start();
 
                 </p>
               </div>
-            </div>';
+            </div></a>';
   }
 } else {
   echo "0 results";
