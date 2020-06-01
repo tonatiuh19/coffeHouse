@@ -26,7 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	    	echo ("<SCRIPT LANGUAGE='JavaScript'>
 	        window.location.href='../profile/';
 	        </SCRIPT>");
-	    }
+	    }elseif ($type=="3") {
+            echo ("<SCRIPT LANGUAGE='JavaScript'>
+            window.location.href='../suscribete/';
+            </SCRIPT>");
+        }
 	} else {
 	    echo "Error: " . $sql . "<br>" . $conn->error;
 	}
