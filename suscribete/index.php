@@ -1,6 +1,13 @@
 <?php
 require_once('../admin/header.php');
 ?>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://js.openpay.mx/openpay.v1.min.js"></script>
+<script type='text/javascript'
+  src="https://js.openpay.mx/openpay-data.v1.min.js"></script>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_4.jpg');" data-stellar-background-ratio="0.5">
 	<div class="overlay"></div>
 	<div class="container">
@@ -26,9 +33,10 @@ require_once('../admin/header.php');
 						<li><i class="fas fa-shopping-bag"></i> Bolsa de cafe</li>
 						<li><i class="fas fa-gift"></i> Regalo especial</li>
 					</ul>
-					<button type="button" class="btn btn-lg btn-block btn-primary mt-auto" data-toggle="modal" data-target="#barista">
+					<button type="button" class="btn btn-lg btn-block btn-primary mt-auto" data-toggle="modal" data-target="#barista" data-whatever="@mdo">
 						Suscribete
 					</button>
+					
 					<!-- Modal -->
 					<div class="modal fade" id="barista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-lg" role="document">
@@ -43,10 +51,10 @@ require_once('../admin/header.php');
 										<div class="row">
 											<div class="col-md-4 order-md-2 mb-4">
 												<h4 class="d-flex justify-content-between align-items-center mb-3">
-													<span class="text-muted nuevaFont"><i class="fas fa-mug-hot"></i> Barista</span>
+													<span class="text-muted nuevaFont subsTitle">Barista</span>
 
 												</h4>
-												<ul class="list-group mb-3">
+												<ul class="list-group mb-3" id="mdoUl">
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Envio gratis
@@ -72,6 +80,84 @@ require_once('../admin/header.php');
 													<li class="list-group-item d-flex justify-content-between">
 														<span>Total:</span>
 														<strong>$199.00</strong>
+													</li>
+												</ul>
+												<ul class="list-group mb-3" id="proUl">
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> Envio gratis
+															
+														</div>
+														
+													</li>
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> 2 Bolsas de cafe
+															
+														</div>
+														
+													</li>
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> Regalos especiales
+															
+														</div>
+
+													</li>
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> Secretos exclusivos Barista
+															
+														</div>
+
+													</li>
+													
+													<li class="list-group-item d-flex justify-content-between">
+														<span>Total:</span>
+														<strong>$299.00</strong>
+													</li>
+																			
+												</ul>
+												<ul class="list-group mb-3" id="godUl">
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> Envio gratis
+															
+														</div>
+														
+													</li>
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> 4 Bolsas de cafe
+															
+														</div>
+														
+													</li>
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> Regalos especiales
+															
+														</div>
+
+													</li>
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> Secretos exclusivos Barista
+															
+														</div>
+
+													</li>
+													<li class="list-group-item d-flex justify-content-between lh-condensed">
+														<div>
+															<i class="fas fa-arrow-alt-circle-right"></i> Cupones para toda la tienda
+															
+														</div>
+
+													</li>
+													
+													<li class="list-group-item d-flex justify-content-between">
+														<span>Total:</span>
+														<strong>$399.00</strong>
 													</li>
 												</ul>
 
@@ -196,29 +282,24 @@ require_once('../admin/header.php');
 													</div>
 													<hr class="mb-4">
 													<div class="red box">
-													<form action="pay/" method="POST" name="Form" id="payment-form" onsubmit="return validateFormA()">
+													<form action="../check-out/pay/subscribe/" method="POST" name="Form" id="payment-form" onsubmit="return validateFormA()">
 													<input type="hidden" name="token_id" id="token_id">
 													<?php
-														echo '<input type="hidden" name="payType" value="1">';
-														echo '<input type="hidden" name="amount" id="amount" value="199">';
-														echo '<input type="hidden" name="description" id="description" value="">';
 														echo '<input type="hidden" name="email" value="'.$_SESSION['email'].'">';
-														echo '<input type="hidden" name="name" value="Pero">';
-														echo '<input type="hidden" name="last" value="Gato">';
-														echo '<input type="hidden" name="number" value="1234567890">';
 													?>
+													<input type="hidden" name="payType" class="subsType" id="subsType" value="1">
 													<input id="myAdress1" type="hidden" name="adres" value="">
 													<div class="row">
 														<div class="col-md-6 mb-3">
 															<label for="cc-name">Nombre en tarjeta</label>
-															<input class="form-control" type="text" autocomplete="off" data-openpay-card="holder_name" placeholder="Como aparece en tu tarjeta" required>
+															<input class="form-control" type="text" autocomplete="off" data-openpay-card="holder_name" name="holder_name" placeholder="Como aparece en tu tarjeta" required>
 															<div class="invalid-feedback">
 																Name on card is required
 															</div>
 														</div>
 														<div class="col-md-6 mb-3">
 															<label for="cc-number">Numero de Tarjeta</label>
-															<input class="form-control" type="text" autocomplete="off" data-openpay-card="card_number" required>
+															<input class="form-control" type="text" autocomplete="off" data-openpay-card="card_number" name="card_number" required>
 															<div class="invalid-feedback">
 																Credit card number is required
 															</div>
@@ -227,21 +308,21 @@ require_once('../admin/header.php');
 													<div class="row">
 														<div class="col-md-3 mb-3">
 															<label for="cc-expiration">Expiracion</label>
-									                        <input type="text" class="form-control" placeholder="Mes" data-openpay-card="expiration_month">
+									                        <input type="text" class="form-control" placeholder="Mes" data-openpay-card="expiration_month" name="expiration_month">
 															<div class="invalid-feedback">
 																Expiration date required
 															</div>
 														</div>
 														<div class="col-md-3 mb-3">
 															<label for="cc-expiration">&nbsp;</label>
-									                        <input type="text" class="form-control" placeholder="Año" data-openpay-card="expiration_year">
+									                        <input type="text" class="form-control" placeholder="Año" data-openpay-card="expiration_year" name="expiration_year">
 															<div class="invalid-feedback">
 																Expiration date required
 															</div>
 														</div>
 														<div class="col-md-3 mb-3">
 															<label for="cc-expiration">CVV <button class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" data-html="true" title="3 digitos atras de tu tarjeta"><i class="fas fa-question-circle"></i></button></label>
-															<input class="form-control" type="text" autocomplete="off" data-openpay-card="cvv2" required>
+															<input class="form-control" type="text" autocomplete="off" data-openpay-card="cvv2" name="cvv2" required>
 															<div class="invalid-feedback">
 																Security code required
 															</div>
@@ -263,12 +344,11 @@ require_once('../admin/header.php');
 										</div>
 									</div>
 								</div>
-								<div class="modal-footer">
-									
-								</div>
+								
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 			<div class="card mb-4 shadow-sm">
@@ -283,29 +363,13 @@ require_once('../admin/header.php');
 						<li><i class="fas fa-gifts"></i> Regalos especiales</li>
 						<li><i class="fas fa-gift"></i> Secretos exclusivos Barista</li>
 					</ul>
-					<button type="button" class="btn btn-lg btn-block btn-primary mt-auto" data-toggle="modal" data-target="#baristapro">
+					<button type="button" class="btn btn-lg btn-block btn-primary mt-auto" data-toggle="modal" data-target="#barista" data-whatever="@pro">
 						Suscribete
 					</button>
 					<!-- Modal -->
-					<div class="modal fade" id="baristapro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header text-center nuevaFont">
-									<h5 class="modal-title" id="baristapro">Barista Pro</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									...
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
-								</div>
-							</div>
-						</div>
-					</div>
+
+
+
 				</div>
 			</div>
 			<div class="card mb-4 shadow-sm">
@@ -321,36 +385,52 @@ require_once('../admin/header.php');
 						<li><i class="fas fa-gift"></i> Secretos exclusivos Barista</li>
 						<li><i class="fas fa-gift"></i> Cupones para toda la tienda</li>
 					</ul>
-					<button type="button" class="btn btn-lg btn-block btn-primary mt-auto" data-toggle="modal" data-target="#baristadios">
+					<button type="button" class="btn btn-lg btn-block btn-primary mt-auto" data-toggle="modal" data-target="#barista" data-whatever="@god">
 						Suscribete
 					</button>
 					<!-- Modal -->
-					<div class="modal fade" id="baristadios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header text-center nuevaFont">
-									<h5 class="modal-title" id="exampleModalLabel">Barista Dios</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									...
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
-								</div>
-							</div>
-						</div>
-					</div>
+					
+
+
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		OpenPay.setId('my5osdjarjverf8pvgd7');
+		OpenPay.setApiKey('pk_adbd72980cc14a83a9b6ede8ebe6dc5a');
+		var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
+	});
 
+	$(document).ready(function() {
+		OpenPay.setId('my5osdjarjverf8pvgd7');
+		OpenPay.setApiKey('pk_adbd72980cc14a83a9b6ede8ebe6dc5a');
+		OpenPay.setSandboxMode(true);
+	});
+
+	$('#pay-button').on('click', function(event) {
+		event.preventDefault();
+		$("#pay-button").prop( "disabled", true);
+		OpenPay.token.extractFormAndCreate('payment-form', success_callbak, error_callbak);              
+
+	});
+
+	var success_callbak = function(response) {
+		var token_id = response.data.id;
+		$('#token_id').val(token_id);
+		$('#payment-form').submit();
+	};
+
+	var error_callbak = function(response) {
+		var desc = response.data.description != undefined ?
+		response.data.description : response.message;
+		alert("ERROR [" + response.status + "] " + desc);
+		$("#pay-button").prop("disabled", false);
+	};
+</script>
 <?php
 require_once('../admin/footer.php');
 ?>
@@ -372,7 +452,8 @@ require_once('../admin/footer.php');
 </script>
 <script>
 	function adre(e) {
-		document.getElementById("myAdress1").value = e.target.value
+		document.getElementById("myAdress1").value = e.target.value;
+		document.getElementById("myAdressPro").value = e.target.value;
 	}
 
 	function validateFormA() {
@@ -384,5 +465,45 @@ require_once('../admin/footer.php');
 		}
 	}
 
-	
+	function validateFormPro() {
+		var a = document.forms["FormPro"]["adresPro"].value;
+
+		if (a == null || a == "") {
+			alert("Necesitas escoger un domicilio");
+			return false;
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	$('#barista').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var recipient = button.data('whatever') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  console.log(recipient);
+
+	  var modal = $(this)
+	  if (recipient == '@pro') {
+	  	modal.find('.subsTitle').text('Barista Pro')
+	  	document.getElementById('subsType').value = '2';
+		$("#godUl").hide();
+		$("#mdoUl").hide();
+		$("#proUl").show();
+	  }else if(recipient == '@god'){
+	  	modal.find('.subsTitle').text('Barista Dios')
+	  	document.getElementById('subsType').value = '3';
+	  	$("#proUl").hide();
+		$("#mdoUl").hide();
+		$("#godUl").show();
+	  }else if(recipient == '@mdo'){
+	  	modal.find('.subsTitle').text('Barista')
+	  	document.getElementById('subsType').value = '1';
+	  	$("#godUl").hide();
+		$("#proUl").hide();
+		$("#mdoUl").show();
+	  }
+	  
+	  
+	})
 </script>

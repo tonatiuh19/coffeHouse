@@ -477,7 +477,7 @@ session_start();
             <li class="d-flex"><a href="#">Registate aqui si eres proveedor</a></li>
             <li class="d-flex"><a href="#">Terminos y Condiciones</a></li>
             <li class="d-flex"><a href="#">Politicas de Privacidad</a></li>
-            <li class="d-flex"><a href="#">CoffeHouse para tu negocio</a></li>
+            <li class="d-flex"><a href="yourBusiness/" target="_blank">CoffeHouse para tu negocio</a></li>
           </ul>
         </div>
       </div>

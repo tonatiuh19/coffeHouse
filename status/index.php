@@ -7,13 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$cart = test_input($_POST["cart"]);
 	$adress = test_input($_POST["adress"]);
 
-	$sql = "UPDATE orders SET complete='1', id_adress='".$adress."' WHERE id_orders=".$cart."";
 
-	if ($conn->query($sql) === TRUE) {
-	    //echo "Record updated successfully";
-	} else {
-	    //echo "Error updating record: " . $conn->error;
-	}
+	
 	?>
 	<section class="hero-wrap hero-wrap-2" data-stellar-background-ratio="0.5" style="background-image: url('../images/bg_4.jpg');">
 		<div class="overlay"></div>
@@ -27,6 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								<script type="text/javascript">
 									window.localStorage.clear();
 								</script>';
+						$sql = "UPDATE orders SET complete='1', id_adress='".$adress."' WHERE id_orders=".$cart."";
+
+						if ($conn->query($sql) === TRUE) {
+						    //echo "Record updated successfully";
+						} else {
+						    //echo "Error updating record: " . $conn->error;
+						}
 					}elseif ($status==2) {
 						echo '<h1 class="mb-2 bread">Tu pago ha sido declinado</h1>';
 					}elseif ($status==3) {
@@ -37,6 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
 					}elseif ($status==6) {
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
+					}elseif ($status==10) {
+						echo '<h1 class="mb-2 bread">Tu subscripcion esta completa</h1>
+								<script type="text/javascript">
+									window.localStorage.clear();
+								</script>';
 					}else{
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
 					}
@@ -102,8 +109,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								  <p class="lead">
 								    <a class="btn btn-primary btn-lg" href="#" role="button">Regresar</a>
 								  </p>';
+						}elseif ($status==10) {
+		        			echo '<h1 class="display-4"><i class="fas fa-check-circle fa-2x text-success"></i> Tu sueño de recibir cafe todos los meses esta completo</h1>
+								  <p class="lead">En breve recibirás un correo electrónico con el número de guía, con el cual podras hacer el seguimiento de tu primer pedido.</p>
+								  <hr class="my-4">
+								  <p>¿Tienes más preguntas?
+									Visita nuestro Centro de ayuda</p>
+								  <p>
+								  <p class="lead">
+								    <a class="btn btn-primary btn-lg" href="#" role="button">Regresar</a>
+								  </p>';
 						}else{
-		        			echo '<h1 class="display-4"><i class="fas fa-times-circle fa-2x text-danger"></i> Tu pago no fue procesado</h1>
+		        			echo '<h1 class="display-4"><i class="fas fa-times-circle fa-2x text-danger"></i> Tu sueño de recibir cafe todos los meses esta completo</h1>
 								  <p class="lead">Intentalo de nuevo.</p>
 								  <hr class="my-4">
 								  <p>¿Tienes más preguntas?

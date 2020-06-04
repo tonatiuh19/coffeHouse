@@ -1,14 +1,14 @@
 <?php
-/*$servername = "mx50.hostgator.mx";
+$servername = "mx50.hostgator.mx";
 $username = "alanchat_admin";
 $password = "tonatiuh19";
-$dbname = "alanchat_coffe";*/
+$dbname = "alanchat_coffe";
 
 
-$servername = "localhost";
+/*$servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "alanchat_coffe";
+$dbname = "alanchat_coffe";*/
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
