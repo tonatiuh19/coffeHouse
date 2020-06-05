@@ -89,6 +89,8 @@ session_start();
                 <div class="btn-group-vertical">
                   <a href="sign-in/fin.php" class="btn btn-success btn-sm"><i class="fas fa-times-circle"></i> sesion</a>
                   <a href="profile/" class="btn btn-success btn-sm">Mi Perfil</a>
+                  <a href="orders/" class="btn btn-success btn-sm">Mis Pedidos</a>
+                  <a href="subscription/" class="btn btn-success btn-sm">Mi Subscripción</a>
                 </div>
               </div>';
         }
