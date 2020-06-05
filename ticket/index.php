@@ -63,7 +63,7 @@ function test_input($data) {
         	<h3>Fecha límite de pago</h3>
             <h4><?php
             $Date = "2010-09-17";
-            echo date('d-m-Y H:i:s', strtotime($todayVisit. ' + 8 days'));
+            echo date('d-m-Y H:i:s', strtotime($todayVisit. ' + 8 dias'));
             ?></h4>
             <?php
                 echo '<img width="300" src="'.$barcode_url.'" alt="Código de Barras">

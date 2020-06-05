@@ -30,7 +30,7 @@ if (!isset($_SESSION['email'])){
 		  <thead class="thead-dark">
 		    <tr>
 		      <th scope="col">Direccion</th>
-		      <th scope="col">Fecha de envio</th>
+		      <th scope="col">Dia de envio por Mes</th>
 		      <th scope="col">Status</th>
 		      <th scope="col">Tipo</th>
 		    </tr>
@@ -40,7 +40,7 @@ if (!isset($_SESSION['email'])){
 		    echo '<tr>
 		     
 		      <td>'.$row["street"].' '.$row["number"].'<br>'.$row["colony"].',CP: '.$row["cp"].'<br>'.$row["city"].'</td>
-		      <td>'.$row["start_date"].'</td>
+		      <td>'.date_format( new DateTime($row['start_date']), 'd' ).'</td>
 		      <td>';
 		      if ($row["active"]=="1") {
 		      	echo '<button type="button" class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Activa</button>';
