@@ -25,11 +25,10 @@ if (isset($_SESSION['email'])){
 		<input type="email" id="inputEmail" class="form-control" name="email_i" placeholder="Correo Electronico" required autofocus>
 		<label for="inputPassword" class="sr-only">Contraseña</label>
 		<input type="password" id="inputPassword" class="form-control" name="pwd_i" placeholder="Contraseña" required>
-		<!--<div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" value="remember-me"> Recuerdame
-			</label>
-		</div>-->
+		<div class="checkbox mb-3">
+			<a href="../forgot/">¿Olvidaste tu contraseña?</a>
+		</div>
+		
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesion</button>
 		<p class="mt-5 mb-3 text-muted">¿No tienes cuenta? <a data-toggle="modal" href="#sign-up">Registrate</a>.</p>
 	</form>
