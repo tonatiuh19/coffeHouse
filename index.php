@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>CoffeHouse</title>
+  <title>TienditaCafe</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -56,7 +56,7 @@ session_start();
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
  <div class="container">
-   <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Cinque Terre"></a>
+   <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Cinque Terre" width="182"></a>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
      <span class="oi oi-menu"></span> Menu
    </button>
@@ -462,7 +462,7 @@ session_start();
       <div class="col-md-6 col-lg-4">
         <div class="ftco-footer-widget mb-4">
           <h2 class="ftco-heading-2">Acerca de Nosotros</h2>
-          <p><b>Escribenos: </b><br>dihola@coffehouse.mx</span></a></p>
+          <p><b>Escribenos: </b><br>dihola@tienditacafe.com</span></a></p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
 
             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -479,7 +479,7 @@ session_start();
             <li class="d-flex"><a href="#">Registate aqui si eres proveedor</a></li>
             <li class="d-flex"><a href="#">Terminos y Condiciones</a></li>
             <li class="d-flex"><a href="#">Politicas de Privacidad</a></li>
-            <li class="d-flex"><a href="yourBusiness/" target="_blank">CoffeHouse para tu negocio</a></li>
+            <li class="d-flex"><a href="yourBusiness/" target="_blank">TienditaCafe para tu negocio</a></li>
           </ul>
         </div>
       </div>

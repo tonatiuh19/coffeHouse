@@ -41,9 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
 					}elseif ($status==10) {
 						echo '<h1 class="mb-2 bread">Tu subscripcion esta completa</h1>
-								<script type="text/javascript">
-									window.localStorage.clear();
-								</script>';
+								';
 					}else{
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
 					}

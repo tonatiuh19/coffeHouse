@@ -61,7 +61,7 @@ if (isset($_SESSION['email'])){
 						<input type="checkbox" class="form-check-input" name="im_busi" id="exampleCheck1">
 						<label class="form-check-label" for="exampleCheck1"><small>Soy Negocio</small></label>
 					</div>
-					<small id="emailHelp" class="form-text text-muted text-center">Al registrarme acepto los <a href="#">Términos y Condiciones</a>, <a href="#">Políticas de Privacidad</a> y <a href="#">Términos de Promociones</a>  de Coffehouse.</a></small>
+					<small id="emailHelp" class="form-text text-muted text-center">Al registrarme acepto los <a href="#">Términos y Condiciones</a>, <a href="#">Políticas de Privacidad</a> y <a href="#">Términos de Promociones</a>  de TienditaCafe.</a></small>
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary">Crear mi cuenta</button>

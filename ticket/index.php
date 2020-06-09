@@ -44,7 +44,7 @@ function test_input($data) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CoffeHouse</title>
+<title>TienditaCafe</title>
 <link href="pago.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -93,7 +93,7 @@ function test_input($data) {
     <div class="Table-Data">
     	<div class="table-row color1">
         	<div>Descripción</div>
-            <span>Pedido CoffeHouse</span>
+            <span>Pedido TienditaCafe</span>
         </div>
     	<div class="table-row color2">
         	<div>Fecha y hora</div>
@@ -103,7 +103,7 @@ function test_input($data) {
             
         </div>
     	<div class="table-row color1">
-        	<div>Correo de un soñador CoffeHouse</div>
+        	<div>Correo de un soñador TienditaCafe</div>
             <?php
             echo '<span>'.$_SESSION["email"].'</span>';
             ?>

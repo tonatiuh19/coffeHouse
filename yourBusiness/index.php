@@ -6,7 +6,7 @@ require_once('../admin/header.php');
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-end justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-2 bread">CoffeHouse para tu Negocio</h1>
+				<h1 class="mb-2 bread">TienditaCafe para tu Negocio</h1>
 			</div>
 		</div>
 	</div>

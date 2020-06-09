@@ -4,7 +4,7 @@
           <div class="col-md-6 col-lg-4">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Acerca de Nosotros</h2>
-              <p><b>Escribenos: </b><br>dihola@coffehouse.mx</span></a></p>
+              <p><b>Escribenos: </b><br>dihola@tienditacafe.com</span></a></p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
 
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -21,7 +21,7 @@
                 <li class="d-flex"><a href="#">Registate aqui si eres proveedor</a></li>
                 <li class="d-flex"><a href="#">Terminos y Condiciones</a></li>
                 <li class="d-flex"><a href="#">Politicas de Privacidad</a></li>
-                <li class="d-flex"><a href="#">CoffeHouse para tu negocio</a></li>
+                <li class="d-flex"><a href="#">TienditaCafe para tu negocio</a></li>
               </ul>
             </div>
           </div>

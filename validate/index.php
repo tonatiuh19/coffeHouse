@@ -103,19 +103,19 @@ function sendmail($addReplyToEmail, $x){
         //Server settings
        $mail->SMTPDebug = 2;                                       // Enable verbose debug output
        // $mail->isSMTP();                                            // Set mailer to use SMTP
-        $mail->Host       = 'mail.coffehouse.mx';  // Specify main and backup SMTP servers
+        $mail->Host       = 'mail.tienditacafe.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mail->Username   = 'dihola@coffehouse.mx';                     // SMTP username
+        $mail->Username   = 'dihola@tienditacafe.com';                     // SMTP username
         $mail->Password   = 'Julio.Banda93';                               // SMTP password
         $mail->SMTPSecure = 'ssl';                                  // Enable TLS encryption, `ssl` also accepted
         $mail->Port       = 469;                                    // TCP port to connect to
 
 
         //Recipients
-        $mail->setFrom('noreply@coffehouse.mx', 'Codigo - CoffeHouse');
+        $mail->setFrom('noreply@tienditacafe.com', 'Codigo - TienditaCafe');
         $mail->addAddress(''.$addReplyToEmail.'', 'Usuario Distinguido');     // Add a recipient
 
-        $mail->addReplyTo('dihola@coffehouse.mx', 'Informacion');
+        $mail->addReplyTo('dihola@tienditacafe.com', 'Informacion');
         //$mail->addCC('cc@example.com');
         //$mail->addBCC('info@agromotics.com', 'Info');
 
@@ -125,10 +125,10 @@ function sendmail($addReplyToEmail, $x){
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Codigo | Recuperar contraseña | CoffeHouse';
+        $mail->Subject = 'Codigo | Recuperar contraseña | TienditaCafe';
         $mail->Body    = '<p>¡Hola!</p> <p>Enseguida encuentra el codigo para reiniciar tu contraseña:</p> 
         <p>Codigo: <b>'.$x.'</b></p>
-        <p>Saludos cordiales.<br>Equipo CoffeHouse. <br>dihola@coffehouse.mx</p>';
+        <p>Saludos cordiales.<br>Equipo TienditaCafe. <br>dihola@tienditacafe.com</p>';
         $mail->AltBody = 'Bienvenido';
 
         $mail->send();
