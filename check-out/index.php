@@ -1,11 +1,10 @@
 <?php
+require_once('../admin/header.php');
 echo ("<SCRIPT LANGUAGE='JavaScript'>
 		if (localStorage.getItem('cart') === null) {
 		  window.location.href='../';
 		}
 		</SCRIPT>");
-
-require_once('../admin/header.php');
 if (!(isset($_SESSION['email']))){
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
 		window.location.href='../sign-in/';

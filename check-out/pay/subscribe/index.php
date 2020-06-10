@@ -77,7 +77,7 @@ try {
 	if ($conn->query($sql) === TRUE) {
 		echo '<form action="../../../status/" id="finish" method="post">';
 		echo '<input type="hidden" name="stat" value="10">';
-		echo '<input type="hidden" name="cart" value="subscriptions">';
+		echo '<input type="hidden" name="cart" value="'.$type.'">';
 		echo '<input type="hidden" name="adress" value="'.$_POST["adres"].'">';
 		echo '</form>';
 		echo '<script type="text/javascript">
