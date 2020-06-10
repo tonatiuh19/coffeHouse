@@ -36,12 +36,19 @@ require_once('../admin/header.php');
 					<button type="button" class="btn btn-lg btn-block btn-primary mt-auto" data-toggle="modal" data-target="#barista" data-whatever="@mdo">
 						Suscribete
 					</button>
-					
+
 					<!-- Modal -->
 					<div class="modal fade" id="barista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-body">
+                  <?php
+                  if (!(isset($_SESSION['email']))){
+                    echo '<div class="row h-100 justify-content-center align-items-center my-3"><a class="btn btn-primary btn-lg w-100" href="../sign-in/" role="button">Inicia Sesion</a>
+                    </div>';
+                  }else{
+                  ?>
+
 									<div class="container">
 										<style>
 										    .box{
@@ -58,25 +65,25 @@ require_once('../admin/header.php');
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Envio gratis
-															
+
 														</div>
-														
+
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Bolsa de cafe
-															
+
 														</div>
-														
+
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Regalo especial
-															
+
 														</div>
 
 													</li>
-													
+
 													<li class="list-group-item d-flex justify-content-between">
 														<span>Total:</span>
 														<strong>$199.00</strong>
@@ -86,90 +93,87 @@ require_once('../admin/header.php');
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Envio gratis
-															
+
 														</div>
-														
+
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> 2 Bolsas de cafe
-															
+
 														</div>
-														
+
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Regalos especiales
-															
+
 														</div>
 
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Secretos exclusivos Barista
-															
+
 														</div>
 
 													</li>
-													
+
 													<li class="list-group-item d-flex justify-content-between">
 														<span>Total:</span>
 														<strong>$299.00</strong>
 													</li>
-																			
+
 												</ul>
 												<ul class="list-group mb-3" id="godUl">
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Envio gratis
-															
+
 														</div>
-														
+
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> 4 Bolsas de cafe
-															
+
 														</div>
-														
+
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Regalos especiales
-															
+
 														</div>
 
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Secretos exclusivos Barista
-															
+
 														</div>
 
 													</li>
 													<li class="list-group-item d-flex justify-content-between lh-condensed">
 														<div>
 															<i class="fas fa-arrow-alt-circle-right"></i> Cupones para toda la tienda
-															
+
 														</div>
 
 													</li>
-													
+
 													<li class="list-group-item d-flex justify-content-between">
 														<span>Total:</span>
 														<strong>$399.00</strong>
 													</li>
 												</ul>
 
-												
+
 											</div>
 											<div class="col-md-8 order-md-1">
-												
+
 												<?php
-												if (!(isset($_SESSION['email']))){
-													echo '<div class="row h-100 justify-content-center align-items-center my-3"><a class="btn btn-primary btn-lg w-100" href="../sign-in/" role="button">Inicia Sesion</a>
-													</div>';
-												}else{
+
 													echo '<h4 class="mb-3">Domicilio</h4>';
 													$sql = "SELECT id_adresses, street, number, cp, state, city FROM adresses WHERE email_user='".$_SESSION['email']."'";
 													$result = $conn->query($sql);
@@ -213,8 +217,8 @@ require_once('../admin/header.php');
 																	</label>
 															      <input type="text" class="form-control" name="number" required>
 															    </div>
-															  </div>	
-															
+															  </div>
+
 															  <div class="form-row">
 															    <div class="col-6">
 															    	<label class="form-check-label" for="exampleRadios1">
@@ -229,9 +233,9 @@ require_once('../admin/header.php');
 															      <input type="text" class="form-control" name="state" required>
 															    </div>
 															  </div>
-															
+
 															  <div class="form-row">
-															  	
+
 															    <div class="col-8">
 															    	<label class="form-check-label" for="exampleRadios1">
 																	    Ciudad:
@@ -245,7 +249,7 @@ require_once('../admin/header.php');
 															      <input type="text" class="form-control" name="cp"  required>
 															    </div>
 															  </div>
-															  
+
 															  <div class="form-row">
 															    <div class="col-12">
 															    	<label class="form-check-label" for="exampleRadios1">
@@ -253,8 +257,8 @@ require_once('../admin/header.php');
 																	</label>
 															      <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3" placeholder="Descripcion opcional: Numero interior, entre calles, color fachada, etc."></textarea>
 															    </div>
-															   
-															  </div>								
+
+															  </div>
 													      </div>
 													      <div class="modal-footer">
 													        <button type="submit" class="btn btn-primary">Guardar</button>
@@ -335,16 +339,14 @@ require_once('../admin/header.php');
 												</form>
 													</div>
 													<div class="blue box">You have selected <strong>blue radio button</strong> so i am here</div>
-													<?php
-												}
-
-												?>
-
 											</div>
 										</div>
 									</div>
+                  <?php
+                  }
+                  ?>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
@@ -389,7 +391,7 @@ require_once('../admin/header.php');
 						Suscribete
 					</button>
 					<!-- Modal -->
-					
+
 
 
 				</div>
@@ -414,7 +416,7 @@ require_once('../admin/header.php');
 	$('#pay-button').on('click', function(event) {
 		event.preventDefault();
 		$("#pay-button").prop( "disabled", true);
-		OpenPay.token.extractFormAndCreate('payment-form', success_callbak, error_callbak);              
+		OpenPay.token.extractFormAndCreate('payment-form', success_callbak, error_callbak);
 
 	});
 
@@ -446,10 +448,7 @@ require_once('../admin/footer.php');
 </script>
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="modal-wizard.js"></script>
-<script>
-  $('#myModal').modalSteps();
-</script>
+
 <script>
 	function adre(e) {
 		document.getElementById("myAdress1").value = e.target.value;
@@ -503,7 +502,7 @@ require_once('../admin/footer.php');
 		$("#proUl").hide();
 		$("#mdoUl").show();
 	  }
-	  
-	  
+
+
 	})
 </script>
