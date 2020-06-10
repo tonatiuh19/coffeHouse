@@ -48,6 +48,63 @@ require_once('../admin/header.php');
 			<textarea class="form-control" id="exampleFormControlTextarea1" name="l_desc" rows="5" placeholder="Descripcion detallada, especificaciones, caracteriztifcas, informacion importante, etc." required></textarea>
 		</div>
 		<div class="form-group">
+			<label for="exampleFormControlSelect1">Sabor/Aroma del Cafe:</label>
+			<select class="form-control" id="exampleFormControlSelect1" name="sabor" required>
+				<?php
+					echo '<option value="">None</option>';
+					$sqlx = "SELECT id_product_f_sabor_types, value FROM product_f_sabor_types";
+					$resultx = $conn->query($sqlx);
+
+					if ($resultx->num_rows > 0) {
+					  // output data of each row
+					  while($rowx = $resultx->fetch_assoc()) {
+					    echo '<option value="'.$rowx["id_product_f_sabor_types"].'">'.$rowx["value"].'</option>';
+					  }
+					} else {
+					  echo "0 results";
+					}
+				?>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Cuerpo del Cafe:</label>
+			<select class="form-control" id="exampleFormControlSelect1" name="cuerpo" required>
+				<?php
+					echo '<option value="">None</option>';
+					$sqlx = "SELECT id_product_f_cuerpo_types, value FROM product_f_cuerpo_types";
+					$resultx = $conn->query($sqlx);
+
+					if ($resultx->num_rows > 0) {
+					  // output data of each row
+					  while($rowx = $resultx->fetch_assoc()) {
+					    echo '<option value="'.$rowx["id_product_f_cuerpo_types"].'">'.$rowx["value"].'</option>';
+					  }
+					} else {
+					  echo "0 results";
+					}
+				?>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Acidez del Cafe:</label>
+			<select class="form-control" id="exampleFormControlSelect1" name="acidez" required>
+				<?php
+					echo '<option value="">None</option>';
+					$sqlx = "SELECT id_product_f_acidez_types, value FROM product_f_acidez_types";
+					$resultx = $conn->query($sqlx);
+
+					if ($resultx->num_rows > 0) {
+					  // output data of each row
+					  while($rowx = $resultx->fetch_assoc()) {
+					    echo '<option value="'.$rowx["id_product_f_acidez_types"].'">'.$rowx["value"].'</option>';
+					  }
+					} else {
+					  echo "0 results";
+					}
+				?>
+			</select>
+		</div>
+		<div class="form-group">
 			<label for="sel1">¿De que lugar es?</label>
 			<select class="form-control" id="sel1" name="country">
 				<?php

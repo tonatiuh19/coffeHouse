@@ -5,6 +5,7 @@ require_once('../admin/header.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$id = test_input($_POST["id"]);
+	$type = "0";
 
 	/*$sql = "SELECT a.id_products, a.name, a.description, a.long_description, a.id_country, a.id_product_type, b.country, c.product_type FROM products as a INNER JOIN countries as b on b.id_country=a.id_country INNER JOIN product_types as c on c.id_product_types=a.id_product_type WHERE a.id_products=".$id."";*/
 	$sql = "SELECT d.id_products, e.price, d.name, d.description, d.id_product_type, d.id_country, d.active, d.long_description, m.country, n.product_type FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN countries as m on m.id_country=d.id_country INNER JOIN product_types as n on n.id_product_types=d.id_product_type WHERE d.id_products=".$id."";
@@ -13,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
+	    	$type = $row["id_product_type"];
 	        echo '	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 						<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 							<h1 class="h2">Editar '.$row["name"].'</h1>
@@ -169,6 +171,101 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							}else{
 								echo '<input type="hidden" name="product_type" value="3">';
 							}
+							if ($row["id_product_type"]!=3 && $row["id_product_type"]!=2) {
+							echo '<div class="form-group">
+										<label for="exampleFormControlSelect1">Sabor/Aroma del Cafe:</label>
+										<select class="form-control" id="exampleFormControlSelect1" name="sabor" required>
+											';
+											$sqlx = "SELECT id_product_f_sabor_types, value FROM product_f_sabor_types";
+											$resultx = $conn->query($sqlx);
+
+											if ($resultx->num_rows > 0) {
+											  // output data of each row
+											  while($rowx = $resultx->fetch_assoc()) {
+											    $sqlx2 = "SELECT id_product_f_sabor_types FROM product_f_sabor WHERE id_product='".$row["id_products"]."'";
+												$resultx2 = $conn->query($sqlx2);
+
+												if ($resultx2->num_rows > 0) {
+												  // output data of each row
+												  while($rowx2 = $resultx2->fetch_assoc()) {
+												    if ($rowx2["id_product_f_sabor_types"]==$rowx["id_product_f_sabor_types"]) {
+												    	echo '<option value="'.$rowx["id_product_f_sabor_types"].'" selected>'.$rowx["value"].'</option>';
+												    }else{
+												    	echo '<option value="'.$rowx["id_product_f_sabor_types"].'">'.$rowx["value"].'</option>';
+												    }
+												  }
+												} else {
+												  echo "0 results";
+												}
+											  }
+											} else {
+											  echo "0 results";
+											}
+										echo '</select>
+									</div>
+									<div class="form-group">
+										<label for="exampleFormControlSelect1">Cuerpo del Cafe:</label>
+										<select class="form-control" id="exampleFormControlSelect1" name="cuerpo" required>
+											';
+											$sqlx = "SELECT id_product_f_cuerpo_types, value FROM product_f_cuerpo_types";
+											$resultx = $conn->query($sqlx);
+
+											if ($resultx->num_rows > 0) {
+											  // output data of each row
+											  while($rowx = $resultx->fetch_assoc()) {
+											    $sqlx2 = "SELECT id_product_f_cuerpo_types FROM product_f_cuerpo WHERE id_product='".$row["id_products"]."'";
+												$resultx2 = $conn->query($sqlx2);
+
+												if ($resultx2->num_rows > 0) {
+												  // output data of each row
+												  while($rowx2 = $resultx2->fetch_assoc()) {
+												    if ($rowx2["id_product_f_cuerpo_types"]==$rowx["id_product_f_cuerpo_types"]) {
+												    	echo '<option value="'.$rowx["id_product_f_cuerpo_types"].'" selected>'.$rowx["value"].'</option>';
+												    }else{
+												    	echo '<option value="'.$rowx["id_product_f_cuerpo_types"].'">'.$rowx["value"].'</option>';
+												    }
+												  }
+												} else {
+												  echo "0 results";
+												}
+											  }
+											} else {
+											  echo "0 results";
+											}
+										echo '</select>
+									</div>
+									<div class="form-group">
+										<label for="exampleFormControlSelect1">Acidez del Cafe:</label>
+										<select class="form-control" id="exampleFormControlSelect1" name="acidez" required>
+											';
+											$sqlx = "SELECT id_product_f_acidez_types, value FROM product_f_acidez_types";
+											$resultx = $conn->query($sqlx);
+
+											if ($resultx->num_rows > 0) {
+											  // output data of each row
+											  while($rowx = $resultx->fetch_assoc()) {
+											    $sqlx2 = "SELECT id_product_f_acidez_types FROM product_f_acidez WHERE id_product='".$row["id_products"]."'";
+												$resultx2 = $conn->query($sqlx2);
+
+												if ($resultx2->num_rows > 0) {
+												  // output data of each row
+												  while($rowx2 = $resultx2->fetch_assoc()) {
+												    if ($rowx2["id_product_f_acidez_types"]==$rowx["id_product_f_acidez_types"]) {
+												    	echo '<option value="'.$rowx["id_product_f_acidez_types"].'" selected>'.$rowx["value"].'</option>';
+												    }else{
+												    	echo '<option value="'.$rowx["id_product_f_acidez_types"].'">'.$rowx["value"].'</option>';
+												    }
+												  }
+												} else {
+												  echo "0 results";
+												}
+											  }
+											} else {
+											  echo "0 results";
+											}
+										echo '</select>
+									</div>';
+								}
 							echo '<div class="form-group">';
 								if ($row["id_product_type"]!=3) {
 									echo '<label for="exampleFormControlTextarea1">Descripcion corta del producto:</label>';
@@ -211,8 +308,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							}
 							echo '<button type="submit" class="btn btn-primary">Actualizar</button>
 						</form>
+						';
+						if ($type=="3") {
+							echo '<hr>
+							<h3>Añadir producto a Campaña</h3>
+							<div class="container">
+							    <div class="row">
+							        <div class="col-sm-6">
+							        	Productos que contiene la campaña:';
+							        	$sqlw = "SELECT a.id_campaigns_products, a.id_products, a.quantity, b.name FROM campaigns_product as a INNER JOIN products as b on b.id_products=a.id_products WHERE b.active=1 AND a.id_campaign=".$id."";
+										$resultw = $conn->query($sqlw);
 
-					</main>
+										if ($resultw->num_rows > 0) {
+										  echo '<table class="table">
+												  <tbody>';
+
+										  while($roww = $resultw->fetch_assoc()) {
+										    echo '<tr>
+												      <th scope="row">'.$roww["name"].'</th>
+												      <td><form action="remove_from_campaign/" method="post">
+														<input type="hidden" name="id" value="'.$roww["id_products"].'">
+														<input type="hidden" name="id_campaign" value="'.$id.'">
+														<button class="btn btn-danger btn-sm" type="submit">Quitar</button>
+													</form></td>
+												    </tr>';
+										  }
+										  echo '</tbody>
+											</table>';
+										} else {
+										  echo "<p>Aun no tiene productos esta campaña.</p>";
+										}
+							        echo '</div>
+							        <div class="col-sm-6">
+								        <form action="add_to_campaigns/" method="post">
+										  <div class="form-group">
+										    <label for="exampleFormControlSelect1">Nuevo producto:</label>
+										    <select class="form-control" id="exampleFormControlSelect1" name="new" required>
+										      ';
+										      $sqlz = "SELECT m.id_products, m.name FROM products m WHERE m.active=1";
+												$resultz = $conn->query($sqlz);
+
+												if ($resultz->num_rows > 0) {
+												  // output data of each row
+												  while($rowz = $resultz->fetch_assoc()) {
+												    echo '<option value="'.$rowz["id_products"].'">'.$rowz["name"].'</option>';
+												  }
+												} else {
+												  echo "0 results";
+												}
+										    echo '</select>
+										  </div>
+										  <div class="form-group">
+										    <label for="exampleFormControlInput1">Cantidad:</label>
+										    <input type="number" class="form-control" name="qty" required>
+										  </div>
+										  <input type="hidden" name="id_campaign" value="'.$id.'">
+										  <button type="submit" class="btn btn-primary">Añadir</button>
+										</form>
+							        </div>
+							    </div>
+							</div>';
+						}
+						
+
+					echo '</main>
 					</div>
 					</div>';
 	    }

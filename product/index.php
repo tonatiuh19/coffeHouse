@@ -200,8 +200,9 @@ if ($result->num_rows > 0) {
 
 					<div class="sidebar-box ftco-animate">
 						<?php
+						
 						if ($type == '1') {
-							$sql2 = "SELECT a.value as 'sabor', b.value as 'cuerpo', c.value as 'acidez' FROM product_f_sabor as a INNER JOIN product_f_cuerpo as b on b.id_product=a.id_product INNER JOIN product_f_acidez as c on c.id_product=a.id_product WHERE a.id_product=".$id_product."";
+							$sql2 = "SELECT ax.value as 'sabor', bx.value as 'cuerpo', cx.value as 'acidez' FROM product_f_sabor as a INNER JOIN product_f_sabor_types as ax on a.id_product_f_sabor_types=ax.id_product_f_sabor_types INNER JOIN product_f_cuerpo as b on b.id_product=a.id_product INNER JOIN product_f_cuerpo_types as bx on b.id_product_f_cuerpo_types=bx.id_product_f_cuerpo_types INNER JOIN product_f_acidez as c on c.id_product=a.id_product INNER JOIN product_f_acidez_types as cx on c.id_product_f_acidez_types=cx.id_product_f_acidez_types WHERE a.id_product=".$id_product."";
 							$result2 = $conn->query($sql2);
 
 							if ($result2->num_rows > 0) {
