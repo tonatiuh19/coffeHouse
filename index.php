@@ -56,7 +56,7 @@ session_start();
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
  <div class="container">
-   <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Cinque Terre" width="182"></a>
+   <a class="navbar-brand" href="/"><img src="images/logo.png" alt="Cinque Terre" width="182"></a>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
      <span class="oi oi-menu"></span> Menu
    </button>
@@ -189,7 +189,7 @@ session_start();
         </div>
         <div class="media-body p-2 mt-3">
           <h3 class="heading">¡Suscribete y recibe Cafe!</h3>
-          <p>Por $200 pesos mensuales recibiras cafe aleatorio y tendras el beneficio de probar diferentes tipos de cafe del mundo.</p>
+          <p>Por $199 pesos mensuales recibiras cafe aleatorio y tendras el beneficio de probar diferentes tipos de cafe del mundo.</p>
         </div>
       </div>      
     </div>
@@ -202,13 +202,16 @@ session_start();
    <div class="col-sm-10 wrap-about ftco-animate text-center">
      <div class="heading-section mb-4 text-center">
 
-       <h2 class="mb-4 text-white">Suscribete por $200.00</h2>
+       <h2 class="mb-4 text-white">Suscribete por $199.00</h2>
      </div>
      <p>Recibe Cafe todos los meses de diferentes marcas de diferentes pasises con <b>envio gratis.</b></p>
 
      <div class="video justify-content-center">
-       <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+       <!--<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
          <span class="ion-ios-play"></span>
+       </a>-->
+       <a href="suscribete/" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+         <span class="fas fa-gift"></span>
        </a>
      </div>
    </div>
@@ -413,7 +416,7 @@ session_start();
         </div>-->
         <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
           <div class="block-18">
-            <div class="text">
+            <div class="text-white btn btn-dark">
               <strong class="number" data-number="20">0</strong>
               <span>Crew members a tu dispocision</span>
             </div>
