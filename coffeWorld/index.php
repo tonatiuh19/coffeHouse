@@ -46,25 +46,77 @@ require_once('../admin/header.php');
 	}
 </style>
 <section class="ftco-section">
-	<?php
-	$sql = "SELECT id_country, country FROM countries WHERE id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 )";
-	$result = $conn->query($sql);
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-3">
+			<h5 class="">Pais/Region:</h5>
+			<ul class="list-group">
+				<?php
+				$sqlx = "SELECT id_country, country FROM countries WHERE id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 )";
+				$resultx = $conn->query($sqlx);
 
-	if ($result->num_rows > 0) {
-	    // output data of each row
-	    while($row = $result->fetch_assoc()) {
-	        echo '	<div class="container">
-						<div class="heading-menu text-center ftco-animate">
-							<h3>'.$row["country"].'</h3>
-						</div>
-						<div class="row">';
+				if ($resultx->num_rows > 0) {
+				  // output data of each row
+				  while($rowx = $resultx->fetch_assoc()) {
+				  	$id_country = $rowx["id_country"];
+				    echo '<li class="list-group-item">
+							<div class="form-check">
+								<label class="form-check-label" >
+							  		<input class="form-check-input product-check" type="checkbox" id="country" value="'.$rowx["country"].'" >'; 
+							  			if ($id_country=="1") {
+									      	echo '<i class="mexico flag"></i>';
+									      }elseif ($id_country=="2") {
+									      	echo '<i class="colombia flag"></i>';
+									      }elseif ($id_country=="3") {
+									      	echo '<i class="united states flag"></i>';
+									      }elseif ($id_country=="4") {
+									      	echo '<i class="canada flag"></i>';
+									      }
+							  		echo $rowx["country"].'
+							  	</label>
+							</div>
+				    </li>';
+				  }
+				} else {
+				  echo "0 results";
+				}
+				?>
+			</ul>
+			<hr>
+			<h5>Tipo:</h5>
+			<ul class="list-group">
+				<?php
+				$sqlx = "SELECT id_product_types, product_type FROM product_types WHERE id_product_types NOT IN ( SELECT id_product_types FROM product_types WHERE id_product_types=3 )";
+				$resultx = $conn->query($sqlx);
 
-							$sql2 = "SELECT d.id_products, e.price, d.name, d.description FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.active=1 and d.id_country=".$row["id_country"]."";
+				if ($resultx->num_rows > 0) {
+				  // output data of each row
+				  while($rowx = $resultx->fetch_assoc()) {
+				    echo '<li class="list-group-item">
+							<div class="form-check">
+								<label class="form-check-label" >
+							  		<input class="form-check-input product-check" type="checkbox" id="product_type" value="'.$rowx["product_type"].'" >'; 
+							  		echo $rowx["product_type"].'
+							  	</label>
+							</div>
+				    </li>';
+				  }
+				} else {
+				  echo "0 results";
+				}
+				?>
+			</ul>
+
+		</div>
+		<div class="col-lg-9 ">
+			<?php
+										$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.active=1 and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 )";
 							$result2 = $conn->query($sql2);
 
 							if ($result2->num_rows > 0) {
-							    // output data of each row
+							    echo '<div class="row">';
 							    while($row2 = $result2->fetch_assoc()) {
+							    	$id_country = $row2["id_country"];
 									echo '<div class="col-md-4">
 											<figure class="card card-product">
 												<a href="../product/?product_sku='.$row2["id_products"].'"><div class="img-wrap"><img src="';
@@ -73,7 +125,17 @@ require_once('../admin/header.php');
 									              }
 												echo '"></div>
 												<figcaption class="info-wrap">
-														<h4 class="title">'.$row2["name"].'</h4>
+														<h4 class="title">'.$row2["name"].'';
+														/*if ($id_country=="1") {
+													      	echo '<i class="mexico flag"></i>';
+													      }elseif ($id_country=="2") {
+													      	echo '<i class="colombia flag"></i>';
+													      }elseif ($id_country=="3") {
+													      	echo '<i class="united states flag"></i>';
+													      }elseif ($id_country=="4") {
+													      	echo '<i class="canada flag"></i>';
+													      }*/
+														echo '</h4>
 														<p class="desc">'.$row2["description"].'</p>
 														<!--<div class="rating-wrap">
 															<div class="label-rating">132 reviews</div>
@@ -94,21 +156,21 @@ require_once('../admin/header.php');
 											</figure>
 										</div>';
 							    }
+							    echo '</div>';
 							} else {
 							    echo "";
 							}
-							
-
-							echo '
-						</div>
-					</div>';
-	    }
-	} else {
-	    echo "0 results";
-	}
-	?>
+			?>
+		</div>
+	</div>
+</div>
 </section>
 
 <?php
 require_once('../admin/footer.php');
 ?>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+</script>

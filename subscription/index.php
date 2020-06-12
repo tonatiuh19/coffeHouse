@@ -11,7 +11,7 @@ if (!isset($_SESSION['email'])){
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-end justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-2 bread">Mis Pedidos</h1>
+				<h1 class="mb-2 bread">Mis Suscripciones</h1>
 			</div>
 		</div>
 	</div>
@@ -62,7 +62,10 @@ if (!isset($_SESSION['email'])){
 		  echo '</tbody>
 		</table>';
 		} else {
-		  echo "0 results";
+		  echo ("<SCRIPT LANGUAGE='JavaScript'>
+			window.alert('Para ver tus suscripciones, necesitas primero tener una ;)')
+			window.location.href='../suscribete/';
+			</SCRIPT>");
 		}
 		$conn->close();
 		?>

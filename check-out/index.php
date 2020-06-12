@@ -237,7 +237,7 @@ $carrito = 0;
 					</div>
 				</div>
 				<div class="red box">
-					<form action="pay/" method="POST" name="Form" id="payment-form" onsubmit="return validateFormA()">
+					<form action="pay/" method="POST" name="Form" class="once-only" id="payment-form" onsubmit="return validateFormA()">
 					<input type="hidden" name="token_id" id="token_id">
 					<?php
 						echo '<input type="hidden" name="payType" value="1">';
@@ -291,7 +291,8 @@ $carrito = 0;
 					</div>
 					<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
 					<hr class="mb-4">
-					<a class="btn btn-primary btn-lg btn-block" id="pay-button"><i class="fas fa-lock"></i> Pagar</a>
+					<a class="btn btn-primary btn-lg btn-block text-white" id="pay-button"><i class="fas fa-lock"></i> Pagar</a>
+					<button class="btn btn-primary btn-lg btn-block text-white" id="pagando" disabled><i class="fas fa-spinner"></i> Pagando</button>
 				</form>
 			</div>
 			<div class="green box">
@@ -361,6 +362,8 @@ $carrito = 0;
 require_once('../admin/footer.php');
 ?>
 <script>
+	//$("#pay-button").hide();
+	$("#pagando").hide();
 	$(document).ready(function(){
 		$('input[type="radio"]').click(function(){
 			var inputValue = $(this).attr("value");
@@ -382,6 +385,8 @@ require_once('../admin/footer.php');
 			alert("Necesitas escoger un domicilio");
 			return false;
 		}
+		$("#pay-button").hide();
+		$("#pagando").show();
 	}
 
 	function validateFormB() {
@@ -392,4 +397,6 @@ require_once('../admin/footer.php');
 			return false;
 		}
 	}
+
+	
 </script>

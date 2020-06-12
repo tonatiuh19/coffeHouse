@@ -336,6 +336,7 @@ require_once('../admin/header.php');
 													<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
 													<hr class="mb-4">
 													<a class="btn btn-primary btn-lg btn-block text-white" id="pay-button"><i class="fas fa-lock"></i> Suscribirme</a>
+													<button class="btn btn-primary btn-lg btn-block text-white" id="pagando" disabled><i class="fas fa-spinner"></i> Procesando</button>
 												</form>
 													</div>
 													<div class="blue box">You have selected <strong>blue radio button</strong> so i am here</div>
@@ -398,6 +399,11 @@ require_once('../admin/header.php');
 			</div>
 		</div>
 	</div>
+	<div class="container h-100">
+	  <div class="row h-100 justify-content-center align-items-center">
+	    <p><i class="fas fa-hand-peace"></i>&nbsp;Puedes tener mas de una suscripcion a la vez y recibir mas variedad durante el mes.</p>
+	  </div>
+	</div>
 </section>
 
 <script type="text/javascript">
@@ -450,6 +456,8 @@ require_once('../admin/footer.php');
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script>
+	//$("#pay-button").hide();
+	$("#pagando").hide();
 	function adre(e) {
 		document.getElementById("myAdress1").value = e.target.value;
 		document.getElementById("myAdressPro").value = e.target.value;
@@ -462,6 +470,8 @@ require_once('../admin/footer.php');
 			alert("Necesitas escoger un domicilio");
 			return false;
 		}
+		$("#pay-button").hide();
+		$("#pagando").show();
 	}
 
 	function validateFormPro() {
@@ -471,6 +481,8 @@ require_once('../admin/footer.php');
 			alert("Necesitas escoger un domicilio");
 			return false;
 		}
+		$("#pay-button").hide();
+		$("#pagando").show();
 	}
 </script>
 
