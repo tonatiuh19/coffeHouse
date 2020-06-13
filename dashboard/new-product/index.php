@@ -108,7 +108,7 @@ require_once('../admin/header.php');
 			<label for="sel1">¿De que lugar es?</label>
 			<select class="form-control" id="sel1" name="country">
 				<?php
-				$sql = "SELECT id_country, country FROM countries";
+				$sql = "SELECT id_country, country FROM countries WHERE id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 OR id_country=1)";
 				$result = $conn->query($sql);
 
 				if ($result->num_rows > 0) {

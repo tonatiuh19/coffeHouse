@@ -114,6 +114,7 @@
   <script src="../js/scrollax.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'></script>
   <script src="../js/main.js"></script>
+  <script src="../js/paginga.jquery.js"></script> 
   <script type="text/javascript">
       $(function() {
         var alert = $('div.alert[auto-close]');
