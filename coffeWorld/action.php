@@ -12,9 +12,8 @@ if (isset($_POST["action"])) {
 	if (isset($_POST["product_type"])){
 		$product_type = implode("','", $_POST['product_type']);
 		$sql2 .= "AND d.id_product_type IN('".$product_type."')";
-	}
+	}	
 
-	
 
 	$result2 = $conn->query($sql2);
 	$output = '';
@@ -22,10 +21,10 @@ if (isset($_POST["action"])) {
 	if ($result2->num_rows > 0) {
 		
 		echo '<div class="paginate">';
-		echo '<div class="row items" >';
+		echo '<div class="row items isotope-grid" >';
 		while($row2 = $result2->fetch_assoc()) {
 			$id_country = $row2["id_country"];
-			echo '<div class="col-md-4">
+			echo '<div class="col-md-4 grid-item">
 			<figure class="card card-product">
 			<a href="../product/?product_sku='.$row2["id_products"].'"><div class="img-wrap"><img src="';
 			foreach(glob('../dashboard/user/'.$row2["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
@@ -43,7 +42,7 @@ if (isset($_POST["action"])) {
 			</div>  rating-wrap.// -->
 			</figcaption></a>
 			<div class="bottom-wrap">
-			<div class="product" data-name="'.$row2["name"].'" data-price="'.$row2["price"].'" data-id="'.$row2["id_products"].'">
+			<div class="product product-card" data-name="'.$row2["name"].'" data-price="'.$row2["price"].'" data-id="'.$row2["id_products"].'">
 			<input type="number" class="count float-right form-control" value="1" min="1" />
 			<button class="tiny btn btn-sm btn-primary float-right" id="modalButton">Soltar en mi bolsa</button>
 			</div>	
@@ -75,6 +74,37 @@ if (isset($_POST["action"])) {
 						});
 					});
 				</script>';
+		/*echo '<script type="text/javascript">
+				$(document).on("change", ".form-control-select", function() {
+					var sortingMethod = $(this).val();
+
+					if(sortingMethod == "l2h") {
+						sortProductsPriceAscending();
+					} else if (sortingMethod == "h2l") {
+						sortProductsPriceDescending();
+					}
+				});
+
+				function sortProductsPriceAscending() {
+					var gridItems = $(".grid-item");
+
+					gridItems.sort(function(a, b) {
+						return $(".product-card", a).data("price") - $(".product-card", b).data("price");
+					});
+
+					$(".isotope-grid").append(gridItems);
+				}
+
+				function sortProductsPriceDescending() {
+					var gridItems = $(".grid-item");
+
+					gridItems.sort(function(a, b) {
+						return $(".product-card", b).data("price") - $(".product-card", a).data("price");
+					});
+
+					$(".isotope-grid").append(gridItems);
+				}
+			</script>';*/
 	}else{
 		echo '<h3>Sin producto todavia</h3>';
 	}

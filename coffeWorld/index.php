@@ -86,13 +86,12 @@ require_once('../admin/header.php');
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="form-group">
-				    <label for="exampleFormControlSelect1">Ordenar por:</label>
-				    <select class="form-control product-check" id="product_order">
-				      <option value="1">Precio: de más bajo a más alto</option>
-				      <option value="2">Precio: de más alto a más bajo</option>
-				      <option value="3" selected>Lo mas nuevo</option>
-				    </select>
-				  </div>
+					<label for="exampleFormControlSelect1">Ordenar por:</label>
+					<select class="form-control form-control-select" name="price-sorting">
+						<option value="l2h">Precio: de más bajo a más alto <i class="fas fa-sort-amount-down-alt"></i></option>
+						<option value="h2l">Precio: de más alto a más bajo <i class="fas fa-sort-amount-down"></i></option>
+					</select>
+				</div>
 				<hr>
 				<label>Tipo:</label>
 				<ul class="list-group">
@@ -170,10 +169,10 @@ require_once('../admin/header.php');
 				if ($result2->num_rows > 0) {
 					
 					echo '<div class="paginate">';
-					echo '<div class="row items" >';
+					echo '<div class="row items isotope-grid">';
 					while($row2 = $result2->fetch_assoc()) {
 						$id_country = $row2["id_country"];
-						echo '<div class="col-md-4">
+						echo '<div class="col-md-4 grid-item">
 						<figure class="card card-product">
 						<a href="../product/?product_sku='.$row2["id_products"].'"><div class="img-wrap"><img src="';
 						foreach(glob('../dashboard/user/'.$row2["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
@@ -191,7 +190,7 @@ require_once('../admin/header.php');
 						</div>  rating-wrap.// -->
 						</figcaption></a>
 						<div class="bottom-wrap">
-						<div class="product" data-name="'.$row2["name"].'" data-price="'.$row2["price"].'" data-id="'.$row2["id_products"].'">
+						<div class="product product-card" data-name="'.$row2["name"].'" data-price="'.$row2["price"].'" data-id="'.$row2["id_products"].'">
 						<input type="number" class="count float-right form-control" value="1" min="1" />
 						<button class="tiny btn btn-sm btn-primary float-right" id="modalButton">Soltar en mi bolsa</button>
 						</div>	
@@ -228,7 +227,6 @@ require_once('../admin/header.php');
 <?php
 require_once('../admin/footer.php');
 ?>
-<script src="../js/buzina-pagination.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -237,7 +235,6 @@ require_once('../admin/footer.php');
 			var action = 'data';
 			var country = get_filter_text('id_country');
 			var product_type = get_filter_text('id_product_types');
-			var product_order = get_filter_text('product_order');
 
 			$.ajax({
 				url:'action.php',
@@ -268,4 +265,36 @@ require_once('../admin/footer.php');
 			itemsPerPage: 10
 		});
 	});
+</script>
+
+<script type="text/javascript">
+	$(document).on("change", ".form-control-select", function() {
+		var sortingMethod = $(this).val();
+
+		if(sortingMethod == 'l2h') {
+			sortProductsPriceAscending();
+		} else if (sortingMethod == 'h2l') {
+			sortProductsPriceDescending();
+		}
+	});
+
+	function sortProductsPriceAscending() {
+		var gridItems = $('.grid-item');
+
+		gridItems.sort(function(a, b) {
+			return $('.product-card', a).data("price") - $('.product-card', b).data("price");
+		});
+
+		$(".isotope-grid").append(gridItems);
+	}
+
+	function sortProductsPriceDescending() {
+		var gridItems = $('.grid-item');
+
+		gridItems.sort(function(a, b) {
+			return $('.product-card', b).data("price") - $('.product-card', a).data("price");
+		});
+
+		$(".isotope-grid").append(gridItems);
+	}
 </script>

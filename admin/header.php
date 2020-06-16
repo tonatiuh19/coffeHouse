@@ -36,7 +36,6 @@ session_start();
   <link rel="stylesheet" href="../css/icomoon.css">
   <link rel="stylesheet" href="../css/style.css">
   <link href="../css/fontawesome/css/all.css" rel="stylesheet">
-  <script src="package/js-image-zoom.js" type="application/javascript"></script>
   <style type="text/css">
     .alerti {
       position: fixed;
