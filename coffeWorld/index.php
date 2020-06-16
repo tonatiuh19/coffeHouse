@@ -85,7 +85,16 @@ require_once('../admin/header.php');
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-3">
-				<h5>Tipo:</h5>
+				<div class="form-group">
+				    <label for="exampleFormControlSelect1">Ordenar por:</label>
+				    <select class="form-control product-check" id="product_order">
+				      <option value="1">Precio: de más bajo a más alto</option>
+				      <option value="2">Precio: de más alto a más bajo</option>
+				      <option value="3" selected>Lo mas nuevo</option>
+				    </select>
+				  </div>
+				<hr>
+				<label>Tipo:</label>
 				<ul class="list-group">
 					<?php
 					$sqlx = "SELECT id_product_types, product_type FROM product_types WHERE id_product_types NOT IN ( SELECT id_product_types FROM product_types WHERE id_product_types=3 )";
@@ -114,7 +123,7 @@ require_once('../admin/header.php');
 					?>
 				</ul>
 				<hr>
-				<h5 class="">Pais/Region:</h5>
+				<label>Pais/Region:</label>
 				<ul class="list-group">
 					<?php
 					$sqlx = "SELECT id_country, country FROM countries WHERE id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 OR id_country=1)";
@@ -151,6 +160,7 @@ require_once('../admin/header.php');
 
 
 			</div>
+
 			<div class="col-lg-9 " id="result">
 				<?php
 
@@ -227,6 +237,7 @@ require_once('../admin/footer.php');
 			var action = 'data';
 			var country = get_filter_text('id_country');
 			var product_type = get_filter_text('id_product_types');
+			var product_order = get_filter_text('product_order');
 
 			$.ajax({
 				url:'action.php',

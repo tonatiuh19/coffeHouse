@@ -11,6 +11,7 @@ $password = "";
 $dbname = "alanchat_coffe";*/
 
 // Create connection
+global $conn;
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {

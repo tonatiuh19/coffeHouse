@@ -14,10 +14,13 @@ if (isset($_POST["action"])) {
 		$sql2 .= "AND d.id_product_type IN('".$product_type."')";
 	}
 
+	
+
 	$result2 = $conn->query($sql2);
 	$output = '';
 
 	if ($result2->num_rows > 0) {
+		
 		echo '<div class="paginate">';
 		echo '<div class="row items" >';
 		while($row2 = $result2->fetch_assoc()) {
