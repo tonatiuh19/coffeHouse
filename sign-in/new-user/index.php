@@ -16,13 +16,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$lastname = test_input($_POST["last_n"]);
 	$pwd = test_input($_POST["pwd_f"]);
 	
-	if (!isset($_POST['im_busi'])) {
+	/*if (!isset($_POST['im_busi'])) {
         // checkbox was not checked...do something
 		$type = "1";
 	} else {
         // checkbox was checked. Rock on!
 		$type = "2";
-	}
+	}*/
  //
 	$today = date("Y-m-d H:i:s");
 
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			</SCRIPT>");
 	} else {
 		$sql = "INSERT INTO users (email, name, last_name, pwd, type, date)
-		VALUES ('$mail_i', '$name', '$lastname', '$pwd', '$type', '$today')";
+		VALUES ('$mail_i', '$name', '$lastname', '$pwd', '1', '$today')";
 
 		if ($conn->query($sql) === TRUE) {
       sendmail($mail_i, $name);

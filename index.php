@@ -230,10 +230,10 @@ session_start();
   <div class="row">
    <div class="col-md-6 col-lg-4 menu-wrap">
     <div class="heading-menu text-center ftco-animate">
-     <h3>Mexico</h3>
+     <h3>Chiapas</h3>
    </div>
    <?php
-   $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=1 LIMIT 3";
+   $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=106 LIMIT 3";
    $result = $conn->query($sql);
 
    if ($result->num_rows > 0) {
@@ -291,11 +291,11 @@ session_start();
 
 <div class="col-md-6 col-lg-4 menu-wrap products">
   <div class="heading-menu text-center ftco-animate">
-   <h3>Colombia</h3>
+   <h3>Veracruz</h3>
  </div>
 
  <?php
- $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=2 LIMIT 3";
+ $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=129 LIMIT 3";
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {
@@ -468,7 +468,7 @@ session_start();
           <p><b>Escribenos: </b><br>dihola@tienditacafe.com</span></a></p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
 
-            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <!--<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>-->
             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
             <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
           </ul>
@@ -478,10 +478,10 @@ session_start();
         <div class="ftco-footer-widget mb-4">
           <h2 class="ftco-heading-2">¿Tienes alguna pregunta?</h2>
           <ul class="list-unstyled open-hours">
-            <li class="d-flex"><a href="#">Contacto</a></li>
-            <li class="d-flex"><a href="#">Registate aqui si eres proveedor</a></li>
-            <li class="d-flex"><a href="#">Terminos y Condiciones</a></li>
-            <li class="d-flex"><a href="#">Politicas de Privacidad</a></li>
+            <li class="d-flex"><a href="mailto:dihola@tienditacafe.com?Subject=Contacto">Contacto</a></li>
+            <li class="d-flex"><a href="suppliers/">Registate aqui si eres proveedor</a></li>
+            <li class="d-flex"><a href="terminosycondiciones/">Terminos y Condiciones</a></li>
+            <li class="d-flex"><a href="politicasdeprivacidad">Politicas de Privacidad</a></li>
             <li class="d-flex"><a href="yourBusiness/" target="_blank">TienditaCafe para tu negocio</a></li>
           </ul>
         </div>

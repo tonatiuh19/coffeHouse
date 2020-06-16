@@ -57,11 +57,11 @@ if (isset($_SESSION['email'])){
 					<div class="form-group">
 						<input type="text" class="form-control" id="exampleInputPassword1" name="last_n" placeholder="Apellido" required>
 					</div>
-					<div class="form-check">
+					<!--<div class="form-check">
 						<input type="checkbox" class="form-check-input" name="im_busi" id="exampleCheck1">
 						<label class="form-check-label" for="exampleCheck1"><small>Soy Negocio</small></label>
-					</div>
-					<small id="emailHelp" class="form-text text-muted text-center">Al registrarme acepto los <a href="#">Términos y Condiciones</a>, <a href="#">Políticas de Privacidad</a> y <a href="#">Términos de Promociones</a>  de TienditaCafe.</a></small>
+					</div>-->
+					<small id="emailHelp" class="form-text text-muted text-center">Al registrarme acepto los <a href="../terminosycondiciones/" target="_blank">Términos y Condiciones</a> y <a href="../politicasdeprivacidad" target="_blank">Políticas de Privacidad</a><!-- y <a href="#">Términos de Promociones</a>  --> de TienditaCafe.</a></small>
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary">Crear mi cuenta</button>
