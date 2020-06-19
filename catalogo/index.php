@@ -125,7 +125,7 @@ require_once('../admin/header.php');
 				<label>Pais/Region:</label>
 				<ul class="list-group">
 					<?php
-					$sqlx = "SELECT id_country, country FROM countries WHERE id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 OR id_country=1)";
+					$sqlx = "SELECT g.id_country, g.country, COUNT(m.id_country) AS members FROM countries AS g LEFT JOIN products AS m USING(id_country) WHERE g.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 OR id_country=1) GROUP BY g.id_country HAVING members > 0 ORDER BY g.id_country DESC";
 					$resultx = $conn->query($sqlx);
 
 					if ($resultx->num_rows > 0) {

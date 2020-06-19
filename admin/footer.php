@@ -21,7 +21,7 @@
                 <li class="d-flex"><a href="../suppliers/">Registate aqui si eres proveedor</a></li>
                 <li class="d-flex"><a href="../terminosycondiciones/">Terminos y Condiciones</a></li>
                 <li class="d-flex"><a href="../politicasdeprivacidad/">Politicas de Privacidad</a></li>
-                <li class="d-flex"><a href="#">TienditaCafe para tu negocio</a></li>
+                <li class="d-flex"><a href="../yourBusiness/">TienditaCafe para tu negocio</a></li>
               </ul>
             </div>
           </div>

@@ -48,7 +48,9 @@ require_once('../admin/header.php');
 				 
 				</div>
 	        </div>
+
 	    </div>
+	    <p class="form-text text-muted text-center"></p><a href="mailto:dihola@tienditaca.com?Subject=Me%20gustaria%20vender%20cafe" class="btn-success btn">Escribenos aqui</a>
 	</div>
 </section>
 
