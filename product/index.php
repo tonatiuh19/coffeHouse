@@ -245,7 +245,7 @@ if ($result->num_rows > 0) {
 										    <tr>
 										      <th scope="row"><i class="fas fa-globe-americas"></i> Pais:</th>
 										      <td>';
-											if ($id_country=="1") {
+											if ($id_country=="1" || ($id_country>="100" && $id_country<="199")) {
 									      	echo '<i class="mexico flag"></i>';
 									      }elseif ($id_country=="2") {
 									      	echo '<i class="colombia flag"></i>';
@@ -278,7 +278,7 @@ if ($result->num_rows > 0) {
 							    		  <td>'.$row2["quantity"].'x</td>
 									      <th scope="row">'.$row2["name"].'</th>
 									      <td>';
-									      if ($row2["id_country"]=="1") {
+									      if ($row2["id_country"]=="1" || ($id_country>="100" && $id_country<="199")) {
 									      	echo '<i class="mexico flag"></i>';
 									      }elseif ($row2["id_country"]=="2") {
 									      	echo '<i class="colombia flag"></i>';
@@ -302,7 +302,7 @@ if ($result->num_rows > 0) {
 
 
 					<div class="sidebar-box ftco-animate">
-						<h3>Productos similares</h3>
+						<h3>Productos similares: </h3>
 						<ul class="tagcloud m-0 p-0">
 							<?php
 							$sql5 = "SELECT a.name, a.id_country, a.id_products FROM products as a WHERE a.active=1 and a.id_product_type=".$type." LIMIT 4";
@@ -313,7 +313,7 @@ if ($result->num_rows > 0) {
 							  while($row5 = $result5->fetch_assoc()) {
 							    echo '<a href="../product/?product_sku='.$row5["id_products"].'" class="tag-cloud-link">';
 							    echo $row5["name"]." ";
-							    if ($row5["id_country"]=="1") {
+							    if ($row5["id_country"]=="1" || ($id_country>="100" && $id_country<="199")) {
 									      	echo '<i class="mexico flag"></i>';
 									      }elseif ($row5["id_country"]=="2") {
 									      	echo '<i class="colombia flag"></i>';

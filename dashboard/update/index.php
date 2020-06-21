@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$long = test_input($_POST["l_desc"]);
 	$country = test_input($_POST["country"]);
 	$price = test_input($_POST["price"]);
+	$stock = test_input($_POST["stock"]);
 
 	if ($type != 3) {
 		$sabor = test_input($_POST["sabor"]);
@@ -29,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($conn->query($sql) === TRUE) {
 			if ($type=="3") {
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
-				window.location.href='../campaigns/';
-				</SCRIPT>");
+					window.location.href='../campaigns/';
+					</SCRIPT>");
 			}else{
 				$sqlx = "UPDATE product_f_acidez SET id_product_f_acidez_types='".$acidez."' WHERE id_product=".$id."";
 
@@ -41,17 +42,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						$sqlx = "UPDATE product_f_cuerpo SET id_product_f_cuerpo_types='".$cuerpo."' WHERE id_product=".$id."";
 
 						if ($conn->query($sqlx) === TRUE) {
-						  echo ("<SCRIPT LANGUAGE='JavaScript'>
-							window.location.href='../';
-							</SCRIPT>");
+							$sql = "UPDATE stock SET quantity='".$stock."' WHERE id_products=".$id."";
+
+							if ($conn->query($sql) === TRUE) {
+								echo ("<SCRIPT LANGUAGE='JavaScript'>
+									window.location.href='../';
+									</SCRIPT>");
+							} else {
+								echo "Error updating record: " . $conn->error;
+								echo ("<SCRIPT LANGUAGE='JavaScript'>
+									window.location.href='../';
+									</SCRIPT>");
+							}
+
 						} else {
-						  echo "Error updating record: " . $conn->error;
+							echo "Error updating record: " . $conn->error;
 						}
 					} else {
-					  echo "Error updating record: " . $conn->error;
+						echo "Error updating record: " . $conn->error;
 					}
 				} else {
-				  echo "Error updating record: " . $conn->error;
+					echo "Error updating record: " . $conn->error;
 				}
 			}
 			

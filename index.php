@@ -35,6 +35,12 @@ session_start();
   <link rel="stylesheet" href="css/icomoon.css">
   <link rel="stylesheet" href="css/style.css">
   <link href="css/fontawesome/css/all.css" rel="stylesheet">
+  <style type="text/css">
+    .owl-carousel .owl-stage, .owl-carousel.owl-drag .owl-item{
+      -ms-touch-action: auto;
+      touch-action: auto;
+    }
+  </style>
 </head>
 <body>
   <div class="py-1 bg-black top">
@@ -128,7 +134,7 @@ session_start();
       <p>'.$row["description"].'<br></a>
       <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
                                     <input type="hidden" class="count float-right form-control" value="1" min="1" />
-                                    <button class="tiny btn btn-primary p-3 px-xl-4 py-xl-3" id="modalButton">Soltar en mi bolsa</button>
+                                    <button class="tiny btn btn-primary p-3 px-xl-4 py-xl-3" id="modalButton" onclick="alertii()">Soltar en mi bolsa</button>
                                     </div></p>
       </div>
 
@@ -258,7 +264,7 @@ session_start();
                 <p>
                   <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
                   <input type="number" class="count" value="1" min="1" />
-                  <button class="tiny btn btn-success">Soltar en mi bolsa</button>
+                  <button class="tiny btn btn-success" onclick="alertii()">Soltar en mi bolsa</button>
                   </div>
                 </p>
               </div>
@@ -319,7 +325,7 @@ session_start();
                 <p>
                   <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
                   <input type="number" class="count" value="1" min="1" />
-                  <button class="tiny btn btn-success">Soltar en mi bolsa</button>
+                  <button class="tiny btn btn-success" onclick="alertii()">Soltar en mi bolsa</button>
                   </div>
                 </p>
               </div>
@@ -368,7 +374,7 @@ session_start();
                 <p>
                   <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
                   <input type="number" class="count" value="1" min="1" />
-                  <button class="tiny btn btn-success">Soltar en mi bolsa</button>
+                  <button class="tiny btn btn-success" onclick="alertii()">Soltar en mi bolsa</button>
                   </div>
 
                 </p>
@@ -576,7 +582,25 @@ session_start();
 <script src="js/scrollax.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'></script>
 <script src="js/main.js"></script>
-
-
 </body>
 </html>
+
+<div class="alert alert-success alert-dismissible fade show alerti" role="alert" id="passwordsNoMatchRegister">
+  <strong>¡Añadido!</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<script type="text/javascript">
+  function alertii(){
+    $('#passwordsNoMatchRegister').show();
+    setTimeout(closeAlert, 1000);
+  }
+
+  function closeAlert(){
+    $('#passwordsNoMatchRegister').hide();
+  }
+  $(document).ready(function(){
+    $('#passwordsNoMatchRegister').hide();
+  });
+</script>

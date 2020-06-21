@@ -127,11 +127,33 @@
         });
       });
 
-      $("#modalButton").click(function(){
-            $("#moo").addClass('show') //Shows Bootstrap alert
-            //alert("hola");
-      })
+      $(document).ready(function(){
+          $('#prdAlert').click(function(){
+              $('#moo').show()
+          }) 
+      });
     </script>
     
   </body>
 </html>
+
+<div class="alert alert-success alert-dismissible fade show alerti" role="alert" id="passwordsNoMatchRegister">
+  <strong>¡Añadido!</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#passwordsNoMatchRegister').hide();
+  });
+  function alertii(){
+    $('#passwordsNoMatchRegister').show();
+    setTimeout(closeAlert, 1000);
+  }
+
+  function closeAlert(){
+    $('#passwordsNoMatchRegister').hide();
+  }
+</script>
+

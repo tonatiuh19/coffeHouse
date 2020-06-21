@@ -44,6 +44,12 @@ session_start();
       z-index: 1000;
     }
   </style>
+  <style type="text/css">
+    .owl-carousel .owl-stage, .owl-carousel.owl-drag .owl-item{
+      -ms-touch-action: auto;
+      touch-action: auto;
+    }
+  </style>
 </head>
 <body>
   <div class="py-1 bg-black top">
@@ -100,12 +106,6 @@ session_start();
       </div>
     </div>
   </nav>
-
-  <div id="moo" class="alert alert-success alert-dismissible fade alerti" role="alert" auto-close="3000">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-    </button>
-    Añadido
-  </div>
 
   <!-- END nav -->
 

@@ -146,9 +146,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							<div class="form-group">
 								<label for="exampleInputEmail1">Precio:</label>
 								<input type="text" class="form-control" id="exampleInputEmail1" name="price" aria-describedby="emailHelp" value="'.$row["price"].'" required>
-							</div>';
-							if ($row["id_product_type"]!=3) {
-								echo '<div class="form-group">
+								</div>';
+
+								$sqls = "SELECT quantity FROM stock WHERE id_products=".$id."";
+								$results = $conn->query($sqls);
+
+								if ($results->num_rows > 0) {
+  // output data of each row
+									while($rows = $results->fetch_assoc()) {
+										echo '<div class="form-group">
+								<label for="exampleInputEmail1">Stock:</label>
+								<input type="text" class="form-control" id="exampleInputEmail1" name="stock" aria-describedby="emailHelp" value="'.$rows["quantity"].'" required>
+								</div>';
+									}
+								} else {
+									echo "";
+								}
+
+								if ($row["id_product_type"]!=3) {
+									echo '<div class="form-group">
 									<label for="sel1">¿Que tipo de producto es?</label>
 									<select class="form-control" id="sel1" name="product_type">';
 									$sql2 = "SELECT id_product_types, product_type FROM product_types WHERE id_product_types NOT IN ( SELECT id_product_types FROM product_types WHERE id_product_types = 3 )";

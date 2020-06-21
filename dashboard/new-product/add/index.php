@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$sabor = test_input($_POST["sabor"]);
 	$cuerpo = test_input($_POST["cuerpo"]);
 	$acidez = test_input($_POST["acidez"]);
+	$stock = test_input($_POST["stock"]);
 
 	$today = date("Y-m-d H:i:s");
 	$sql = "INSERT INTO products (name, id_product_type, id_country, date, long_description, description)
@@ -23,41 +24,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$result2 = $conn->query($sql2);
 
 		if ($result2->num_rows > 0) {
-    		
+
 			while($row2 = $result2->fetch_assoc()) {
-				$sql = "INSERT INTO prices (id_products, price, date)
+				$sqlcx = "INSERT INTO prices (id_products, price, date)
 				VALUES ('".$row2["id_products"]."', '".$price."', '".$today."')";
 
-				if ($conn->query($sql) === TRUE) {
-					$sqlx = "INSERT INTO product_f_acidez (value, id_product)
-				VALUES ('".$acidez."', '".$row2["id_products"]."')";
+				if ($conn->query($sqlcx) === TRUE) {
+					$sqlx = "INSERT INTO product_f_acidez (id_product_f_acidez_types, id_product)
+					VALUES ('".$acidez."', '".$row2["id_products"]."')";
 
-				if ($conn->query($sqlx) === TRUE) {
-					$sqly = "INSERT INTO product_f_cuerpo (value, id_product)
-					VALUES ('".$cuerpo."', '".$row2["id_products"]."')";
+					if ($conn->query($sqlx) === TRUE) {
+						$sqly = "INSERT INTO product_f_cuerpo (id_product_f_cuerpo_types, id_product)
+						VALUES ('".$cuerpo."', '".$row2["id_products"]."')";
 
-					if ($conn->query($sqly) === TRUE) {
-						$sqlz = "INSERT INTO product_f_sabor (value, id_product)
-						VALUES ('".$sabor."', '".$row2["id_products"]."')";
+						if ($conn->query($sqly) === TRUE) {
+							$sqlz = "INSERT INTO product_f_sabor (id_product_f_sabor_types, id_product)
+							VALUES ('".$sabor."', '".$row2["id_products"]."')";
 
-						if ($conn->query($sqlz) === TRUE) {
-						  echo ("<SCRIPT LANGUAGE='JavaScript'>
-							window.location.href='../../';
-							</SCRIPT>");
+							if ($conn->query($sqlz) === TRUE) {
+
+								$sqlza = "INSERT INTO stock (id_products, quantity)
+								VALUES ('".$row2["id_products"]."', '".$stock."')";
+
+								if ($conn->query($sqlza) === TRUE) {
+									echo ("<SCRIPT LANGUAGE='JavaScript'>
+										window.location.href='../../';
+										</SCRIPT>");
+								} else {
+									echo "Error: " . $sqlza . "<br>" . $conn->error;
+								}
+
+							} else {
+						  echo "Error: " . $sqlz . "<br>" . $conn->error;
+							}
+
 						} else {
-						  //echo "Error: " . $sql . "<br>" . $conn->error;
+					  echo "Error: " . $sqly . "<br>" . $conn->error;
 						}
-					  
+
 					} else {
-					  //echo "Error: " . $sql . "<br>" . $conn->error;
+				  echo "Error: " . $sqlx . "<br>" . $conn->error;
 					}
-				  
-				} else {
-				  //echo "Error: " . $sql . "<br>" . $conn->error;
-				}
 					
 				} else {
-					echo "Error: " . $sql . "<br>" . $conn->error;
+					echo "Error: " . $sqlcx . "<br>" . $conn->error;
 				}
 			}
 		} else {
