@@ -219,7 +219,8 @@ require_once('../admin/header.php');
 					</div>';
 					echo '</div>';
 				} else {
-					echo "<h3>No hay resultados</h3>Revisa la ortgrafía o usa términos más generales.";
+					echo "<h3>No hay resultados o por el momento no tenemos stock</h3>Revisa la ortgrafía o usa términos más generales.";
+					echo '<p><a href="../coffePack/">Ver Coffe Packs</a></p>';
 				}
 				
 				?>
@@ -227,6 +228,7 @@ require_once('../admin/header.php');
 		</div>
 	</div>
 </section>
+
 
 <?php
 require_once('../admin/footer.php');

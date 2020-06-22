@@ -14,7 +14,8 @@ if (isset($_POST['query'])) {
 			echo '<a href="https://coffehouse.mx/product/?product_sku='.$row["id_products"].'" class="list-group-item list-group-item-action"><i class="far fa-hand-point-right"></i> '.$row["name"].'</a>';
 		}
 	} else {
-		echo '<a href="https://coffehouse.mx/catalogo/" class="list-group-item list-group-item-action"><i class="far fa-hand-point-right"></i> Ver catalogo</a>';
+		echo '<a href="https://tienditacafe.com/catalogo/" class="list-group-item list-group-item-action"><i class="far fa-hand-point-right"></i> Ver catalogo</a>';
+		echo '<a href="https://tienditacafe.com/coffePack/" class="list-group-item list-group-item-action"><i class="far fa-hand-point-right"></i> Ver Coffee Packs</a>';
 	}
 }
 ?>
