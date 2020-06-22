@@ -162,8 +162,12 @@ require_once('../admin/header.php');
 
 			<div class="col-lg-9 " id="result">
 				<?php
-
-				$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.active=1 and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 )";
+				if (isset($_POST['search'])) {
+					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.active=1 and d.name LIKE '%".$_POST['search']."%' and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 )";
+				}else{
+					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.active=1 and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 )";
+				}
+				
 				$result2 = $conn->query($sql2);
 
 				if ($result2->num_rows > 0) {
@@ -215,7 +219,7 @@ require_once('../admin/header.php');
 					</div>';
 					echo '</div>';
 				} else {
-					echo "";
+					echo "<h3>No hay resultados</h3>Revisa la ortgrafía o usa términos más generales.";
 				}
 				
 				?>

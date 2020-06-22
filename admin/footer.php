@@ -116,25 +116,45 @@
   <script src="../js/main.js"></script>
   <script src="../js/paginga.jquery.js"></script> 
   <script type="text/javascript">
-      $(function() {
-        var alert = $('div.alert[auto-close]');
-        alert.each(function() {
-          var that = $(this);
-          var time_period = that.attr('auto-close');
-          setTimeout(function() {
-            that.alert('close');
-          }, time_period);
-        });
+    $(function() {
+      var alert = $('div.alert[auto-close]');
+      alert.each(function() {
+        var that = $(this);
+        var time_period = that.attr('auto-close');
+        setTimeout(function() {
+          that.alert('close');
+        }, time_period);
+      });
+    });
+
+    $(document).ready(function(){
+      $('#prdAlert').click(function(){
+        $('#moo').show()
+      }) 
+    });
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#search").keyup(function(){     
+        var searchText = $(this).val();
+        if (searchText != '') {
+          $.ajax({
+            url: '../admin/action_search.php',
+            method: 'post',
+            data:{query:searchText},
+            success:function(response){
+              $("#show-list").html(response);
+            }
+          });
+        }else{
+          $("#show-list").html('');
+        }
       });
 
-      $(document).ready(function(){
-          $('#prdAlert').click(function(){
-              $('#moo').show()
-          }) 
-      });
-    </script>
-    
-  </body>
+    });
+  </script>
+
+</body>
 </html>
 
 <div class="alert alert-success alert-dismissible fade show alerti" role="alert" id="passwordsNoMatchRegister">

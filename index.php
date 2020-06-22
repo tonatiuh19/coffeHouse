@@ -68,12 +68,34 @@ session_start();
    </button>
 
    <div class="collapse navbar-collapse" id="ftco-nav">
+
      <ul class="navbar-nav ml-auto">
-      <li class="nav-item <!--active-->"><a href="coffePack/" class="nav-link">CoffePacks</a></li>
-      <!--<li class="nav-item"><a href="yourBusiness/" class="nav-link">Para tu Negocio</a></li>-->
-      <li class="nav-item"><a href="catalogo/" class="nav-link"><i class="fas fa-book-open"></i> Catalogo</a></li>
-      <li class="nav-item"><a href="suscribete/" class="nav-link">Suscribete</a></li>
-      <li class="nav-item"><a data-toggle="modal" href="#myCart" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i><span id="countCart"></span></a></li>
+      <li class="nav-item">
+
+        <div class="row">
+          <div class="col-sm-12"><form class="form-inline" action="catalogo/" method="post">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Buscar..." aria-label="Username" id="search" name="search" aria-describedby="basic-addon1" autocomplete="off">
+              <div class="input-group-prepend">
+                <button type="submit" class="input-group-text btn btn-primary" id="basic-addon1" ><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-sm-3" style="position: absolute; top:100%;">
+          <div class="list-group" id="show-list">
+          </div>
+        </div>
+      </div>
+
+
+    </li>
+
+    <li class="nav-item <!--active-->"><a href="coffePack/" class="nav-link">CoffePacks</a></li>
+    <!--<li class="nav-item"><a href="yourBusiness/" class="nav-link">Para tu Negocio</a></li>-->
+    <li class="nav-item"><a href="catalogo/" class="nav-link"><i class="fas fa-book-open"></i> Catalogo</a></li>
+    <li class="nav-item"><a href="suscribete/" class="nav-link">Suscribete</a></li>
+    <li class="nav-item"><a data-toggle="modal" href="#myCart" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i><span id="countCart"></span></a></li>
       <?php
       if (isset($_SESSION['email'])){
 
@@ -109,7 +131,9 @@ session_start();
     </ul>
   </div>
 </div>
+
 </nav>
+
 <!-- END nav -->
 
 <section class="home-slider owl-carousel js-fullheight">
@@ -582,6 +606,29 @@ session_start();
 <script src="js/scrollax.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js'></script>
 <script src="js/main.js"></script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#search").keyup(function(){     
+      var searchText = $(this).val();
+      if (searchText != '') {
+        $.ajax({
+          url: 'admin/action_search.php',
+          method: 'post',
+          data:{query:searchText},
+          success:function(response){
+            $("#show-list").html(response);
+          }
+        });
+      }else{
+        $("#show-list").html('');
+      }
+    });
+
+  });
+</script>
+
 </body>
 </html>
 
@@ -604,3 +651,4 @@ session_start();
     $('#passwordsNoMatchRegister').hide();
   });
 </script>
+
