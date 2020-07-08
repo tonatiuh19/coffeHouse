@@ -49,7 +49,7 @@ require_once('../admin/header.php');
 	<div class="container">
 		<div class="row">
 			<?php
-			$sql = "SELECT d.id_products, e.price, d.name, d.description FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=3 and d.active=1";
+			$sql = "SELECT d.id_products, e.price, d.name, d.description, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.id_product_type=3 and d.active=1";
 			$result = $conn->query($sql);
 
 			if ($result->num_rows > 0) {
@@ -63,7 +63,7 @@ require_once('../admin/header.php');
 									              }
 												echo '"></div></a>
 												<a href="../product/?product_sku='.$row["id_products"].'"><figcaption class="info-wrap">
-														<h4 class="title">'.$row["name"].'</h4>
+														<h4 class="title">'.$row["name"].' <small><br>Disponible: <b>'.$row["quantity"].'</b></small></h4>
 														<p class="desc">'.$row["description"].'</p>
 														<!--<div class="rating-wrap">
 															<div class="label-rating">132 reviews</div>
@@ -72,9 +72,13 @@ require_once('../admin/header.php');
 												</figcaption></a>
 												<div class="bottom-wrap">
 													  <div class="product" data-name="'.$row["name"].'" data-price="'.$row["price"].'" data-id="'.$row["id_products"].'">
-									                  <input type="number" class="count float-right form-control" value="1" min="1" />
-									                  <button class="tiny btn btn-sm btn-primary float-right" onclick="alertii()">Soltar en mi bolsa</button>
-									                  </div>	
+									                  <input type="number" class="count float-right form-control" value="1" min="1" max="'.$row["quantity"].'" />';
+									                  if($row["quantity"]<="0"){
+									                  	echo '<button class="tiny btn btn-sm btn-secondary float-right" onclick="alertii()" disabled>Agotado por el momento <i class="fas fa-frown-open"></i></button>';
+									                  }else{
+									                  	echo '<button class="tiny btn btn-sm btn-primary float-right" onclick="alertii()">Soltar en mi bolsa</button>';
+									                  }
+									                  echo '</div>	
 													<div class="price-wrap h5">
 													';
 													$percentage = $row["price"]+20;

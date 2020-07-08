@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 									  </thead>
 									  <tbody>
 									  ';
-									  $sql = "SELECT b.id_carts, b.id_products, b.quantity, b.id_orders, e.price, d.name FROM carts as b INNER JOIN orders as c on c.id_orders=b.id_orders INNER JOIN products as d on d.id_products=b.id_products INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE c.id_orders=".$cart."";
+									  $sql = "SELECT b.id_carts, b.id_products, b.quantity, b.id_orders, e.price, d.name, d.id_product_type FROM carts as b INNER JOIN orders as c on c.id_orders=b.id_orders INNER JOIN products as d on d.id_products=b.id_products INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE c.id_orders=".$cart."";
 										$result = $conn->query($sql);
 
 										if ($result->num_rows > 0) {
@@ -90,6 +90,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 													      <td>'.$row["quantity"].'</td>
 													      <td>'.$row["price"].'</td>
 													    </tr>';
+												$sqlj = "UPDATE stock SET quantity = quantity - ".$row["quantity"]." WHERE id_products='".$row["id_products"]."'";
+
+												if ($conn->query($sqlj) === TRUE) {
+												  //echo "Record updated successfully";
+													if ($row["id_product_type"]=="3") {
+														$sqly = "SELECT id_products, quantity FROM campaigns_product WHERE id_campaign='".$row["id_products"]."'";
+														$resulty = $conn->query($sqly);
+
+														if ($resulty->num_rows > 0) {
+														  // output data of each row
+														  while($rowy = $resulty->fetch_assoc()) {
+														  	$quant = 0;
+														  	$quant = $rowy["quantity"]*$row["quantity"];
+														    $sqlz = "UPDATE stock SET quantity = quantity - ".$quant." WHERE id_products='".$rowy["id_products"]."'";
+
+															if ($conn->query($sqlz) === TRUE) {
+															  //echo "Record updated successfully";
+															} else {
+															  //echo "Error updating record: " . $conn->error;
+															}
+														  }
+														} else {
+														  echo "0 results";
+														}
+													}
+												} else {
+												  //echo "Error updating record: " . $conn->error;
+												}
 										    }
 										} else {
 										    echo "0 results";

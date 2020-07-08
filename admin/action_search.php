@@ -11,7 +11,7 @@ if (isset($_POST['query'])) {
 	if ($result->num_rows > 0) {
   // output data of each row
 		while($row = $result->fetch_assoc()) {
-			echo '<a href="https://coffehouse.mx/product/?product_sku='.$row["id_products"].'" class="list-group-item list-group-item-action"><i class="far fa-hand-point-right"></i> '.$row["name"].'</a>';
+			echo '<a href="https://tienditacafe.com/product/?product_sku='.$row["id_products"].'" class="list-group-item list-group-item-action"><i class="far fa-hand-point-right"></i> '.$row["name"].'</a>';
 		}
 	} else {
 		echo '<a href="https://tienditacafe.com/catalogo/" class="list-group-item list-group-item-action"><i class="far fa-hand-point-right"></i> Ver catalogo</a>';

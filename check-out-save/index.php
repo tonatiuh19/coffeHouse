@@ -3,7 +3,7 @@
 session_start();
 require_once('../admin/cn.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$qty_arr = $_POST["qty"];
 	$product_arr = $_POST['productId'];
 	$todayVisit = date("Y-m-d H:i:s");

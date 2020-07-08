@@ -13,7 +13,7 @@ if(!isset($_GET['product_sku']) || $_GET['product_sku']=='') {
 
 
 require_once('../admin/header.php');
-$sql = "SELECT d.id_products, e.price, d.name, d.description, d.long_description, d.id_country, d.id_product_type FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_products=".$id_product."";
+$sql = "SELECT d.id_products, e.price, d.name, d.description, d.long_description, d.id_country, d.id_product_type, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.id_products=".$id_product."";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -25,6 +25,7 @@ if ($result->num_rows > 0) {
 		$long_description = $row["long_description"];
 		$id_country = $row["id_country"];
 		$type = $row["id_product_type"];
+		$quantity = $row["quantity"];
 	}
 } else {
 	echo "0 results";
@@ -35,7 +36,7 @@ if ($result->num_rows > 0) {
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-end justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-2 bread"><?php echo $name; ?></h1>
+				<h1 class="mb-2 bread"><?php echo $name;?></h1>
 			</div>
 		</div>
 	</div>
@@ -183,10 +184,15 @@ if ($result->num_rows > 0) {
 					<div class="sidebar-box ftco-animate">
 						<div class="bottom-wrap">
 							<?php
+							echo '<h5>Disponible: <b>'.$quantity.'</b></h5>';
 							echo '<div class="product" data-name="'.$name.'" data-price="'.$price.'" data-id="'.$id_product.'">
-								<input type="number" class="count float-right form-control" value="1" min="1" />
-								<button class="tiny btn btn-sm btn-primary float-right">Soltar en mi bolsa</button>
-							</div>	
+								<input type="number" class="count float-right form-control" value="1" min="1" max="'.$quantity.'" />';
+								if ($quantity<="0") {
+									echo '<button class="tiny btn btn-sm btn-secondary float-right" disabled>Agotado por el momento <i class="fas fa-frown-open"></i></button>';
+								}else{
+									echo '<button class="tiny btn btn-sm btn-primary float-right">Soltar en mi bolsa</button>';
+								}
+							echo '</div>	
 							<div class="price-wrap h5">
 								';
 								$percentage = $price+20;
@@ -274,6 +280,7 @@ if ($result->num_rows > 0) {
 									  
 									  </thead><tbody>';
 							  while($row2 = $result2->fetch_assoc()) {
+							  	$id_country = $row2["id_country"];
 							    echo '<tr>
 							    		  <td>'.$row2["quantity"].'x</td>
 									      <th scope="row">'.$row2["name"].'</th>

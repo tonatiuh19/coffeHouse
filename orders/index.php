@@ -22,7 +22,7 @@ if (!isset($_SESSION['email'])){
     <div class="row">
         <div class="col-sm-12">
 		<?php
-		$sql = "SELECT a.id_orders, a.id_adress, a.date, a.complete, b.street, b.number, b.cp, b.colony, b.city, a.track_id FROM orders as a INNER JOIN adresses as b on b.id_adresses=a.id_adress WHERE a.complete <> '0' AND a.email_user='".$_SESSION['email']."'";
+		$sql = "SELECT a.id_orders, a.id_adress, a.date, a.complete, b.street, b.number, b.cp, b.colony, b.city, a.track_id FROM orders as a INNER JOIN adresses as b on b.id_adresses=a.id_adress WHERE a.complete <> '0' AND a.email_user='".$_SESSION['email']."' ORDER by a.date DESC";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {

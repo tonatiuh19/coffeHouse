@@ -122,6 +122,12 @@ require_once('../admin/header.php');
 					?>
 				</ul>
 				<hr>
+				<!--<div id="">
+					<label>Sabor y Aroma:</label>
+					<label>Cuerpo:</label>
+					<label>Acidez:</label>
+				</div>
+				<hr>-->
 				<label>Pais/Region:</label>
 				<ul class="list-group">
 					<?php
@@ -158,14 +164,15 @@ require_once('../admin/header.php');
 				<hr>
 
 
+
 			</div>
 
 			<div class="col-lg-9 " id="result">
 				<?php
 				if (isset($_POST['search'])) {
-					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.active=1 and d.name LIKE '%".$_POST['search']."%' and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 )";
+					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.active=1 and d.name LIKE '%".$_POST['search']."%' and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 ) ORDER BY y.quantity desc";
 				}else{
-					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.active=1 and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 )";
+					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.active=1 and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 ) ORDER BY y.quantity desc ";
 				}
 				
 				$result2 = $conn->query($sql2);
@@ -184,8 +191,7 @@ require_once('../admin/header.php');
 						}
 						echo '"></div>
 						<figcaption class="info-wrap">
-						<h4 class="title">'.$row2["name"].'';
-
+						<h4 class="title">'.$row2["name"].' <small><br>Disponible: <b>'.$row2["quantity"].'</b></small>';
 						echo '</h4>
 						<p class="desc">'.$row2["description"].'</p>
 						<!--<div class="rating-wrap">
@@ -195,9 +201,14 @@ require_once('../admin/header.php');
 						</figcaption></a>
 						<div class="bottom-wrap">
 						<div class="product product-card" data-name="'.$row2["name"].'" data-price="'.$row2["price"].'" data-id="'.$row2["id_products"].'">
-						<input type="number" class="count float-right form-control" value="1" min="1" />
-						<button class="tiny btn btn-sm btn-primary float-right" onclick="alertii()">Soltar en mi bolsa</button>
-						</div>	
+						<input type="number" class="count float-right form-control" value="1" min="1" max="'.$row2["quantity"].'" />';
+						if ($row2["quantity"]<="0") {
+							echo '<button class="tiny btn btn-sm btn-secondary float-right" onclick="alertii()" disabled>Agotado por el momento <i class="fas fa-frown-open"></i></button>';
+						}else{
+							echo '<button class="tiny btn btn-sm btn-primary float-right" onclick="alertii()">Soltar en mi bolsa</button>';
+						}
+						
+						echo '</div>	
 						<div class="price-wrap h5">
 						';
 						$percentage = $row2["price"]+20;
@@ -207,8 +218,6 @@ require_once('../admin/header.php');
 						</figure>
 						</div>';
 					}
-
-
 					echo '</div>';
 					echo '<div class="pager">
 					<div class="firstPage">&laquo;</div>

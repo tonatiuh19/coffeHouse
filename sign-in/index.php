@@ -19,7 +19,7 @@ if (isset($_SESSION['email'])){
 <link rel="stylesheet" href="css/signin.css">
 <section class="ftco-section bg-light">
 	<form class="form-signin" method="post" action="log-in/">
-		<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+		
 		<h1 class="h3 mb-3 font-weight-normal">Inicia Sesion</h1>
 		<label for="inputEmail" class="sr-only">Correo Electronico</label>
 		<input type="email" id="inputEmail" class="form-control" name="email_i" placeholder="Correo Electronico" required autofocus>

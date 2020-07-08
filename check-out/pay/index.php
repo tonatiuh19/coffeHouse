@@ -27,10 +27,10 @@ if ($_POST["payType"]=="1") {
 		//Openpay::setProductionMode(false);
 		$openpay = Openpay::getInstance('my5osdjarjverf8pvgd7', 'sk_9252628a92d04854b9602f975da5da78');
 		$charge = $openpay->charges->create($chargeData);
-		echo $charge->id;
-		echo "<br>";
-		echo $charge->status;
-		echo "<br>";
+		$charge->id;
+		//echo "<br>";
+		$charge->status;
+		//echo "<br>";
 
 		$status=1;
 	} catch (OpenpayApiTransactionError $e) {
