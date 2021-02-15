@@ -260,10 +260,10 @@ require_once('admin/cn.php');
   <div class="row">
    <div class="col-md-6 col-lg-4 menu-wrap">
     <div class="heading-menu text-center ftco-animate">
-     <h3>Chiapas</h3>
+     <h3>Extranjero</h3>
    </div>
    <?php
-   $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=106 LIMIT 3";
+   $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=2 and d.active=1 LIMIT 3";
    $result = $conn->query($sql);
 
    if ($result->num_rows > 0) {
@@ -321,11 +321,11 @@ require_once('admin/cn.php');
 
 <div class="col-md-6 col-lg-4 menu-wrap products">
   <div class="heading-menu text-center ftco-animate">
-   <h3>Veracruz</h3>
+   <h3>Lo nuevo</h3>
  </div>
 
  <?php
- $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=129 LIMIT 3";
+ $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=1 and d.id_country=114 and d.active=1 LIMIT 3";
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {
@@ -333,7 +333,7 @@ require_once('admin/cn.php');
   while($row = $result->fetch_assoc()) {
     echo '<a href="../product/?product_sku='.$row["id_products"].'"><div class="menus d-flex ftco-animate">
               <div class="menu-img img" style="background-image: url(';
-              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png,PNG}', GLOB_BRACE) as $file) {
                 echo $file;
               }
               echo ');"></div>
@@ -366,7 +366,7 @@ require_once('admin/cn.php');
    <h3>Accesorios</h3>
  </div>
  <?php
- $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=2";
+ $sql = "SELECT d.id_products, e.price, d.name FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=2 and d.active=1 LIMIT 3";
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {
@@ -382,7 +382,7 @@ require_once('admin/cn.php');
             </div>';*/
     echo '<a href="../product/?product_sku='.$row["id_products"].'"><div class="menus d-flex ftco-animate">
               <div class="menu-img img" style="background-image: url(';
-              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png,PNG}', GLOB_BRACE) as $file) {
                 echo $file;
               }
               echo ');"></div>
@@ -461,27 +461,27 @@ require_once('admin/cn.php');
  <div class="container-fluid px-0">
   <div class="row no-gutters">
    <div class="col-md">
-    <a href="#" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-1.jpg);">
+    <a href="https://www.instagram.com/tienditacafe/" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-1.jpg);">
      <span class="ion-logo-instagram"></span>
    </a>
  </div>
  <div class="col-md">
-  <a href="#" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-2.jpg);">
+  <a href="https://www.instagram.com/tienditacafe/" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-2.jpg);">
    <span class="ion-logo-instagram"></span>
  </a>
 </div>
 <div class="col-md">
-  <a href="#" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-3.jpg);">
+  <a href="https://www.instagram.com/tienditacafe/" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-3.jpg);">
    <span class="ion-logo-instagram"></span>
  </a>
 </div>
 <div class="col-md">
-  <a href="#" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-4.jpg);">
+  <a href="https://www.instagram.com/tienditacafe/" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-4.jpg);">
    <span class="ion-logo-instagram"></span>
  </a>
 </div>
 <div class="col-md">
-  <a href="#" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-5.jpg);">
+  <a href="https://www.instagram.com/tienditacafe/" class="instagram img d-flex align-items-center justify-content-center" style="background-image: url(images/insta-5.jpg);">
    <span class="ion-logo-instagram"></span>
  </a>
 </div>
@@ -521,19 +521,19 @@ require_once('admin/cn.php');
        <div class="ftco-footer-widget mb-4">
         <h2 class="ftco-heading-2">Instagram</h2>
         <div class="thumb d-sm-flex">
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-1.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-1.jpg);">
           </a>
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-2.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-2.jpg);">
           </a>
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-3.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-3.jpg);">
           </a>
         </div>
         <div class="thumb d-flex">
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-4.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-4.jpg);">
           </a>
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-5.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-5.jpg);">
           </a>
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-6.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-6.jpg);">
           </a>
         </div>
       </div>
