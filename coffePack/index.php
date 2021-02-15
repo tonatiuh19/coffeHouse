@@ -58,7 +58,7 @@ require_once('../admin/header.php');
 									echo '<div class="col-md-4">
 											<figure class="card card-product">
 												<a href="../product/?product_sku='.$row["id_products"].'"><div class="img-wrap"><img src="';
-												foreach(glob('../dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+												foreach(glob('../dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png,PNG}', GLOB_BRACE) as $file) {
 									                echo $file;
 									              }
 												echo '"></div></a>

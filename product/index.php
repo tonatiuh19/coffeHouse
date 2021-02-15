@@ -59,7 +59,7 @@ if ($result->num_rows > 0) {
 				<div class="img-wrap d-flex align-items-center justify-content-center">
 					<?php
 						echo '<img src="';
-						foreach(glob('../dashboard/user/'.$id_product.'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+						foreach(glob('../dashboard/user/'.$id_product.'/profile/*.{jpg,pdf,png,PNG}', GLOB_BRACE) as $file) {
 							echo $file;
 						}
 						echo '" width="172">';
@@ -272,7 +272,8 @@ if ($result->num_rows > 0) {
 						}elseif ($type == '2') {
 							# code...
 						}elseif ($type == '3') {
-							$sql2 = "SELECT b.name, b.id_country, a.quantity FROM campaigns_product as a INNER JOIN products as b on b.id_products=a.id_products WHERE a.id_campaign=".$id_product."";
+							$sql2 = "SELECT a.id_campaigns_products, a.id_products, a.quantity, b.name, b.id_country FROM campaigns_product as a INNER JOIN products as b on b.id_products=a.id_products WHERE b.active=1 AND a.id_campaign=".$id_product."";
+							
 							$result2 = $conn->query($sql2);
 							echo "Incluye:";
 							if ($result2->num_rows > 0) {

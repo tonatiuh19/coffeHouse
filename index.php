@@ -271,7 +271,7 @@ require_once('admin/cn.php');
     while($row = $result->fetch_assoc()) {
      echo '<div class="menus d-flex ftco-animate">
               <div class="menu-img img" style="background-image: url(';
-              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+              foreach(glob('dashboard/user/'.$row["id_products"].'/profile/*.{jpg,pdf,png,PNG}', GLOB_BRACE) as $file) {
                 echo $file;
               }
               echo ');"></div>

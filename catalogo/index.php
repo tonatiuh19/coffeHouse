@@ -170,9 +170,9 @@ require_once('../admin/header.php');
 			<div class="col-lg-9 " id="result">
 				<?php
 				if (isset($_POST['search'])) {
-					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.active=1 and d.name LIKE '%".$_POST['search']."%' and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 ) ORDER BY y.quantity desc";
+					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.active=1 and y.quantity>0 and d.name LIKE '%".$_POST['search']."%' and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 ) ORDER BY y.quantity desc";
 				}else{
-					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.active=1 and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 ) ORDER BY y.quantity desc ";
+					$sql2 = "SELECT d.id_products, e.price, d.name, d.description, d.id_country, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.active=1 and y.quantity>0 and d.id_country NOT IN ( SELECT id_country FROM countries WHERE id_country=10 ) ORDER BY y.quantity desc ";
 				}
 				
 				$result2 = $conn->query($sql2);
@@ -186,7 +186,7 @@ require_once('../admin/header.php');
 						echo '<div class="col-md-4 grid-item">
 						<figure class="card card-product">
 						<a href="../product/?product_sku='.$row2["id_products"].'"><div class="img-wrap"><img src="';
-						foreach(glob('../dashboard/user/'.$row2["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+						foreach(glob('../dashboard/user/'.$row2["id_products"].'/profile/*.{jpg,pdf,png,PNG}', GLOB_BRACE) as $file) {
 							echo $file;
 						}
 						echo '"></div>
