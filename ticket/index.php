@@ -1,6 +1,4 @@
-
 <?php
-// define variables and set to empty values
 session_start();
 require_once('../admin/cn.php');
 
@@ -38,9 +36,6 @@ function test_input($data) {
 
 
 ?>
-
-
-<!doctype html>
 <html>
 <head>
 <meta charset="UTF-8">

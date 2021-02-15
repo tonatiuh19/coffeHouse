@@ -72,7 +72,7 @@ if (!isset($_SESSION['email'])){
 				  }
 				} else {
 				  echo '<td><!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#factura'.$row["id_orders"].'">
+					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#factura'.$row["id_orders"].'">
 					  Solicitar
 					</button>
 

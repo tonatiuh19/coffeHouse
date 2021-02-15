@@ -1,6 +1,6 @@
 <?php
-require_once('admin/cn.php');
 session_start();
+require_once('admin/cn.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -495,12 +495,12 @@ session_start();
       <div class="col-md-6 col-lg-4">
         <div class="ftco-footer-widget mb-4">
           <h2 class="ftco-heading-2">Acerca de Nosotros</h2>
-          <p><b>Escribenos: </b><br>dihola@tienditacafe.com</span></a></p>
+          <p><b>Escribenos: </b><br><a href="mailto:dihola@tienditacafe.com?Subject=Contacto">dihola@tienditacafe.com</span></a></p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
 
             <!--<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>-->
-            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            <li class="ftco-animate"><a href="https://www.facebook.com/Tiendita-Caf%C3%A9-114440876982576" target="_blank"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="https://www.instagram.com/tienditacafe/?hl=es-la" target="_blank"><span class="icon-instagram"></span></a></li>
           </ul>
         </div>
       </div>
@@ -510,8 +510,8 @@ session_start();
           <ul class="list-unstyled open-hours">
             <li class="d-flex"><a href="mailto:dihola@tienditacafe.com?Subject=Contacto">Contacto</a></li>
             <li class="d-flex"><a href="suppliers/">Registate aqui si eres proveedor</a></li>
-            <li class="d-flex"><a href="terminosycondiciones/">Terminos y Condiciones</a></li>
-            <li class="d-flex"><a href="politicasdeprivacidad">Politicas de Privacidad</a></li>
+            <li class="d-flex"><a href="terminosycondiciones/" target="_blank">Terminos y Condiciones</a></li>
+            <li class="d-flex"><a href="politicasdeprivacidad" target="_blank">Politicas de Privacidad</a></li>
             <li class="d-flex"><a href="yourBusiness/" target="_blank">TienditaCafe para tu negocio</a></li>
           </ul>
         </div>
