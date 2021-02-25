@@ -521,19 +521,19 @@ require_once('admin/cn.php');
        <div class="ftco-footer-widget mb-4">
         <h2 class="ftco-heading-2">Instagram</h2>
         <div class="thumb d-sm-flex">
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-1.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-1.jpg);">
           </a>
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-2.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-2.jpg);">
           </a>
           <a href="#" class="thumb-menu img" style="background-image: url(images/insta-3.jpg);">
           </a>
         </div>
         <div class="thumb d-flex">
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-4.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-4.jpg);">
           </a>
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-5.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-5.jpg);">
           </a>
-          <a href="#" class="thumb-menu img" style="background-image: url(images/insta-6.jpg);">
+          <a href="https://www.instagram.com/tienditacafe/" class="thumb-menu img" style="background-image: url(images/insta-6.jpg);">
           </a>
         </div>
       </div>
