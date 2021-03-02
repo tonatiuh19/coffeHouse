@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, GET, POST");
 
 
-
+require_once('../../admin/cn.php');
 $response = array();
 
 if($_FILES['avatar'])
@@ -30,10 +30,20 @@ if($_FILES['avatar'])
     {
         if (move_uploaded_file($_FILES['avatar']['tmp_name'], $newname))
         {
-            $response = array(
-                "status" => "1",
-                "message" => "File uploaded!"
-            );
+            $sql = "UPDATE products SET active=3 WHERE id_products=".$idProduct."";
+
+            if ($conn->query($sql) === TRUE) {
+                $response = array(
+                    "status" => "1",
+                    "message" => "File uploaded!"
+                );
+            } else {
+                $response = array(
+                    "status" => "2",
+                    "message" => "Error updating record: " . $conn->error
+                );
+            }
+            
         }else{
             $response = array(
                 "status" => "2",
