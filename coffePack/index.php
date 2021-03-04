@@ -49,7 +49,7 @@ require_once('../admin/header.php');
 	<div class="container">
 		<div class="row">
 			<?php
-			$sql = "SELECT d.id_products, e.price, d.name, d.description, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN stock as y on y.id_products=d.id_products WHERE d.id_product_type=3 and d.active=1";
+			$sql = "SELECT d.id_products, e.price, d.name, d.description, y.quantity FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products INNER JOIN (SELECT a.id_stock, a.id_products, a.quantity FROM stock AS a WHERE date = ( SELECT MAX(date) FROM stock AS b WHERE a.id_products = b.id_products )) as y on y.id_products=d.id_products WHERE d.id_product_type=3 and d.active=1";
 			$result = $conn->query($sql);
 
 			if ($result->num_rows > 0) {

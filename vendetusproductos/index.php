@@ -6,13 +6,17 @@ require_once('../admin/header.php');
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-end justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<h1 class="mb-2 bread">Nuevo Proveedor</h1>
+				<h1 class="mb-2 bread">Incrementa tus ventas</h1>
 			</div>
 		</div>
 	</div>
 </section>
 <section class="ftco-section ">
 	<div class="container">
+		<div class="row text-center p-5">
+			<div class="col-sm-12"><h4>¿Ya tienes cuenta?</h4></div>
+			<div class="col-sm-12"><a class="btn btn-primary" href="../proveedores/">Ingresa al portal</a></div>
+		</div>
 		<div class="row">
 			<div class="col-sm-12"><h4><i class="far fa-hand-point-right"></i> ¿Te gustaria vender tus productos con nosotros? Registrate aqui:</h4></div>
 		</div>

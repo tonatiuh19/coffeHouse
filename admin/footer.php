@@ -18,7 +18,7 @@
               <h2 class="ftco-heading-2">¿Tienes alguna pregunta?</h2>
               <ul class="list-unstyled open-hours">
                 <li class="d-flex"><a href="mailto:dihola@tienditacafe.com?Subject=Contacto">Contacto</a></li>
-                <li class="d-flex"><a href="../suppliers/">Registate aqui si eres proveedor</a></li>
+                <li class="d-flex"><a href="../vendetusproductos/">Registate aqui si eres proveedor</a></li>
                 <li class="d-flex"><a href="../terminosycondiciones/" target="_blank">Terminos y Condiciones</a></li>
                 <li class="d-flex"><a href="../politicasdeprivacidad/" target="_blank">Politicas de Privacidad</a></li>
                 <li class="d-flex"><a href="../yourBusiness/">TienditaCafe para tu negocio</a></li>

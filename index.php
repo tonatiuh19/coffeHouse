@@ -93,7 +93,8 @@ require_once('admin/cn.php');
 
     <li class="nav-item <!--active-->"><a href="coffePack/" class="nav-link">CoffePacks</a></li>
     <!--<li class="nav-item"><a href="yourBusiness/" class="nav-link">Para tu Negocio</a></li>-->
-    <li class="nav-item"><a href="catalogo/" class="nav-link"><i class="fas fa-book-open"></i> Catalogo</a></li>
+    <li class="nav-item"><a href="catalogo/" class="nav-link"></i> Catalogo</a></li>
+    <li class="nav-item"><a href="vendetusproductos/" class="nav-link">Vende con nosotros</a></li>
     <li class="nav-item"><a href="suscribete/" class="nav-link">Suscribete</a></li>
     <li class="nav-item"><a data-toggle="modal" href="#myCart" class="nav-link btn btn-warning btn-sm" data-toggle="tooltip" title="Tu bolsa de compras"><i class="fas fa-shopping-bag fa-1x"></i><span id="countCart"></span></a></li>
       <?php
@@ -107,7 +108,7 @@ require_once('admin/cn.php');
                 <div class="btn-group-vertical">
                   <a href="sign-in/fin.php" class="btn btn-success btn-sm"><i class="fas fa-times-circle"></i> sesion</a>
                   <a href="profile/" class="btn btn-success btn-sm">Mi Perfil</a>
-                  <a href="dashboard/" class="btn btn-success btn-sm">Admin</a>
+                  <a href="proveedores/" class="btn btn-warning btn-sm">Portal proveedores</a>
                 </div>
               </div>';
         }else{
@@ -116,6 +117,7 @@ require_once('admin/cn.php');
               <div id="demo" class="collapse">
                 <div class="btn-group-vertical">
                   <a href="sign-in/fin.php" class="btn btn-success btn-sm"><i class="fas fa-times-circle"></i> sesion</a>
+                  <hr>
                   <a href="profile/" class="btn btn-success btn-sm">Mi Perfil</a>
                   <a href="orders/" class="btn btn-success btn-sm">Mis Pedidos</a>
                   <a href="subscription/" class="btn btn-success btn-sm">Mi Subscripción</a>
@@ -509,7 +511,7 @@ require_once('admin/cn.php');
           <h2 class="ftco-heading-2">¿Tienes alguna pregunta?</h2>
           <ul class="list-unstyled open-hours">
             <li class="d-flex"><a href="mailto:dihola@tienditacafe.com?Subject=Contacto">Contacto</a></li>
-            <li class="d-flex"><a href="suppliers/">Registate aqui si eres proveedor</a></li>
+            <li class="d-flex"><a href="vendetusproductos/">Registate aqui si eres proveedor</a></li>
             <li class="d-flex"><a href="terminosycondiciones/" target="_blank">Terminos y Condiciones</a></li>
             <li class="d-flex"><a href="politicasdeprivacidad" target="_blank">Politicas de Privacidad</a></li>
             <li class="d-flex"><a href="yourBusiness/" target="_blank">TienditaCafe para tu negocio</a></li>
