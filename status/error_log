@@ -1,0 +1,10 @@
+[14-Jun-2020 14:04:16 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home3/alanchat/tienditacafe.com/status/index.php:236
+Stack trace:
+#0 /home3/alanchat/tienditacafe.com/status/index.php(113): sendmailPayment('tonatiuh.gom@gm...', 'Felix Alejandro...', 'Ignacio Lopez R...', '817', '47470', 'San Felipe', 'Lagos de Moreno', 'Jalisco', '6515')
+#1 {main}
+  thrown in /home3/alanchat/tienditacafe.com/status/index.php on line 236
+[14-Jun-2020 14:10:00 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home3/alanchat/tienditacafe.com/status/index.php:236
+Stack trace:
+#0 /home3/alanchat/tienditacafe.com/status/index.php(113): sendmailPayment('tonatiuh.gom@gm...', 'Felix Alejandro...', 'Ignacio Lopez R...', '817', '47470', 'San Felipe', 'Lagos de Moreno', 'Jalisco', '6516')
+#1 {main}
+  thrown in /home3/alanchat/tienditacafe.com/status/index.php on line 236

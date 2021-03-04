@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!getImage.php
+!uploadImage.php
+# etc...
+
+# ...even if they are in subdirectories
+!*/
