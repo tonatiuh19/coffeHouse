@@ -30,7 +30,7 @@ if($_FILES['avatar'])
     {
         if (move_uploaded_file($_FILES['avatar']['tmp_name'], $newname))
         {
-            $sql = "UPDATE products SET active=3 WHERE id_products=".$idProduct."";
+            $sql = "UPDATE products SET active=1 WHERE id_products=".$idProduct."";
 
             if ($conn->query($sql) === TRUE) {
                 $response = array(

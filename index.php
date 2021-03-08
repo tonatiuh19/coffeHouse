@@ -140,7 +140,7 @@ require_once('admin/cn.php');
 
 <section class="home-slider owl-carousel js-fullheight">
   <?php
-  $sql = "SELECT d.id_products, e.price, d.name, d.description, d.long_description FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=3 LIMIT 3";
+  $sql = "SELECT d.id_products, e.price, d.name, d.description, d.long_description FROM products as d INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE d.id_product_type=3 and d.active=1 LIMIT 5";
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
