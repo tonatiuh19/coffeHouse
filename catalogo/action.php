@@ -27,7 +27,7 @@ if (isset($_POST["action"])) {
 			echo '<div class="col-md-4 grid-item">
 			<figure class="card card-product">
 			<a href="../product/?product_sku='.$row2["id_products"].'"><div class="img-wrap"><img src="';
-			foreach(glob('../dashboard/user/'.$row2["id_products"].'/profile/*.{jpg,pdf,png}', GLOB_BRACE) as $file) {
+			foreach(glob('../dashboard/user/'.$row2["id_products"].'/profile/*.{jpg,pdf,png,PNG,JPG,JPEG,jpeg}', GLOB_BRACE) as $file) {
 				echo $file;
 			}
 			echo '"></div>
