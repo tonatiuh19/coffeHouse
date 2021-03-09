@@ -314,7 +314,42 @@ $carrito = 0;
 					<button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fas fa-lock"></i> Generar ticket de Pago</button>
 				</form>
 			</div>
-    		<div class="blue box">Paypal</div>
+    		<div class="blue box">
+				<style>
+					.paypal {
+						padding-bottom: 40px;
+					}
+					.paypal button {
+						display: inline-block;
+						padding: 10px 20px 7px 20px;
+						background-color: #FFC439;
+						border-radius: 5px;
+						border: none;
+						cursor: pointer;
+						width: 215px;
+					}
+					.paypal button:hover {
+						background-color: #f3bb37;
+					}
+				</style>
+				<form name="frm_customer_detail" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
+					<input type='hidden' name='business' value='sb-yptqr1610907@business.example.com'>
+					<input type='hidden' name='item_name' value="<?php echo $carrito;?>"> 
+					<input type='hidden' name='item_number' value="<?php echo $carrito;?>">
+					<input type='hidden' name='amount' value='<?php echo $precioTotal; ?>'> 
+					<input type='hidden' name='currency_code' value='MXN'> 
+					<input type='hidden' name='notify_url' value='https://tienditacafe.com/check-out/paypal/notify.php'>
+					<input type='hidden' name='return' value='https://tienditacafe.com/check-out/paypal/response.php'>
+					<input type="hidden" name="cancel_return" value="https://tienditacafe.com/vuelveaintentar/">
+					<input type="hidden" name="cmd" value="_xclick"> 
+					<input type="hidden" name="order" value="<?php echo $carrito;?>">
+					<div>
+						<div class="paypal">
+							<button type="submit" class="btn-action" name="continue_payment"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo"></button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 

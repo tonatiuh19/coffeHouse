@@ -7,7 +7,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$qty_arr = $_POST["qty"];
 	$product_arr = $_POST['productId'];
 	$todayVisit = date("Y-m-d H:i:s");
-	$correo= $_SESSION["email"];
+	if (isset($_SESSION['email'])){
+		$correo= $_SESSION["email"];
+	}else{
+		echo ("<SCRIPT LANGUAGE='JavaScript'>
+		window.location.href='../sign-in/';
+		</SCRIPT>");
+	}
+	
 	
 	$sql = "INSERT INTO orders (email_user,  date)
 	VALUES ('$correo', '$todayVisit')";
