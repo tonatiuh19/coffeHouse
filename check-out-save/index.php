@@ -31,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			    // do something with $array_one[$key] and $array_two[$key]
 		    		$idProduct = $product_arr[$key];
 		    		$quantity = $qty_arr[$key];
-		    		$sql = "INSERT INTO carts (id_products, quantity, id_orders)
-					VALUES ('$idProduct', '$quantity', '$idOrder')";
+		    		$sql = "INSERT INTO carts (id_products, quantity, id_orders, date)
+					VALUES ('$idProduct', '$quantity', '$idOrder', '$todayVisit')";
 
 
 					if ($conn->query($sql) === TRUE) {

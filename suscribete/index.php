@@ -277,12 +277,12 @@ require_once('../admin/header.php');
 																Credito/Debito
 															</label>
 														</div>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio" name="colorRadio" value="blue">
+														<!--<div class="form-check form-check-inline">
+															<input class="form-check-input" type="radio" name="colorRadio" value="blue" disabled>
 															<label class="form-check-label" for="exampleRadios3">
-																Paypal
+																<span class="text-muted">Paypal (proximamente)</span>
 															</label>
-														</div>
+														</div>-->
 													</div>
 													<hr class="mb-4">
 													<div class="red box">

@@ -69,14 +69,16 @@ $res = trim(end($tokens));
 if (strcmp ($res, "VERIFIED") == 0) {
 	// assign posted variables to local variables
 	
-	echo $item_name = $_POST['item_name'];
-	echo $item_number = $_POST['item_number'];
-	echo $payment_status = $_POST['payment_status'];
-	echo $payment_amount = $_POST['mc_gross'];
-	echo $payment_currency = $_POST['mc_currency'];
+	$item_name = $_POST['item_name'];
+	$item_number = $_POST['item_number'];
+	$payment_status = $_POST['payment_status'];
+	$payment_amount = $_POST['mc_gross'];
+	$payment_currency = $_POST['mc_currency'];
 	$txn_id = $_POST['txn_id'];
 	$receiver_email = $_POST['receiver_email'];
-	echo $payer_email = $_POST['payer_email'];
+	$payer_email = $_POST['payer_email'];
+	$adress = $_POST['custom'];
+	$today = date("Y-m-d H:i:s");
 	
 	// check whether the payment_status is Completed
 	$isPaymentCompleted = false;
@@ -85,14 +87,13 @@ if (strcmp ($res, "VERIFIED") == 0) {
 	}
 
     if($isPaymentCompleted){
-        /*$sql = "INSERT INTO MyGuests (firstname, lastname, email)
-        VALUES ('John', 'Doe', 'john@example.com')";
+		$sql = "UPDATE orders SET complete='1', id_adress='".$adress."', date='".$today."', description='Paypal: ".$payment_status."', track_id='".$txn_id."' WHERE id_orders=".$item_number."";
         
         if (mysqli_query($conn, $sql)) {
-          echo "New record created successfully";
+          //echo "New record created successfully";
         } else {
-          echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }*/
+          //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     }
 	/*$payment_id = $shoppingCart->insertPayment($item_number, $payment_status, $payment_response);
 	

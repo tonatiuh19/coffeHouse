@@ -332,17 +332,19 @@ $carrito = 0;
 						background-color: #f3bb37;
 					}
 				</style>
-				<form name="frm_customer_detail" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
+				<form name="frm_customer_detail" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return validateFormC()">
 					<input type='hidden' name='business' value='sb-yptqr1610907@business.example.com'>
-					<input type='hidden' name='item_name' value="<?php echo $carrito;?>"> 
+					<input type='hidden' name='item_name' value="<?php echo "Orden: ".$carrito;?>"> 
 					<input type='hidden' name='item_number' value="<?php echo $carrito;?>">
 					<input type='hidden' name='amount' value='<?php echo $precioTotal; ?>'> 
-					<input type='hidden' name='currency_code' value='MXN'> 
+					<input type='hidden' name='currency_code' value='MXN'>
 					<input type='hidden' name='notify_url' value='https://tienditacafe.com/check-out/paypal/notify.php'>
-					<input type='hidden' name='return' value='https://tienditacafe.com/check-out/paypal/response.php'>
-					<input type="hidden" name="cancel_return" value="https://tienditacafe.com/vuelveaintentar/">
+					<input type='hidden' name='return' value='https://tienditacafe.com/gracias/'>
+					<input type="hidden" name="cancel_return" value="<?php echo "https://tienditacafe.com/vuelveaintentar/?order=".$carrito;?>">
 					<input type="hidden" name="cmd" value="_xclick"> 
 					<input type="hidden" name="order" value="<?php echo $carrito;?>">
+					<input type="hidden" id="myAdress3" name="custom" value="">
+					<input type="hidden" name="payer_email" value="<?php echo $_SESSION['email'];?>">
 					<div>
 						<div class="paypal">
 							<button type="submit" class="btn-action" name="continue_payment"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo"></button>
@@ -411,6 +413,7 @@ require_once('../admin/footer.php');
 	function adre(e) {
 		document.getElementById("myAdress1").value = e.target.value
 		document.getElementById("myAdress2").value = e.target.value
+		document.getElementById("myAdress3").value = e.target.value
 	}
 
 	function validateFormA() {
@@ -433,5 +436,12 @@ require_once('../admin/footer.php');
 		}
 	}
 
-	
+	function validateFormC() {
+		var a = document.forms["frm_customer_detail"]["custom"].value;
+
+		if (a == null || a == "") {
+			alert("Necesitas escoger un domicilio");
+			return false;
+		}
+	}
 </script>

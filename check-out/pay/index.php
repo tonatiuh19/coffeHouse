@@ -56,29 +56,42 @@ if ($_POST["payType"]=="1") {
 		//echo 'Error on the script: ' . $e->getMessage();
 	}
 
+	echo $_POST["description"];
+	echo $_POST["adres"];
+	echo "Open:".$charge->id;
+	echo "Desc:".$charge->description;
+
 	echo '<form action="../../status/" id="finish" method="post">';
 	if ($status==1) {
 		echo '<input type="hidden" name="stat" value="1">';
 		echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
 		echo '<input type="hidden" name="adress" value="'.$_POST["adres"].'">';
+		echo '<input type="hidden" name="idOpen" value="'.$charge->id.'">';
+		echo '<input type="hidden" name="description" value="'.$charge->description.'">';
 	}elseif ($status==2) {
 		echo '<input type="hidden" name="stat" value="2">';
 		echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+		echo '<input type="hidden" name="description" value="'.$e->getMessage().'">';
 	}elseif ($status==3) {
 		echo '<input type="hidden" name="stat" value="3">';
 		echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+		echo '<input type="hidden" name="description" value="'.$e->getMessage().'">';
 	}elseif ($status==4) {
 		echo '<input type="hidden" name="stat" value="4">';
 		echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+		echo '<input type="hidden" name="description" value="'.$e->getMessage().'">';
 	}elseif ($status==5) {
 		echo '<input type="hidden" name="stat" value="5">';
 		echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+		echo '<input type="hidden" name="description" value="'.$e->getMessage().'">';
 	}elseif ($status==6) {
 		echo '<input type="hidden" name="stat" value="6">';
 		echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+		echo '<input type="hidden" name="description" value="'.$e->getMessage().'">';
 	}else{
 		echo '<input type="hidden" name="stat" value="0">';
 		echo '<input type="hidden" name="cart" value="'.$_POST["description"].'">';
+		echo '<input type="hidden" name="description" value="'.$e->getMessage().'">';
 	}
 	echo '</form>';
 	echo '<script type="text/javascript">

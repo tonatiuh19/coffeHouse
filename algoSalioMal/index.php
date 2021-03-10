@@ -8,11 +8,7 @@ require '../admin/mailer/src/Exception.php';
 require '../admin/mailer/src/PHPMailer.php';
 require '../admin/mailer/src/SMTP.php';
 require_once('../admin/header.php');
-if(!isset($_GET['order']) || $_GET['order']=='') {
-	echo ("<SCRIPT LANGUAGE='JavaScript'>
-		window.location.href='../';
-		</SCRIPT>");
-}else{
+if (true) {
 	?>
 	<section class="hero-wrap hero-wrap-2" data-stellar-background-ratio="0.5" style="background-image: url('../images/bg_4.jpg');">
 		<div class="overlay"></div>
@@ -51,6 +47,10 @@ if(!isset($_GET['order']) || $_GET['order']=='') {
 	</section>
 	<?php
 	
+}else{
+	echo ("<SCRIPT LANGUAGE='JavaScript'>
+		window.location.href='../../';
+		</SCRIPT>");
 }
 
 require_once('../admin/footer.php');

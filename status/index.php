@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$status = test_input($_POST["stat"]);
 	$cart = test_input($_POST["cart"]);
 	$adress = test_input($_POST["adress"]);
-
-
+	$description = test_input($_POST["description"]);
+	$today = date("Y-m-d H:i:s");
 	
 	?>
 	<section class="hero-wrap hero-wrap-2" data-stellar-background-ratio="0.5" style="background-image: url('../images/bg_4.jpg');">
@@ -24,32 +24,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					<?php
 					//$status=1;
 					if ($status==1) {
+						$idOpen = test_input($_POST["idOpen"]);
 						echo '<h1 class="mb-2 bread">Gracias por tu compra</h1>
 								<script type="text/javascript">
 									window.localStorage.clear();
 								</script>';
-						$sql = "UPDATE orders SET complete='1', id_adress='".$adress."' WHERE id_orders=".$cart."";
-
-						if ($conn->query($sql) === TRUE) {
-						    //echo "Record updated successfully";
-						} else {
-						    //echo "Error updating record: " . $conn->error;
-						}
+						$sql = "UPDATE orders SET complete='1', id_adress='".$adress."', date='".$today."', description='".$description."', track_id='".$idOpen."' WHERE id_orders=".$cart."";
 					}elseif ($status==2) {
+						$sql = "UPDATE orders SET complete='2', description='".$description."' WHERE id_orders=".$cart."";
 						echo '<h1 class="mb-2 bread">Tu pago ha sido declinado</h1>';
 					}elseif ($status==3) {
+						$sql = "UPDATE orders SET complete='3', description='".$description."' WHERE id_orders=".$cart."";
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
 					}elseif ($status==4) {
+						$sql = "UPDATE orders SET complete='3', description='".$description."' WHERE id_orders=".$cart."";
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
 					}elseif ($status==5) {
+						$sql = "UPDATE orders SET complete='3', description='".$description."' WHERE id_orders=".$cart."";
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
 					}elseif ($status==6) {
+						$sql = "UPDATE orders SET complete='3', description='".$description."' WHERE id_orders=".$cart."";
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
 					}elseif ($status==10) {
-						echo '<h1 class="mb-2 bread">Tu subscripcion esta completa</h1>
-								';
+						$sql = "UPDATE orders SET complete='3' WHERE id_orders=0";
+						echo '<h1 class="mb-2 bread">Tu subscripcion esta completa</h1>';
 					}else{
+						$sql = "UPDATE orders SET complete='4', description='".$description."' WHERE id_orders=".$cart."";
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
+					}
+
+
+					if ($conn->query($sql) === TRUE) {
+						//echo "Record updated successfully";
+					} else {
+						//echo "Error updating record: " . $conn->error;
 					}
 					?>
 				</div>
@@ -79,7 +87,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 									  </thead>
 									  <tbody>
 									  ';
-									  $sql = "SELECT b.id_carts, b.id_products, b.quantity, b.id_orders, e.price, d.name, d.id_product_type FROM carts as b INNER JOIN orders as c on c.id_orders=b.id_orders INNER JOIN products as d on d.id_products=b.id_products INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products WHERE c.id_orders=".$cart."";
+									  	$sql = "SELECT b.id_carts, b.id_products, b.quantity, b.id_orders, e.price, d.name, d.id_product_type, y.id_stock, y.quantity as 'stock' FROM carts as b 
+										  INNER JOIN orders as c on c.id_orders=b.id_orders 
+										  INNER JOIN products as d on d.id_products=b.id_products 
+										  INNER JOIN (SELECT a.id_prices, a.id_products, a.price FROM prices AS a WHERE date = ( SELECT MAX(date) FROM prices AS b WHERE a.id_products = b.id_products )) as e on d.id_products=e.id_products
+										  INNER JOIN (SELECT a.id_products, a.quantity, a.id_stock FROM stock AS a INNER JOIN (SELECT id_products, MAX(Date) as TopDate FROM stock GROUP BY id_products) AS EachItem ON EachItem.TopDate = a.date AND EachItem.id_products = a.id_products ORDER BY `a`.`id_products` ASC) as y on y.id_products=d.id_products 
+										  WHERE c.id_orders=".$cart."";
 										$result = $conn->query($sql);
 
 										if ($result->num_rows > 0) {
@@ -90,12 +103,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 													      <td>'.$row["quantity"].'</td>
 													      <td>'.$row["price"].'</td>
 													    </tr>';
-												$sqlj = "UPDATE stock SET quantity = quantity - ".$row["quantity"]." WHERE id_products='".$row["id_products"]."'";
+												$sqlj = "UPDATE stock SET quantity = quantity - ".$row["quantity"]." WHERE id_stock='".$row["id_stock"]."'";
 
 												if ($conn->query($sqlj) === TRUE) {
 												  //echo "Record updated successfully";
 													if ($row["id_product_type"]=="3") {
-														$sqly = "SELECT id_products, quantity FROM campaigns_product WHERE id_campaign='".$row["id_products"]."'";
+														$sqly = "SELECT a.id_products, a.quantity, y.id_stock FROM campaigns_product as a
+														INNER JOIN (SELECT a.id_products, a.quantity, a.id_stock FROM stock AS a INNER JOIN (SELECT id_products, MAX(Date) as TopDate FROM stock GROUP BY id_products) AS EachItem ON EachItem.TopDate = a.date AND EachItem.id_products = a.id_products ORDER BY `a`.`id_products` ASC) as y on y.id_products=a.id_products 
+														WHERE a.id_campaign='".$row["id_products"]."'";
 														$resulty = $conn->query($sqly);
 
 														if ($resulty->num_rows > 0) {
@@ -103,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 														  while($rowy = $resulty->fetch_assoc()) {
 														  	$quant = 0;
 														  	$quant = $rowy["quantity"]*$row["quantity"];
-														    $sqlz = "UPDATE stock SET quantity = quantity - ".$quant." WHERE id_products='".$rowy["id_products"]."'";
+														    $sqlz = "UPDATE stock SET quantity = quantity - ".$quant." WHERE id_stock='".$rowy["id_stock"]."'";
 
 															if ($conn->query($sqlz) === TRUE) {
 															  //echo "Record updated successfully";
@@ -116,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 														}
 													}
 												} else {
-												  //echo "Error updating record: " . $conn->error;
+												 // echo "Error updating record: " . $conn->error;
 												}
 										    }
 										} else {
@@ -140,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 											sendmailPayment($_SESSION['email'], $rowa["name"], $rowa["street"], $rowa["number"], $rowa["cp"], $rowa["colony"], $rowa["city"], $rowa["state"],$cart, $result);
 										  }
 										} else {
-										  echo "0 results";
+										  //echo "0 results";
 										}
 								  
 						}elseif ($status==2) {

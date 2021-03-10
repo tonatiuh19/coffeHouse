@@ -514,7 +514,7 @@ require_once('admin/cn.php');
             <li class="d-flex"><a href="vendetusproductos/">Registate aqui si eres proveedor</a></li>
             <li class="d-flex"><a href="terminosycondiciones/" target="_blank">Terminos y Condiciones</a></li>
             <li class="d-flex"><a href="politicasdeprivacidad" target="_blank">Politicas de Privacidad</a></li>
-            <li class="d-flex"><a href="yourBusiness/" target="_blank">TienditaCafe para tu negocio</a></li>
+            <!--<li class="d-flex"><a href="yourBusiness/" target="_blank">TienditaCafe para tu negocio</a></li>-->
           </ul>
         </div>
       </div>
