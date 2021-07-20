@@ -9,13 +9,32 @@ require '../../admin/mailer/src/SMTP.php';
 
 session_start();
 require_once('../../admin/cn.php');
+require_once("../../check-out/conekta/conekta-php/lib/Conekta.php");
+\Conekta\Conekta::setApiKey("key_r4xRrHrCWepFPgPbmiBF1Q");
+\Conekta\Conekta::setApiVersion("2.0.0");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  echo "Cargando...";
 	$mail_i = test_input($_POST["email_f"]);
 	$name = test_input($_POST["first_n"]);
 	$lastname = test_input($_POST["last_n"]);
 	$pwd = test_input($_POST["pwd_f"]);
-	
+
+  $fullName = $name.' '.$lastname;
+  try{
+    $customer = \Conekta\Customer::create(
+      [
+        'name'  => $fullName,
+        'email' => $mail_i
+      ]
+    );
+  } catch (\Conekta\ProcessingError $error){
+    echo $error->getMessage();
+  } catch (\Conekta\ParameterValidationError $error){
+    echo $error->getMessage();
+  } catch (\Conekta\Handler $error){
+    echo $error->getMessage();
+  }
 	/*if (!isset($_POST['im_busi'])) {
         // checkbox was not checked...do something
 		$type = "1";
@@ -36,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			window.location.href='../';
 			</SCRIPT>");
 	} else {
-		$sql = "INSERT INTO users (email, name, last_name, pwd, type, date)
-		VALUES ('$mail_i', '$name', '$lastname', '$pwd', '1', '$today')";
+		$sql = "INSERT INTO users (email, name, last_name, pwd, type, date, conekta_id)
+		VALUES ('$mail_i', '$name', '$lastname', '$pwd', '1', '$today', '$customer->id')";
 
 		if ($conn->query($sql) === TRUE) {
       sendmail($mail_i, $name);

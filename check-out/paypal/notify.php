@@ -28,7 +28,7 @@ foreach ($myPost as $key => $value) {
 // Post IPN data back to PayPal to validate the IPN data is genuine
 // Without this step anyone can fake IPN data
 
-$ch = curl_init("https://www.sandbox.paypal.com/cgi-bin/webscr");
+$ch = curl_init("https://ipnpb.paypal.com/cgi-bin/webscr");
 if ($ch == FALSE) {
 	return FALSE;
 }

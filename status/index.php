@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						echo '<h1 class="mb-2 bread">Tu pago ha sido declinado</h1>';
 					}elseif ($status==3) {
 						$sql = "UPDATE orders SET complete='3', description='".$description."' WHERE id_orders=".$cart."";
-						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
+						echo '<h1 class="mb-2 bread">Tu pago ha sido declinado o se interrumpio tu conexion</h1>';
 					}elseif ($status==4) {
 						$sql = "UPDATE orders SET complete='3', description='".$description."' WHERE id_orders=".$cart."";
 						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						echo '<h1 class="mb-2 bread">Tu subscripcion esta completa</h1>';
 					}else{
 						$sql = "UPDATE orders SET complete='4', description='".$description."' WHERE id_orders=".$cart."";
-						echo '<h1 class="mb-2 bread">Se interrumpio tu conexion</h1>';
+						echo '<h1 class="mb-2 bread">Tu pago ha sido declinado o se interrumpio tu conexion</h1>';
 					}
 
 
@@ -198,14 +198,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		        			
 							
 						}else{
-		        			echo '<h1 class="display-4"><i class="fas fa-times-circle fa-2x text-danger"></i> Tu sueño de recibir cafe todos los meses esta completo</h1>
-								  <p class="lead">Intentalo de nuevo.</p>
+		        			echo '<h1 class="display-4"><i class="fas fa-times-circle fa-2x text-danger"></i> Tu pago no fue procesado</h1>
+								  <p class="lead">Intenta con otro medio de pago.</p>
 								  <hr class="my-4">
 								  <p>¿Tienes más preguntas?
 									Visita nuestro Centro de ayuda</p>
 								  <p>
 								  <p class="lead">
-								    <a class="btn btn-primary btn-lg" href="#" role="button">Regresar</a>
+								    <a class="btn btn-primary btn-lg" href="../check-out/" role="button">Volver a probar</a>
 								  </p>';
 						}
 		        		?>

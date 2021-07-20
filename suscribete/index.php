@@ -2,12 +2,8 @@
 require_once('../admin/header.php');
 ?>
 
-<script type="text/javascript"
-        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript"
-        src="https://js.openpay.mx/openpay.v1.min.js"></script>
-<script type='text/javascript'
-  src="https://js.openpay.mx/openpay-data.v1.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.conekta.io/js/latest/conekta.js"></script>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_4.jpg');" data-stellar-background-ratio="0.5">
 	<div class="overlay"></div>
 	<div class="container">
@@ -174,7 +170,7 @@ require_once('../admin/header.php');
 
 												<?php
 
-													echo '<h4 class="mb-3">Domicilio</h4>';
+													echo '<h4 class="mb-3">¿Donde entregamos el paquete?</h4>';
 													$sql = "SELECT id_adresses, street, number, cp, state, city FROM adresses WHERE email_user='".$_SESSION['email']."'";
 													$result = $conn->query($sql);
 
@@ -267,77 +263,84 @@ require_once('../admin/header.php');
 													    </div>
 													  </div>
 													</div>
-													<h4 class="mb-3">¿Cual es tu medio de pago favorito?</h4>
-													<hr class="mb-4">
+													<div id="secondStep">
+														<h4 class="mb-3">¿Cual es tu medio de pago favorito?</h4>
+														<hr class="mb-4">
 
-													<div class="d-block my-3">
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio" name="colorRadio" value="red">
-															<label class="form-check-label" for="exampleRadios1">
-																Credito/Debito
-															</label>
+														<div class="d-block my-3">
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="colorRadio" value="red">
+																<label class="form-check-label" for="exampleRadios1">
+																	Credito/Debito
+																</label>
+															</div>
+															<!--<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" name="colorRadio" value="blue" disabled>
+																<label class="form-check-label" for="exampleRadios3">
+																	<span class="text-muted">Paypal (proximamente)</span>
+																</label>
+															</div>-->
 														</div>
-														<!--<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio" name="colorRadio" value="blue" disabled>
-															<label class="form-check-label" for="exampleRadios3">
-																<span class="text-muted">Paypal (proximamente)</span>
-															</label>
-														</div>-->
 													</div>
 													<hr class="mb-4">
 													<div class="red box">
-													<form action="../check-out/pay/subscribe/" method="POST" name="Form" id="payment-form" onsubmit="return validateFormA()">
-													<input type="hidden" name="token_id" id="token_id">
-													<?php
-														echo '<input type="hidden" name="email" value="'.$_SESSION['email'].'">';
-													?>
-													<input type="hidden" name="payType" class="subsType" id="subsType" value="1">
-													<input id="myAdress1" type="hidden" name="adres" value="">
-													<div class="row">
-														<div class="col-md-6 mb-3">
-															<label for="cc-name">Nombre en tarjeta</label>
-															<input class="form-control" type="text" autocomplete="off" data-openpay-card="holder_name" name="holder_name" placeholder="Como aparece en tu tarjeta" required>
-															<div class="invalid-feedback">
-																Name on card is required
-															</div>
-														</div>
-														<div class="col-md-6 mb-3">
-															<label for="cc-number">Numero de Tarjeta</label>
-															<input class="form-control" type="text" autocomplete="off" data-openpay-card="card_number" name="card_number" required>
-															<div class="invalid-feedback">
-																Credit card number is required
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-3 mb-3">
-															<label for="cc-expiration">Expiracion</label>
-									                        <input type="text" class="form-control" placeholder="Mes" data-openpay-card="expiration_month" name="expiration_month">
-															<div class="invalid-feedback">
-																Expiration date required
-															</div>
-														</div>
-														<div class="col-md-3 mb-3">
-															<label for="cc-expiration">&nbsp;</label>
-									                        <input type="text" class="form-control" placeholder="Año" data-openpay-card="expiration_year" name="expiration_year">
-															<div class="invalid-feedback">
-																Expiration date required
-															</div>
-														</div>
-														<div class="col-md-3 mb-3">
-															<label for="cc-expiration">CVV <button class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" data-html="true" title="3 digitos atras de tu tarjeta"><i class="fas fa-question-circle"></i></button></label>
-															<input class="form-control" type="text" autocomplete="off" data-openpay-card="cvv2" name="cvv2" required>
-															<div class="invalid-feedback">
-																Security code required
-															</div>
-														</div>
+													<form action="../check-out/pay/subscribe/" method="POST" name="Form" id="card-form">
 
-													</div>
-													<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
-													<hr class="mb-4">
-													<a class="btn btn-primary btn-lg btn-block text-white" id="pay-button"><i class="fas fa-lock"></i> Suscribirme</a>
-													<button class="btn btn-primary btn-lg btn-block text-white" id="pagando" disabled><i class="fas fa-spinner"></i> Procesando</button>
-												</form>
+														<?php
+															echo '<input type="hidden" name="email" value="'.$_SESSION['email'].'">';
+														?>
+														<input type="hidden" name="payType" class="subsType" id="subsType" value="1">
+														<input id="myAdress1" type="hidden" name="adres" value="">
+														<div class="row">
+															<div class="col-md-6 mb-3">
+																<span class="card-errors btn btn-danger" id="errorAlert"></span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-6 mb-3">
+																<label for="cc-name">Nombre en tarjeta</label>
+																<input class="form-control" type="text" autocomplete="off" data-conekta="card[name]" placeholder="Como aparece en tu tarjeta" required>
+																<div class="invalid-feedback">
+																	Name on card is required
+																</div>
+															</div>
+															<div class="col-md-6 mb-3">
+																<label for="cc-number">Numero de Tarjeta</label>
+																<input class="form-control" type="text" autocomplete="off" data-conekta="card[number]" required>
+																<div class="invalid-feedback">
+																	Credit card number is required
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-3 mb-3">
+																<label for="cc-expiration">Expiracion</label>
+																<input type="text" class="form-control" placeholder="Mes" data-conekta="card[exp_month]" required>
+																<div class="invalid-feedback">
+																	Expiration date required
+																</div>
+															</div>
+															<div class="col-md-3 mb-3">
+																<label for="cc-expiration">&nbsp;</label>
+																<input type="text" class="form-control" placeholder="Año" data-conekta="card[exp_year]" required>
+																<div class="invalid-feedback">
+																	Expiration date required
+																</div>
+															</div>
+															<div class="col-md-3 mb-3">
+																<label for="cc-expiration">CVV <button class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" data-html="true" title="3 digitos atras de tu tarjeta"><i class="fas fa-question-circle"></i></button></label>
+																<input class="form-control" type="text" autocomplete="off" data-conekta="card[cvc]" required>
+																<div class="invalid-feedback">
+																	Security code required
+																</div>
+															</div>
+
+														</div>
+														<div class="small"><i class="fas fa-user-lock"></i> Tus pagos se realizan de forma segura con encriptación de 256 bits.</div>
+														<hr class="mb-4">
+														<button type="submit" class="btn btn-primary btn-lg" id="pay-button" onclick="paying()"><i class="fas fa-lock"></i> Suscribirme</button>
+														<button class="btn btn-primary btn-lg" id="pagando" disabled><i class="fas fa-spinner"></i> Procesando</button>
+													</form>
 													</div>
 													<div class="blue box">You have selected <strong>blue radio button</strong> so i am here</div>
 											</div>
@@ -406,38 +409,36 @@ require_once('../admin/header.php');
 	</div>
 </section>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		OpenPay.setId('my5osdjarjverf8pvgd7');
-		OpenPay.setApiKey('pk_adbd72980cc14a83a9b6ede8ebe6dc5a');
-		var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
-	});
+<script type="text/javascript" >
+  Conekta.setPublicKey('key_eop46ZMg4dAnCT1qeV9AeTg');
 
-	$(document).ready(function() {
-		OpenPay.setId('my5osdjarjverf8pvgd7');
-		OpenPay.setApiKey('pk_adbd72980cc14a83a9b6ede8ebe6dc5a');
-		OpenPay.setSandboxMode(true);
-	});
 
-	$('#pay-button').on('click', function(event) {
-		event.preventDefault();
-		$("#pay-button").prop( "disabled", true);
-		OpenPay.token.extractFormAndCreate('payment-form', success_callbak, error_callbak);
+  var conektaSuccessResponseHandler = function(token) {
+    var $form = $('form[name="Form"]');
+    //Inserta el token_id en la forma para que se envíe al servidor
+     $form.append($('<input type="hidden" name="conektaTokenId" id="conektaTokenId">').val(token.id));
+    $form.get(0).submit(); //Hace submit
+  };
+  var conektaErrorResponseHandler = function(response) {
+    var $form = $('form[name="Form"]');
+	$("#errorAlert").show();
+	$("#pay-button").show();
+	$("#pagando").hide();
+    $form.find(".card-errors").text(response.message_to_purchaser);
+    $form.find("button").prop("disabled", false);
+  };
 
-	});
 
-	var success_callbak = function(response) {
-		var token_id = response.data.id;
-		$('#token_id').val(token_id);
-		$('#payment-form').submit();
-	};
-
-	var error_callbak = function(response) {
-		var desc = response.data.description != undefined ?
-		response.data.description : response.message;
-		alert("ERROR [" + response.status + "] " + desc);
-		$("#pay-button").prop("disabled", false);
-	};
+  //jQuery para que genere el token después de dar click en submit
+  $(function () {
+    $('form[name="Form"]').submit(function(event) {
+      var $form = $(this);
+      // Previene hacer submit más de una vez
+      $form.find("button").prop("disabled", true);
+      Conekta.Token.create($form, conektaSuccessResponseHandler, conektaErrorResponseHandler);
+      return false;
+    });
+  });
 </script>
 <?php
 require_once('../admin/footer.php');
@@ -458,9 +459,12 @@ require_once('../admin/footer.php');
 <script>
 	//$("#pay-button").hide();
 	$("#pagando").hide();
+	$("#secondStep").hide();
+	$("#errorAlert").hide();
 	function adre(e) {
 		document.getElementById("myAdress1").value = e.target.value;
-		document.getElementById("myAdressPro").value = e.target.value;
+
+		$("#secondStep").show();
 	}
 
 	function validateFormA() {
@@ -481,6 +485,11 @@ require_once('../admin/footer.php');
 			alert("Necesitas escoger un domicilio");
 			return false;
 		}
+		$("#pay-button").hide();
+		$("#pagando").show();
+	}
+
+	function paying(){
 		$("#pay-button").hide();
 		$("#pagando").show();
 	}

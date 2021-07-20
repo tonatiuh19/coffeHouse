@@ -22,7 +22,11 @@ if (!isset($_SESSION['email'])){
     <div class="row">
         <div class="col-sm-12">
 		<?php
-		$sql = "SELECT a.id_subscriptions, a.id_adresss, a.start_date, a.active, a.type, b.street, b.number, b.cp, b.colony, b.city FROM subscriptions as a INNER JOIN adresses as b on b.id_adresses=a.id_adresss WHERE a.user_email='".$_SESSION['email']."'";
+		$sql = "SELECT a.id_subscriptions, a.id_adresss, a.start_date, a.active, a.type, a.subs_id, b.street, b.number, b.cp, b.colony, b.city, c.conekta_id 
+		FROM subscriptions as a 
+		INNER JOIN adresses as b on b.id_adresses=a.id_adresss 
+        INNER JOIN users as c on c.email=a.user_email
+		WHERE a.user_email='".$_SESSION['email']."'";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -44,7 +48,33 @@ if (!isset($_SESSION['email'])){
 		      <td>';
 		      if ($row["active"]=="1") {
 		      	echo '<button type="button" class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Activa</button>';
-		      }else{
+				echo '<button type="button" class="btn btn-danger btn-sm ml-1" data-toggle="modal" data-target="#cancelSub'.$row["id_subscriptions"].'"><i class="fas fa-window-close"></i></button>';
+
+				echo '<div class="modal fade" id="cancelSub'.$row["id_subscriptions"].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				  <div class="modal-content">
+				  	<form action="../subscription/cancel/" method="post">
+					  <input type="hidden" value="'.$row["id_subscriptions"].'" name="id_subscriptions">
+					  <input type="hidden" value="'.$row["conekta_id"].'" name="conekta_id">
+					  <input type="hidden" value="3" name="type">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">¿Estas seguro de querer cancelar?</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Me equivoque</button>
+							<button type="submit" class="btn btn-danger">Cancelar</button>
+						</div>
+					</form>
+				  </div>
+				</div>
+			  </div>';
+		      }else if($row["active"]=="2"){
+				echo '<span class="btn btn-warning btn-sm">Cancelado <i class="far fa-sad-tear"></i></span>';
+			  }
+			  else{
 		      	echo '<button type="button" class="btn btn-warning btn-sm"><i class="fas fa-exclamation-circle"></i> Pendiente de pago</button>';
 		      }
 		      echo '</td>
